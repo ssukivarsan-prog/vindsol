@@ -1,0 +1,13 @@
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temp & IDE files
+.idea/
+.vscode/
+*.swp
+*.tmp
