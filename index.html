@@ -460,6 +460,9 @@
         <button class="calc-nav-btn" data-calc-tab="tab-pool-calc">
           🏊 Swimming Pool &amp; Spa
         </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-dom-calc">
+          🏠 Residential Domestic
+        </button>
       </div>
 
       <!-- TAB 1: Commercial Hot Water Sizer -->
@@ -467,11 +470,11 @@
         <div class="calc-grid-layout">
           
           <div class="calc-input-box">
-            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">1. Operating Parameters</h4>
+            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">Operating Parameters</h4>
             
             <div class="form-field-group">
               <label class="form-label-custom" for="commVolume">Daily Hot Water Demand (Liters / Day)</label>
-              <input type="number" id="commVolume" class="form-input-custom" value="2000" step="100">
+              <input type="number" id="commVolume" class="form-input-custom" value="1000" step="100">
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
@@ -499,36 +502,36 @@
 
           <div class="calc-results-box">
             <div class="calc-results-title">
-              <span>VINDSOL Engineering Sizing Output</span>
+              <span>VINDSOL Sizing Output</span>
               <span>⚡ COP 4.25x</span>
             </div>
 
             <div class="calc-metric-grid">
               <div class="calc-metric-card">
-                <span class="calc-metric-label">Required Heat Pump</span>
-                <div class="calc-metric-val" id="commKWVal">10.2 kW</div>
+                <span class="calc-metric-label">Required Capacity</span>
+                <div class="calc-metric-val" id="commKWVal">5.1 kW</div>
               </div>
               <div class="calc-metric-card">
-                <span class="calc-metric-label">Daily Thermal Load</span>
-                <div class="calc-metric-val" id="commKcalVal">81 kWh/day</div>
+                <span class="calc-metric-label">Daily Net Load</span>
+                <div class="calc-metric-val" id="commKcalVal">41 kWh/day</div>
               </div>
               <div class="calc-metric-card">
                 <span class="calc-metric-label">Annual Savings</span>
-                <div class="calc-metric-val" id="commYearlySavingsVal" style="color: #86EFAC;">₹ 1,76,200</div>
+                <div class="calc-metric-val" id="commYearlySavingsVal" style="color: #86EFAC;">₹ 1,04,076</div>
               </div>
               <div class="calc-metric-card">
                 <span class="calc-metric-label">Est. Payback</span>
-                <div class="calc-metric-val" id="commPaybackVal">1.2 Years</div>
+                <div class="calc-metric-val" id="commPaybackVal">0.9 Years</div>
               </div>
             </div>
 
             <div class="calc-rec-banner">
-              Recommended Heat Pump Model:
-              <strong id="commRecModelVal">VCHP 3500 V Commercial (35 kW)</strong>
+              Recommended Unit:
+              <strong id="commRecModelVal">VDHP 11000 MB Monoblock (10 kW)</strong>
             </div>
 
             <a href="contact.html#quote" class="btn-buy-primary" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
-              📋 Request Official Proforma Quotation
+              📋 Request Official Proforma Quote
             </a>
           </div>
 
@@ -540,7 +543,7 @@
         <div class="calc-grid-layout">
           
           <div class="calc-input-box">
-            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">1. Pool Dimensions &amp; Environment</h4>
+            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">Pool Dimensions &amp; Environment</h4>
             
             <div class="form-field-group">
               <label class="form-label-custom" for="poolVol">Pool Volume (m³ / Cubic Meters)</label>
@@ -549,21 +552,21 @@
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
               <div class="form-field-group">
-                <label class="form-label-custom" for="poolType">Pool Environment</label>
+                <label class="form-label-custom" for="poolType">Pool Location</label>
                 <select id="poolType" class="form-select-custom">
-                  <option value="outdoor" selected>Outdoor Pool (Wind 2m/s)</option>
-                  <option value="indoor">Indoor Pool (Wind 0.5m/s)</option>
+                  <option value="outdoor" selected>Outdoor Pool</option>
+                  <option value="indoor">Indoor Pool</option>
                 </select>
               </div>
               <div class="form-field-group">
-                <label class="form-label-custom" for="poolAmb">Ambient Air Temp (°C)</label>
+                <label class="form-label-custom" for="poolAmb">Ambient Temp (°C)</label>
                 <input type="number" id="poolAmb" class="form-input-custom" value="20" step="1">
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
               <div class="form-field-group">
-                <label class="form-label-custom" for="poolT2">Target Water Temp (°C)</label>
+                <label class="form-label-custom" for="poolT2">Target Pool Temp (°C)</label>
                 <input type="number" id="poolT2" class="form-input-custom" value="28" step="1">
               </div>
               <div class="form-field-group">
@@ -582,7 +585,7 @@
             <div class="calc-metric-grid">
               <div class="calc-metric-card" style="grid-column: span 2;">
                 <span class="calc-metric-label">Total Pool Heat Capacity Needed</span>
-                <div class="calc-metric-val" id="poolKWVal" style="font-size: 1.6rem; color: #86EFAC;">31.5 kW / hr</div>
+                <div class="calc-metric-val" id="poolKWVal" style="font-size: 1.6rem; color: #86EFAC;">31.5 kW</div>
               </div>
               <div class="calc-metric-card" style="grid-column: span 2;">
                 <span class="calc-metric-label">Initial Warm-up Capacity</span>
@@ -591,12 +594,83 @@
             </div>
 
             <div class="calc-rec-banner">
-              Recommended Titanium Pool Heater:
+              Recommended Titanium Heater:
               <strong id="poolRecModelVal">VPHP 3500 Pool (35 kW Titanium)</strong>
             </div>
 
             <a href="product-detail.html?id=pool" id="poolRecModelLink" class="btn-buy-primary" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
               🌊 View Titanium Pool Heater Specs →
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 3: Residential Domestic Sizer -->
+      <div class="calc-tab-pane" id="tab-dom-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">Residential Water Usage</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="calcPeople">Number of Occupants / Family Size</label>
+              <input type="number" id="calcPeople" class="form-input-custom" value="4" min="1" max="50">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" for="calcLitres">Daily Water Consumption (Liters)</label>
+              <input type="number" id="calcLitres" class="form-input-custom" value="200" step="50">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="calcHeaterType">Existing System</label>
+                <select id="calcHeaterType" class="form-select-custom">
+                  <option value="geyser" selected>Electric Geyser (0.9)</option>
+                  <option value="boiler">Diesel Boiler (0.7)</option>
+                  <option value="solar">Solar Backup (1.5)</option>
+                </select>
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="calcTariff">Tariff (₹/kWh)</label>
+                <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>Home Financial Savings Output</span>
+              <span>🏠 Residential Monoblock</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Monthly Savings</span>
+                <div class="calc-metric-val" id="monthlySavingsVal" style="color: #86EFAC;">₹ 1,922</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Annual Savings</span>
+                <div class="calc-metric-val" id="yearlySavingsVal" style="color: #86EFAC;">₹ 23,068</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Est. Payback</span>
+                <div class="calc-metric-val" id="paybackPeriodVal">2.8 Years</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">CO₂ Saved</span>
+                <div class="calc-metric-val" id="co2ReductionVal">2.4 Tonnes</div>
+              </div>
+            </div>
+
+            <div class="calc-rec-banner">
+              Recommended Residential Unit:
+              <strong id="recommendedModelVal">VDHP 4500 MB (200L)</strong>
+            </div>
+
+            <a href="product-detail.html?id=dhw" class="btn-buy-primary" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
+              🏠 View Residential Monoblock Specs →
             </a>
           </div>
 

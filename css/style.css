@@ -1190,18 +1190,24 @@ img {
 }
 
 .calc-tab-pane {
-  display: none;
+  display: none !important;
 }
 
 .calc-tab-pane.active {
-  display: block;
+  display: block !important;
 }
 
 .calc-grid-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
-  align-items: start;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .calc-grid-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .calc-input-box {

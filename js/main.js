@@ -235,22 +235,107 @@ function initSavingsCalculator() {
     if (poolRecModelLinkEl) poolRecModelLinkEl.href = `product-detail.html?id=${recModelId}`;
   }
 
+  // Residential Domestic Calculation
+  function calcDomestic() {
+    const peopleInput = document.getElementById('calcPeople');
+    const litresInput = document.getElementById('calcLitres');
+    const heaterSelect = document.getElementById('calcHeaterType');
+    const tariffInput = document.getElementById('calcTariff');
+
+    const monthlySavingsEl = document.getElementById('monthlySavingsVal');
+    const yearlySavingsEl = document.getElementById('yearlySavingsVal');
+    const co2El = document.getElementById('co2ReductionVal');
+    const paybackEl = document.getElementById('paybackPeriodVal');
+    const recModelEl = document.getElementById('recommendedModelVal');
+
+    if (!litresInput) return;
+
+    let litres = parseFloat(litresInput.value) || 200;
+    const tariff = parseFloat(tariffInput ? tariffInput.value : 8) || 8;
+    const heaterType = heaterSelect ? heaterSelect.value : 'geyser';
+
+    const deltaT = 40;
+    const dailyKWhRequired = (litres * 4.186 * deltaT) / 3600;
+
+    let conventionalCOP = 0.9;
+    if (heaterType === 'boiler') conventionalCOP = 0.7;
+    if (heaterType === 'solar') conventionalCOP = 1.5;
+
+    const geyserDailyKWh = dailyKWhRequired / conventionalCOP;
+    const geyserAnnualCost = geyserDailyKWh * 365 * tariff;
+
+    const vindsolDailyKWh = dailyKWhRequired / 4.25;
+    const vindsolAnnualCost = vindsolDailyKWh * 365 * tariff;
+
+    const yearlySavings = Math.max(0, geyserAnnualCost - vindsolAnnualCost);
+    const monthlySavings = yearlySavings / 12;
+
+    const kwhSavedPerYear = (geyserDailyKWh - vindsolDailyKWh) * 365;
+    const co2Tonnes = (kwhSavedPerYear * 0.82) / 1000;
+
+    let recModel = 'VDHP 4500 MB (200L)';
+    let estPrice = 65000;
+
+    if (litres <= 150) {
+      recModel = 'VDHP 3000 MB (150L)';
+      estPrice = 48000;
+    } else if (litres <= 250) {
+      recModel = 'VDHP 4500 MB (200L)';
+      estPrice = 65000;
+    } else if (litres <= 400) {
+      recModel = 'VDHP 6000 MB (300L)';
+      estPrice = 78000;
+    } else if (litres <= 600) {
+      recModel = 'VDHP 7500 MB (500L)';
+      estPrice = 95000;
+    } else {
+      recModel = 'VDHP 11000 MB (750L+)';
+      estPrice = 125000;
+    }
+
+    const paybackYears = Math.max(1.1, (estPrice / yearlySavings)).toFixed(1);
+    const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
+
+    if (monthlySavingsEl) monthlySavingsEl.textContent = formatINR(monthlySavings);
+    if (yearlySavingsEl) yearlySavingsEl.textContent = formatINR(yearlySavings);
+    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes`;
+    if (paybackEl) paybackEl.textContent = `${paybackYears} Years`;
+    if (recModelEl) recModelEl.textContent = recModel;
+  }
+
   [commVolume, commT1, commT2, commHT, commTariff].forEach(el => {
     if (el) {
-      el.addEventListener('input', calcCommercial);
-      el.addEventListener('change', calcCommercial);
+      ['input', 'change', 'keyup'].forEach(evt => el.addEventListener(evt, calcCommercial));
     }
   });
 
   [poolVol, poolType, poolT2, poolT1, poolAmb].forEach(el => {
     if (el) {
-      el.addEventListener('input', calcPool);
-      el.addEventListener('change', calcPool);
+      ['input', 'change', 'keyup'].forEach(evt => el.addEventListener(evt, calcPool));
+    }
+  });
+
+  const domPeople = document.getElementById('calcPeople');
+  const domLitres = document.getElementById('calcLitres');
+  const domHeater = document.getElementById('calcHeaterType');
+  const domTariff = document.getElementById('calcTariff');
+
+  if (domPeople && domLitres) {
+    domPeople.addEventListener('input', () => {
+      domLitres.value = Math.max(100, parseFloat(domPeople.value || 4) * 50);
+      calcDomestic();
+    });
+  }
+
+  [domPeople, domLitres, domHeater, domTariff].forEach(el => {
+    if (el) {
+      ['input', 'change', 'keyup'].forEach(evt => el.addEventListener(evt, calcDomestic));
     }
   });
 
   calcCommercial();
   calcPool();
+  calcDomestic();
 }
 
 /* -------------------------------------------------------------------------- */
