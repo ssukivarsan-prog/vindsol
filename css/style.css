@@ -417,14 +417,14 @@ img {
   transform: scale(1.06);
 }
 
-/* Subtle Dark Glass Backdrop that keeps the pool photos 100% highlighted and visible! */
+/* Seamless Transparent Hero Text Overlay */
 .hero-banner-content-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(7, 38, 20, 0.82) 0%, rgba(7, 38, 20, 0.55) 45%, rgba(0, 0, 0, 0.05) 80%);
+  background: linear-gradient(90deg, rgba(7, 38, 20, 0.78) 0%, rgba(7, 38, 20, 0.35) 55%, rgba(0, 0, 0, 0) 100%);
   display: flex;
   align-items: center;
   z-index: 2;
@@ -438,22 +438,23 @@ img {
 }
 
 .hero-banner-text-box {
-  max-width: 620px;
-  background: rgba(11, 42, 24, 0.72);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(74, 222, 128, 0.3);
-  border-radius: 20px;
-  padding: 2.25rem 2.5rem;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  max-width: 680px;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 .hero-banner-title {
-  font-size: 3rem;
+  font-size: 3.4rem;
   font-weight: 900;
   color: #FFFFFF;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 /* Pure Transparent Floating Product Cutout Images (No Card Box) */
@@ -493,11 +494,11 @@ img {
 }
 
 .floating-prod-img {
-  height: 110px;
+  height: 115px;
   width: auto;
-  max-width: 160px;
+  max-width: 170px;
   object-fit: contain;
-  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.45));
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.55));
 }
 
 .floating-prod-text label {
@@ -515,63 +516,67 @@ img {
   color: #FFFFFF;
   display: block;
   line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 
 .hero-banner-description {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: #E2E8F0;
+  color: #F1F5F9;
   line-height: 1.55;
-  margin-bottom: 1.75rem;
-  max-width: 580px;
+  margin-bottom: 2rem;
+  max-width: 620px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .hero-banner-buttons {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .btn-banner-green {
-  background-color: #2E7D32;
+  background-color: #15803D;
   color: #FFFFFF;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 0.85rem 2.2rem;
-  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.95rem 2.4rem;
+  border-radius: 8px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 25px rgba(21, 128, 61, 0.4);
 }
 
 .btn-banner-green:hover {
-  background-color: #1B5E20;
-  transform: translateY(-2px);
+  background-color: #166534;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(21, 128, 61, 0.5);
 }
 
 .btn-banner-outline {
-  background-color: rgba(255, 255, 255, 0.85);
-  color: #0F3D22;
-  border: 2px solid #2E7D32;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 0.85rem 2.2rem;
-  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.95rem 2.4rem;
+  border-radius: 8px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .btn-banner-outline:hover {
-  background-color: #2E7D32;
-  color: #FFFFFF;
-  transform: translateY(-2px);
+  background-color: #FFFFFF;
+  color: #0F3D22;
+  border-color: #FFFFFF;
+  transform: translateY(-3px);
 }
 
 /* Slider Edge Arrow Buttons */
@@ -1042,10 +1047,111 @@ img {
   color: var(--text-primary);
 }
 
-.comp-table td.highlight-vindsol {
-  color: var(--color-primary);
+/* ==========================================================================
+   GRAND PRODUCT SHOWCASE GALLERY (Showcasing all product asset images)
+   ========================================================================== */
+.grand-products-section {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #F8FAF8 0%, #FFFFFF 100%);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.grand-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.grand-product-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s var(--ease-out-expo);
+  display: flex;
+  flex-direction: column;
+}
+
+.grand-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-accent);
+}
+
+.grand-product-img-wrap {
+  width: 100%;
+  height: 240px;
+  background: #F8FAF8;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.grand-product-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+}
+
+.grand-product-card:hover .grand-product-img {
+  transform: scale(1.08);
+}
+
+.grand-product-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.grand-product-tag {
+  font-size: 0.72rem;
   font-weight: 800;
-  background-color: rgba(220, 252, 231, 0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.grand-product-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: 0.65rem;
+  line-height: 1.25;
+}
+
+.grand-product-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.grand-product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--bg-body);
+  padding-top: 1rem;
+}
+
+.grand-product-spec {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--color-accent-badge);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
 }
 
 /* How Heat Pumps Work Diagram */
