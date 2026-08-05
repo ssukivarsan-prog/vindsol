@@ -171,7 +171,7 @@ function initHeroAdSlider() {
   const slider = document.getElementById('heroAdSlider');
   if (!slider) return;
 
-  const slides = slider.querySelectorAll('.hero-slide');
+  const slides = slider.querySelectorAll('.hero-banner-slide, .hero-slide');
   const dots = slider.querySelectorAll('.hero-slider-dot');
   const prevBtn = document.getElementById('heroSlidePrev');
   const nextBtn = document.getElementById('heroSlideNext');
