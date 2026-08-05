@@ -6,488 +6,139 @@
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
   initMobileNav();
-  initScrollReveals();
-  initAnimatedCounters();
-  initMouseParallax();
-  initScrollSpy();
-  initProductTabs();
-  initProductShowcase();
   initSavingsCalculator();
-  initQuoteModal();
+  initVideoDiagram();
 });
 
 /* -------------------------------------------------------------------------- */
-/* 1. Sticky Header Blur on Scroll                                             */
+/* 1. Sticky Header Shadow on Scroll                                          */
 /* -------------------------------------------------------------------------- */
 function initStickyHeader() {
   const header = document.querySelector('.header');
   if (!header) return;
 
-  const handleScroll = () => {
-    if (window.scrollY > 25) {
-      header.classList.add('scrolled');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
     } else {
-      header.classList.remove('scrolled');
+      header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
     }
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+  }, { passive: true });
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. Mobile Drawer Menu Toggle                                               */
+/* 2. Mobile Navigation Menu Toggle                                           */
 /* -------------------------------------------------------------------------- */
 function initMobileNav() {
   const toggleBtn = document.querySelector('.mobile-toggle');
   const navMenu = document.querySelector('.nav-menu');
+
   if (!toggleBtn || !navMenu) return;
 
   toggleBtn.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('mobile-open');
-    toggleBtn.setAttribute('aria-expanded', isOpen);
-  });
-
-  // Close when clicking nav links
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('mobile-open');
-    });
-  });
-}
-
-/* -------------------------------------------------------------------------- */
-/* 3. Intersection Observer Scroll Reveals & Staggered Elements               */
-/* -------------------------------------------------------------------------- */
-function initScrollReveals() {
-  const revealElements = document.querySelectorAll('.reveal, .reveal-on-scroll, .stagger-child');
-  if (!revealElements.length) return;
-
-  const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  revealElements.forEach(el => observer.observe(el));
-}
-
-/* -------------------------------------------------------------------------- */
-/* 3.1 Animated Number Counters (Count-up from 0 to Target)                  */
-/* -------------------------------------------------------------------------- */
-function initAnimatedCounters() {
-  const counterElements = document.querySelectorAll('.stat-number, [data-count]');
-  if (!counterElements.length) return;
-
-  const animateCounter = (el) => {
-    if (el.dataset.animated) return;
-    el.dataset.animated = 'true';
-
-    const rawValue = el.getAttribute('data-count') || el.textContent.trim();
-    const numericTarget = parseFloat(rawValue.replace(/[^0-9.]/g, ''));
-    if (isNaN(numericTarget)) return;
-
-    const prefix = rawValue.match(/^[^\d]+/)?.[0] || '';
-    const suffix = rawValue.match(/[^\d.]+$/)?.[0] || '';
-    const isDecimal = rawValue.includes('.');
-
-    const duration = 1200; // ms
-    const startTime = performance.now();
-
-    function step(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic easing formula: 1 - Math.pow(1 - progress, 3)
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      const currentValue = numericTarget * easedProgress;
-
-      const formattedValue = isDecimal ? currentValue.toFixed(1) : Math.floor(currentValue);
-      el.textContent = `${prefix}${formattedValue}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = rawValue; // Ensure exact target string at completion
-      }
+    const isExpanded = navMenu.style.display === 'flex';
+    if (isExpanded) {
+      navMenu.style.display = 'none';
+    } else {
+      navMenu.style.display = 'flex';
+      navMenu.style.flexDirection = 'column';
+      navMenu.style.position = 'absolute';
+      navMenu.style.top = '100%';
+      navMenu.style.left = '0';
+      navMenu.style.width = '100%';
+      navMenu.style.background = '#FFFFFF';
+      navMenu.style.padding = '1.5rem';
+      navMenu.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
     }
-
-    requestAnimationFrame(step);
-  };
-
-  const observerOptions = { threshold: 0.25 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  counterElements.forEach(el => observer.observe(el));
-}
-
-/* -------------------------------------------------------------------------- */
-/* 3.2 Mouse Parallax Effect for Hero Ambient Visual                         */
-/* -------------------------------------------------------------------------- */
-function initMouseParallax() {
-  const ambientVisuals = document.querySelectorAll('.ambient-visual, .hero-interactive-visual');
-  if (!ambientVisuals.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  document.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    const moveX = (clientX - centerX) / 45; // Max ~15px shift
-    const moveY = (clientY - centerY) / 45;
-
-    ambientVisuals.forEach(visual => {
-      visual.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-    });
-  }, { passive: true });
-}
-
-/* -------------------------------------------------------------------------- */
-/* 3.3 Active Section ScrollSpy                                               */
-/* -------------------------------------------------------------------------- */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-menu a');
-  if (!sections.length || !navLinks.length) return;
-
-  window.addEventListener('scroll', () => {
-    let currentId = '';
-    const scrollPosition = window.scrollY + 120;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        currentId = section.getAttribute('id');
-      }
-    });
-
-    if (currentId) {
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentId}` || link.getAttribute('href').endsWith(`#${currentId}`)) {
-          link.classList.add('active');
-        }
-      });
-    }
-  }, { passive: true });
-}
-
-/* -------------------------------------------------------------------------- */
-/* 4. Product Category Filter Tabs                                             */
-/* -------------------------------------------------------------------------- */
-function initProductTabs() {
-  const tabBtns = document.querySelectorAll('.filter-tabs .tab-btn');
-  const productCards = document.querySelectorAll('.product-card');
-  if (!tabBtns.length || !productCards.length) return;
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      productCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          card.style.display = 'flex';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 50);
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 300);
-        }
-      });
-    });
   });
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4.1 Flagship Product Showcase Advertising Rotator                          */
-/* -------------------------------------------------------------------------- */
-function initProductShowcase() {
-  const slides = document.querySelectorAll('.product-slide');
-  const dots = document.querySelectorAll('.showcase-dot');
-  if (!slides.length || !dots.length) return;
-
-  let currentSlide = 0;
-  let showcaseInterval = null;
-
-  function showSlide(index) {
-    slides.forEach((s, idx) => {
-      if (idx === index) {
-        s.style.display = 'flex';
-        setTimeout(() => { s.style.opacity = '1'; }, 20);
-      } else {
-        s.style.opacity = '0';
-        s.style.display = 'none';
-      }
-    });
-
-    dots.forEach((d, idx) => {
-      if (idx === index) {
-        d.style.background = 'var(--color-accent)';
-        d.style.width = '28px';
-        d.classList.add('active');
-      } else {
-        d.style.background = 'var(--border-divider)';
-        d.style.width = '10px';
-        d.classList.remove('active');
-      }
-    });
-
-    currentSlide = index;
-  }
-
-  function startAutoPlay() {
-    showcaseInterval = setInterval(() => {
-      let next = (currentSlide + 1) % slides.length;
-      showSlide(next);
-    }, 4500);
-  }
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      clearInterval(showcaseInterval);
-      const targetIdx = parseInt(e.target.getAttribute('data-target-slide'), 10);
-      if (!isNaN(targetIdx)) {
-        showSlide(targetIdx);
-        startAutoPlay();
-      }
-    });
-  });
-
-  showSlide(0);
-  startAutoPlay();
-}
-
-/* -------------------------------------------------------------------------- */
-/* 5. Smart Heat Pump Sizing & Calculator Bot                                */
+/* 3. Interactive Energy Savings & ROI Calculator                             */
 /* -------------------------------------------------------------------------- */
 function initSavingsCalculator() {
+  const peopleInput = document.getElementById('calcPeople');
+  const heaterSelect = document.getElementById('calcHeaterType');
   const litresInput = document.getElementById('calcLitres');
   const tariffInput = document.getElementById('calcTariff');
-  const segmentSelect = document.getElementById('botSegment');
+  const submitBtn = document.getElementById('calcSubmitBtn');
 
-  const geyserCostEl = document.getElementById('geyserCost');
-  const vindsolCostEl = document.getElementById('vindsolCost');
-  const savingsAmtEl = document.getElementById('savingsAmount');
-  const barGeyser = document.getElementById('barGeyser');
-  const barVindsol = document.getElementById('barVindsol');
-
-  const modelBadge = document.getElementById('recommendedModelBadge');
-  const modelTitle = document.getElementById('recommendedModelTitle');
-  const modelDesc = document.getElementById('recommendedModelDesc');
-  const roiPayback = document.getElementById('roiPaybackPeriod');
-  const btnModelName = document.getElementById('btnModelName');
+  const monthlySavingsEl = document.getElementById('monthlySavingsVal');
+  const yearlySavingsEl = document.getElementById('yearlySavingsVal');
+  const co2El = document.getElementById('co2ReductionVal');
+  const paybackEl = document.getElementById('paybackPeriodVal');
 
   if (!litresInput || !tariffInput) return;
 
-  function getProductRecommendation(litres, segment) {
-    if (segment === 'pool') {
-      return {
-        badge: 'VCHP-POOL-35KW',
-        title: 'VCHP Pool Titanium Series 35kW',
-        desc: 'High-flow anti-corrosion Titanium in PVC heat exchanger for resort pools & Jacuzzis.',
-        cop: 5.2,
-        estPrice: 225000
-      };
-    }
-
-    if (litres <= 300) {
-      return {
-        badge: 'VDHP-3000MB',
-        title: 'VDHP Domestic Monoblock 3.16kW',
-        desc: 'Compact residential heat pump for 150L–300L domestic hot water supply.',
-        cop: 4.29,
-        estPrice: 65000
-      };
-    } else if (litres <= 750) {
-      return {
-        badge: 'VDHP-11000MB',
-        title: 'VDHP Domestic Monoblock 11kW',
-        desc: 'High-efficiency villa heat pump with Tube-in-Tube exchanger for 500L–750L demand.',
-        cop: 4.85,
-        estPrice: 115000
-      };
-    } else if (litres <= 2000) {
-      return {
-        badge: 'VCHP-1720',
-        title: 'VCHP Commercial V-Type 17kW',
-        desc: 'Modular commercial heat pump with Saginomya EEV & auto-defrost valve.',
-        cop: 4.6,
-        estPrice: 185000
-      };
-    } else {
-      return {
-        badge: 'VCHP-3500-VTYPE',
-        title: 'VCHP Heavy-Duty Commercial 35kW',
-        desc: 'Industrial-grade dual-compressor heat pump for hotels, hospitals & factories.',
-        cop: 5.1,
-        estPrice: 310000
-      };
-    }
-  }
-
   function calculate() {
-    const litres = parseFloat(litresInput.value) || 500;
-    const tariff = parseFloat(tariffInput.value) || 8.5; // Rs / kWh
-    const segment = segmentSelect ? segmentSelect.value : 'residential';
-    const deltaT = 40; // °C temp rise (15°C to 55°C)
+    const people = parseFloat(peopleInput ? peopleInput.value : 4) || 4;
+    const litres = parseFloat(litresInput.value) || (people * 50);
+    const tariff = parseFloat(tariffInput.value) || 8.00; // Rs / kWh
+    const heaterType = heaterSelect ? heaterSelect.value : 'geyser';
 
-    const rec = getProductRecommendation(litres, segment);
+    // Temp rise: 15°C ambient air to 55°C water = 40°C rise
+    const deltaT = 40;
 
-    // Heat energy formula: Q (kWh) = (Litres * 4.186 * deltaT) / 3600
+    // Daily Thermal Energy needed Q (kWh) = (Litres * 4.186 * 40) / 3600
     const dailyKWhRequired = (litres * 4.186 * deltaT) / 3600;
 
-    // Electric Resistance Geyser efficiency ~ 90%
-    const geyserDailyKWh = dailyKWhRequired / 0.9;
+    // Conventional Efficiency COP
+    let conventionalCOP = 0.9; // Electric Geyser
+    if (heaterType === 'boiler') conventionalCOP = 0.7;
+    if (heaterType === 'solar') conventionalCOP = 1.5;
+
+    const geyserDailyKWh = dailyKWhRequired / conventionalCOP;
     const geyserAnnualCost = geyserDailyKWh * 365 * tariff;
 
-    // VINDSOL Heat Pump COP
-    const vindsolDailyKWh = dailyKWhRequired / rec.cop;
+    // VINDSOL Air-Source Heat Pump COP ~ 4.25
+    const vindsolDailyKWh = dailyKWhRequired / 4.25;
     const vindsolAnnualCost = vindsolDailyKWh * 365 * tariff;
 
-    const annualSavings = geyserAnnualCost - vindsolAnnualCost;
+    const yearlySavings = Math.max(0, geyserAnnualCost - vindsolAnnualCost);
+    const monthlySavings = yearlySavings / 12;
 
-    // Estimated Payback Period in Months
-    const paybackMonths = Math.max(8, Math.round((rec.estPrice / annualSavings) * 12));
+    // CO2 reduction: ~0.82 kg CO2 per kWh saved in India grid
+    const kwhSavedPerYear = (geyserDailyKWh - vindsolDailyKWh) * 365;
+    const co2Tonnes = (kwhSavedPerYear * 0.82) / 1000;
+
+    // Estimated Payback (Average heat pump system cost ~ Rs 75,000 for residential)
+    const estPrice = litres > 1000 ? 220000 : 78000;
+    const paybackYears = Math.max(1.2, (estPrice / yearlySavings)).toFixed(1);
 
     // Format currency to Indian Rupees
-    const formatINR = (val) => '₹' + Math.round(val).toLocaleString('en-IN');
+    const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
 
-    if (geyserCostEl) geyserCostEl.textContent = formatINR(geyserAnnualCost);
-    if (vindsolCostEl) vindsolCostEl.textContent = formatINR(vindsolAnnualCost);
-    if (savingsAmtEl) savingsAmtEl.textContent = formatINR(annualSavings);
-    if (roiPayback) roiPayback.textContent = `${paybackMonths} Months`;
-
-    if (modelBadge) modelBadge.textContent = rec.badge;
-    if (modelTitle) modelTitle.textContent = rec.title;
-    if (modelDesc) modelDesc.textContent = rec.desc;
-    if (btnModelName) btnModelName.textContent = rec.badge;
-
-    // Update comparative bar widths
-    if (barGeyser) barGeyser.style.width = '100%';
-    if (barVindsol) {
-      const pct = Math.max(15, (vindsolAnnualCost / geyserAnnualCost) * 100);
-      barVindsol.style.width = `${pct}%`;
-    }
+    if (monthlySavingsEl) monthlySavingsEl.textContent = formatINR(monthlySavings);
+    if (yearlySavingsEl) yearlySavingsEl.textContent = formatINR(yearlySavings);
+    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes`;
+    if (paybackEl) paybackEl.textContent = `${paybackYears} Years`;
   }
 
-  [litresInput, tariffInput, segmentSelect].forEach(el => {
-    if (el) el.addEventListener('change', calculate);
-    if (el) el.addEventListener('input', calculate);
+  [peopleInput, heaterSelect, litresInput, tariffInput].forEach(el => {
+    if (el) {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    }
   });
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      calculate();
+    });
+  }
 
   calculate();
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6. Quote / Consultation Modal Form with Client Validation                  */
+/* 4. Diagram Play Button Video Modal                                         */
 /* -------------------------------------------------------------------------- */
-function initQuoteModal() {
-  const modal = document.getElementById('quoteModal');
-  const openBtns = document.querySelectorAll('.open-quote-modal');
-  const closeBtn = document.getElementById('modalCloseBtn');
-  const form = document.getElementById('quoteForm');
-  const segmentSelect = document.getElementById('modalSegment');
-  const successMsg = document.getElementById('modalSuccessMsg');
+function initVideoDiagram() {
+  const playBtn = document.getElementById('playDiagramBtn');
+  if (!playBtn) return;
 
-  if (!modal) return;
-
-  openBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const category = btn.getAttribute('data-product-category');
-      if (category && segmentSelect) {
-        segmentSelect.value = category;
-      }
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-    });
+  playBtn.addEventListener('click', () => {
+    alert('VINDSOL Thermodynamic Cycle Demonstration: Air-Source heat pumps extract 75% ambient heat energy from outdoor air using eco-friendly refrigerant cycles.');
   });
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-    });
-  }
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  });
-
-  // Client-side Form Validation
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let isValid = true;
-
-      const name = form.querySelector('[name="name"]');
-      const email = form.querySelector('[name="email"]');
-      const phone = form.querySelector('[name="phone"]');
-      const message = form.querySelector('[name="message"]');
-
-      // Clear previous error styles
-      form.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
-        input.style.borderColor = 'var(--border-bright)';
-      });
-
-      if (!name || name.value.trim().length < 2) {
-        if (name) name.style.borderColor = '#ef4444';
-        isValid = false;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email.value.trim())) {
-        if (email) email.style.borderColor = '#ef4444';
-        isValid = false;
-      }
-
-      const phoneRegex = /^[6-9]\d{9}$/; // Indian 10-digit mobile number format
-      if (!phone || !phoneRegex.test(phone.value.trim())) {
-        if (phone) phone.style.borderColor = '#ef4444';
-        isValid = false;
-      }
-
-      if (isValid) {
-        form.style.display = 'none';
-        if (successMsg) {
-          successMsg.style.display = 'block';
-        }
-        setTimeout(() => {
-          modal.classList.remove('active');
-          form.reset();
-          form.style.display = 'flex';
-          if (successMsg) successMsg.style.display = 'none';
-        }, 4000);
-      }
-    });
-  }
 }
