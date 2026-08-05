@@ -14,11 +14,11 @@
        ========================================================================= -->
   <header class="header">
     <div class="container nav-container">
-      <a href="index.html" class="logo-brand" aria-label="VINDSOL Homepage">
-        <div class="logo-icon-badge">V</div>
+      <a href="index.html" class="logo-brand" aria-label="VINDSOL Homepage" style="display: flex; align-items: center; gap: 0.75rem;">
+        <img src="assets/images/vindsol-official-logo.png" alt="VINDSOL Official Logo" style="height: 48px; width: auto; object-fit: contain;">
         <div class="logo-text-group">
-          <span class="logo-title">VIND<span>SOL</span></span>
-          <span class="logo-sub">MECHZEPHYR ENGINEERING</span>
+          <span class="logo-title" style="color: var(--color-primary); font-size: 1.5rem; font-weight: 900;">VIND<span style="color: var(--color-accent);">SOL</span></span>
+          <span class="logo-sub" style="color: var(--color-secondary-dark); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;">MECHZEPHYR ENGINEERING</span>
         </div>
       </a>
 
@@ -43,35 +43,35 @@
   </header>
 
   <!-- =========================================================================
-       HERO SECTION
+       HERO SECTION WITH PRODUCT SHOWCASE PRESENTATION
        ========================================================================= -->
-  <section class="hero-section">
+  <section class="hero-section" style="padding-top: calc(var(--header-height) + 3.5rem); padding-bottom: 5.5rem; background: linear-gradient(180deg, #F3F1E9 0%, var(--bg-body) 100%);">
     <div class="container hero-grid">
       <div class="hero-content">
         <div class="blueprint-tag stagger-load-1">
-          AIR-SOURCE HEAT PUMP MANUFACTURER &bull; BENGALURU, INDIA
+          MANUFACTURER &bull; BENGALURU, INDIA
         </div>
         <h1 class="hero-title stagger-load-2">
           Industrial-Grade <br>
           Thermal Efficiency. <br>
-          <span class="highlight-thermal">75% Energy Savings.</span>
+          <span style="color: var(--color-accent);">75% Power Saved.</span>
         </h1>
         <p class="hero-subtitle stagger-load-3">
-          VINDSOL designs and manufactures high-efficiency monoblock, commercial V-type, and thermodynamic solar heat pumps engineered specifically for Indian climate conditions. Grounded in 8+ years of HVAC precision.
+          VINDSOL manufactures high-efficiency monoblock, commercial V-type, and thermodynamic solar heat pumps engineered for Indian climate conditions. Backed by 8+ years of engineering excellence by Mechzephyr Engineering Pvt. Ltd.
         </p>
 
         <!-- Key Metrics Strip -->
         <div class="hero-stats-row stagger-load-4">
           <div class="stat-item">
-            <span class="stat-val" data-count="5.8x">3.0–5.8x</span>
+            <span class="stat-val" data-count="5.8x" style="color: var(--color-primary);">3.0–5.8x</span>
             <span class="stat-lbl">COP Efficiency</span>
           </div>
           <div class="stat-item">
-            <span class="stat-val orange" data-count="75%">75%</span>
+            <span class="stat-val" data-count="75%" style="color: var(--color-accent);">75%</span>
             <span class="stat-lbl">Power Saved vs Geyser</span>
           </div>
           <div class="stat-item">
-            <span class="stat-val" data-count="100%">100%</span>
+            <span class="stat-val" data-count="100%" style="color: var(--color-secondary-dark);">100%</span>
             <span class="stat-lbl">Zero ODP Refrigerant</span>
           </div>
         </div>
@@ -82,85 +82,115 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#calculator" class="btn btn-secondary">
-            Live Savings Calculator
+            Sizing Calculator Bot
           </a>
         </div>
       </div>
 
-      <!-- Signature Thermal Flow Interactive Engine Visualizer -->
-      <div class="thermal-flow-wrapper ambient-visual stagger-load-5">
-        <div class="thermal-flow-header">
-          <div class="flow-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            THERMAL FLOW TELEMETRY ENGINE
+      <!-- Signature Product Showcase & Advertising Presentation Engine -->
+      <div class="product-showcase-wrapper ambient-visual stagger-load-5" style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-lg); position: relative;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 0.85rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; color: var(--color-primary); text-transform: uppercase;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            FLAGSHIP PRODUCT PRESENTATION
           </div>
-          <span class="blueprint-tag tag-orange">LIVE SIMULATION</span>
+          <span class="blueprint-tag tag-orange" style="font-size: 0.75rem;">LIVE SHOWCASE</span>
         </div>
 
-        <div class="flow-canvas-container">
-          <canvas id="thermalCanvas"></canvas>
-        </div>
-
-        <div class="thermal-telemetry-controls">
-          <div class="control-group">
-            <div class="control-label">
-              <span>Ambient Air Temp:</span>
-              <strong id="ambientVal">25°C</strong>
+        <!-- Animated Product Slides -->
+        <div id="productShowcaseContainer" style="position: relative; min-height: 310px; overflow: hidden; border-radius: var(--radius-md);">
+          
+          <!-- Slide 1: Domestic Monoblock -->
+          <div class="product-slide active-slide" data-slide="0" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; transition: opacity 0.5s ease;">
+            <div style="position: relative; width: 100%; max-height: 200px; overflow: hidden; border-radius: var(--radius-md);">
+              <img src="assets/images/domestic-monoblock.jpg" alt="VDHP Domestic Monoblock Series" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md);">
+              <span class="blueprint-tag" style="position: absolute; top: 12px; left: 12px; background: rgba(15, 61, 34, 0.9); color: #FFFFFF;">VDHP MONOBLOCK</span>
             </div>
-            <input type="range" id="ambientSlider" class="control-slider" min="10" max="42" value="25" step="1">
-          </div>
-
-          <div class="control-group">
-            <div class="control-label">
-              <span>Target Water Temp:</span>
-              <strong id="waterVal">55°C</strong>
-            </div>
-            <input type="range" id="waterSlider" class="control-slider" min="45" max="75" value="55" step="1">
-          </div>
-
-          <div class="cop-indicator">
             <div>
-              <span>SYSTEM COP RATING:</span>
-              <div class="cop-score" id="copScore">4.85x</div>
-            </div>
-            <div style="text-align: right;">
-              <span>ENERGY REDUCTION:</span>
-              <div style="color: var(--color-primary); font-weight: 800; font-size: 1.2rem;" id="savingsPct">79.4%</div>
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem;">VDHP Domestic Monoblock Series</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">Compact air-to-water heat pump for luxury villas &amp; apartments. Tube-in-Tube exchanger with low-vibration rubber damper feet.</p>
+              <div style="display: flex; justify-content: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;">
+                <span style="color: var(--color-primary);">CAPACITY: 3.1–11.0 kW</span>
+                <span style="color: var(--color-accent);">COP: 4.29–5.83x</span>
+              </div>
             </div>
           </div>
+
+          <!-- Slide 2: Commercial V-Type -->
+          <div class="product-slide" data-slide="1" style="display: none; flex-direction: column; align-items: center; text-align: center; gap: 1rem; transition: opacity 0.5s ease;">
+            <div style="position: relative; width: 100%; max-height: 200px; overflow: hidden; border-radius: var(--radius-md);">
+              <img src="assets/images/commercial-vtype.jpg" alt="VCHP Commercial V-Type Series" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md);">
+              <span class="blueprint-tag tag-orange" style="position: absolute; top: 12px; left: 12px;">VCHP COMMERCIAL V-TYPE</span>
+            </div>
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem;">VCHP Commercial V-Type Series</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">Modular heavy-duty heat pump for hotels, hospitals &amp; factories. Saginomya 4-way auto-defrost valve &amp; dual-compressor staging.</p>
+              <div style="display: flex; justify-content: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;">
+                <span style="color: var(--color-primary);">CAPACITY: 17.0–70.0 kW</span>
+                <span style="color: var(--color-accent);">TEMP: Up to 65°C</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Swimming Pool Titanium -->
+          <div class="product-slide" data-slide="2" style="display: none; flex-direction: column; align-items: center; text-align: center; gap: 1rem; transition: opacity 0.5s ease;">
+            <div style="position: relative; width: 100%; max-height: 200px; overflow: hidden; border-radius: var(--radius-md);">
+              <img src="assets/images/swimming-pool.png" alt="VCHP Swimming Pool Titanium Series" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-md);">
+              <span class="blueprint-tag tag-accent" style="position: absolute; top: 12px; left: 12px;">TITANIUM POOL &amp; SPA</span>
+            </div>
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.35rem;">VCHP Pool Titanium Series</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.75rem;">Anti-corrosion Titanium Tube-in-PVC exchanger designed for resort pools, clubhouses &amp; Jacuzzis. Ultra-quiet operation (&lt;50 dBA).</p>
+              <div style="display: flex; justify-content: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;">
+                <span style="color: var(--color-primary);">CAPACITY: 11.0–35.0 kW</span>
+                <span style="color: var(--color-secondary-dark);">NOISE: &lt; 50 dBA</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- Slide Navigation Dots -->
+        <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+          <button class="showcase-dot active" data-target-slide="0" style="width: 28px; height: 6px; border-radius: 3px; background: var(--color-accent); border: none; cursor: pointer; transition: all 0.3s ease;" aria-label="Go to Slide 1"></button>
+          <button class="showcase-dot" data-target-slide="1" style="width: 10px; height: 6px; border-radius: 3px; background: var(--border-divider); border: none; cursor: pointer; transition: all 0.3s ease;" aria-label="Go to Slide 2"></button>
+          <button class="showcase-dot" data-target-slide="2" style="width: 10px; height: 6px; border-radius: 3px; background: var(--border-divider); border: none; cursor: pointer; transition: all 0.3s ease;" aria-label="Go to Slide 3"></button>
+        </div>
+
       </div>
+
     </div>
   </section>
 
   <!-- TRUST STRIP -->
-  <section class="trust-strip reveal-on-scroll">
+  <section class="trust-strip reveal-on-scroll" style="background: var(--bg-surface); padding: 3rem 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container trust-grid">
       <div class="trust-card stagger-child">
-        <div class="trust-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="trust-info"><h4>In-House Assembly</h4><p>Engineered & manufactured at Bommasandra Industrial Area, Bangalore</p></div>
+        <div class="trust-icon" style="color: var(--color-primary);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="trust-info"><h4>In-House Assembly</h4><p>Engineered &amp; manufactured at Bommasandra Industrial Area, Bangalore</p></div>
       </div>
       <div class="trust-card stagger-child">
-        <div class="trust-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="trust-info"><h4>Saginomya EEV & Defrost</h4><p>Electronic expansion valves with intelligent auto-defrost algorithms</p></div>
+        <div class="trust-icon" style="color: var(--color-accent);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="trust-info"><h4>Saginomya EEV &amp; Defrost</h4><p>Electronic expansion valves with intelligent auto-defrost algorithms</p></div>
       </div>
       <div class="trust-card stagger-child">
-        <div class="trust-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="trust-icon" style="color: var(--color-secondary);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
         <div class="trust-info"><h4>8+ Years Segment Trust</h4><p>Over 500+ successful installations across villas, hotels, and hospitals</p></div>
       </div>
       <div class="trust-card stagger-child">
-        <div class="trust-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="trust-icon" style="color: var(--color-primary);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="trust-info"><h4>Zero ODP Refrigerant</h4><p>Eco-friendly R134a, R407c, and R410a green refrigerants</p></div>
       </div>
     </div>
   </section>
 
   <!-- PRODUCT RANGE MATRIX -->
-  <section class="products-section reveal-on-scroll" id="products">
+  <section class="products-section reveal-on-scroll" id="products" style="padding: 5rem 0; background: #FFFFFF;">
     <div class="container">
       <div class="section-header">
         <div class="blueprint-tag">CATALOGUE MATRIX</div>
-        <h2 class="section-title">Air-Source & Thermodynamic Heat Pumps</h2>
+        <h2 class="section-title">Air-Source &amp; Thermodynamic Heat Pumps</h2>
         <p class="section-desc">Extracted direct from official technical spec sheets. Built with Tube-in-Tube heat exchangers, rotary heat pump compressors, and Wi-Fi smart app monitoring.</p>
       </div>
 
@@ -168,7 +198,7 @@
         <button class="tab-btn active" data-filter="all">All Models</button>
         <button class="tab-btn" data-filter="domestic">Domestic Monoblock</button>
         <button class="tab-btn" data-filter="commercial">Commercial V-Type</button>
-        <button class="tab-btn" data-filter="pool">Swimming Pool & Spa</button>
+        <button class="tab-btn" data-filter="pool">Swimming Pool &amp; Spa</button>
         <button class="tab-btn" data-filter="solar">Thermodynamic Solar</button>
       </div>
 
@@ -197,7 +227,7 @@
         </div>
 
         <!-- Card 2: Commercial V-Type -->
-        <div class="product-card reveal" data-category="commercial">
+        <div class="product-card motion-card stagger-child" data-category="commercial">
           <div class="product-img-wrapper">
             <span class="blueprint-tag tag-orange product-badge-float">VCHP COMMERCIAL</span>
             <img src="assets/images/commercial-vtype.jpg" alt="VINDSOL Commercial V-Type Heat Pump" class="product-img">
@@ -219,13 +249,13 @@
         </div>
 
         <!-- Card 3: Swimming Pool Heat Pump -->
-        <div class="product-card reveal" data-category="pool">
+        <div class="product-card motion-card stagger-child" data-category="pool">
           <div class="product-img-wrapper">
-            <span class="blueprint-tag product-badge-float">TITANIUM POOL</span>
+            <span class="blueprint-tag tag-accent product-badge-float">TITANIUM POOL</span>
             <img src="assets/images/swimming-pool.png" alt="VINDSOL Swimming Pool Heat Pump" class="product-img">
           </div>
           <div class="product-content">
-            <h3 class="product-title">VCHP Pool & Spa Titanium Series</h3>
+            <h3 class="product-title">VCHP Pool &amp; Spa Titanium Series</h3>
             <p class="product-desc">High-flow heat pump equipped with anti-corrosion Titanium Tube-in-PVC heat exchanger for resort pools, luxury clubhouses, and Jacuzzis.</p>
             <div class="spec-mini-grid">
               <div class="spec-mini-item"><span class="spec-lbl">CAPACITY RANGE</span><span class="spec-val">11 kW – 35.0 kW</span></div>
@@ -244,83 +274,137 @@
     </div>
   </section>
 
-  <!-- CALCULATOR -->
-  <section class="why-section" id="calculator">
+  <!-- INTERACTIVE HEAT PUMP SIZING & CALCULATOR BOT -->
+  <section class="why-section reveal-on-scroll" id="calculator" style="padding: 5.5rem 0; background: var(--bg-body); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);">
     <div class="container">
-      <div class="section-header reveal">
-        <div class="blueprint-tag tag-orange">ENERGY ECONOMICS</div>
-        <h2 class="section-title">Why Air-Source Heat Pumps?</h2>
-        <p class="section-desc">Conventional electrical geysers convert 1 kW of electricity into 1 kW of heat. VINDSOL heat pumps transfer ambient environmental heat into water, delivering 3 to 5+ kW of thermal energy for every 1 kW consumed.</p>
+      <div class="section-header">
+        <div class="blueprint-tag tag-orange">HEAT PUMP SIZING &amp; COST BOT</div>
+        <h2 class="section-title">Smart Product Sizing &amp; ROI Calculator Bot</h2>
+        <p class="section-desc">Select your project segment and hot water demand to calculate the exact VINDSOL heat pump model, annual electricity savings, and estimated payback period.</p>
       </div>
 
-      <div class="calculator-wrapper reveal">
-        <div class="calc-inputs">
-          <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Interactive Annual Savings Calculator</h3>
+      <div class="calculator-wrapper" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.5rem; background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-md);">
+        
+        <!-- Calculator Inputs -->
+        <div class="calc-inputs" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            Interactive Sizing Bot
+          </h3>
+          
           <div class="form-group">
-            <label class="form-label" for="calcLitres">Daily Hot Water Demand:</label>
-            <select id="calcLitres" class="form-select">
-              <option value="300">300 Litres / Day (Villa / 3-4 BHK)</option>
+            <label class="form-label" for="botSegment" style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.35rem; display: block;">Project Segment:</label>
+            <select id="botSegment" class="form-select" style="width: 100%; padding: 0.85rem; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--bg-surface); font-family: var(--font-body); font-weight: 600;">
+              <option value="residential" selected>Residential Villa / Independent House</option>
+              <option value="commercial">Hotel / Hospital / Hostel</option>
+              <option value="pool">Resort Swimming Pool &amp; Spa</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="calcLitres" style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.35rem; display: block;">Daily Hot Water Demand:</label>
+            <select id="calcLitres" class="form-select" style="width: 100%; padding: 0.85rem; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--bg-surface); font-family: var(--font-body); font-weight: 600;">
+              <option value="300">300 Litres / Day (3-4 BHK Villa)</option>
               <option value="500" selected>500 Litres / Day (Large Residence / Villa)</option>
               <option value="1000">1,000 Litres / Day (Boutique Hotel / Hostel)</option>
               <option value="3000">3,000 Litres / Day (Commercial Hotel / Hospital)</option>
+              <option value="5000">5,000 Litres / Day (High-Capacity Commercial)</option>
             </select>
           </div>
+
           <div class="form-group">
-            <label class="form-label" for="calcTariff">Electricity Tariff (₹ / kWh):</label>
-            <input type="number" id="calcTariff" class="form-input" value="8.50" step="0.25">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="calcDelta">Target Temperature Rise (°C):</label>
-            <input type="number" id="calcDelta" class="form-input" value="40" readonly>
+            <label class="form-label" for="calcTariff" style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.35rem; display: block;">Electricity Tariff (₹ / kWh):</label>
+            <input type="number" id="calcTariff" class="form-input" value="8.50" step="0.25" style="width: 100%; padding: 0.85rem; border: 1px solid var(--border-soft); border-radius: var(--radius-md); background: var(--bg-surface); font-family: var(--font-mono); font-weight: 600;">
           </div>
         </div>
 
-        <div class="calc-results">
-          <div class="savings-highlight">
-            <span class="savings-label">ESTIMATED ANNUAL SAVINGS</span>
-            <div class="savings-amount" id="savingsAmount">₹0</div>
-          </div>
-          <div class="comparison-bars">
-            <div class="bar-item">
-              <div class="bar-header"><span>Electric Resistance Geyser</span><strong id="geyserCost" style="color: #E53935;">₹0</strong></div>
-              <div class="bar-bg"><div class="bar-fill geyser" id="barGeyser" style="width: 100%;"></div></div>
+        <!-- Calculator Bot Results & Model Recommendation -->
+        <div class="calc-results" style="display: flex; flex-direction: column; justify-content: space-between; background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: 2rem;">
+          
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 0.75rem;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--color-secondary-dark); text-transform: uppercase;">RECOMMENDED VINDSOL MODEL</span>
+              <span class="blueprint-tag tag-orange" id="recommendedModelBadge">VDHP-11000MB</span>
             </div>
-            <div class="bar-item">
-              <div class="bar-header"><span>VINDSOL Heat Pump (COP 4.25x)</span><strong id="vindsolCost" style="color: var(--color-primary);">₹0</strong></div>
-              <div class="bar-bg"><div class="bar-fill vindsol" id="barVindsol" style="width: 25%;"></div></div>
+
+            <h4 id="recommendedModelTitle" style="font-size: 1.3rem; font-weight: 900; color: var(--color-primary); margin-bottom: 0.5rem;">VDHP Domestic Monoblock 11kW</h4>
+            <p id="recommendedModelDesc" style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Optimized monoblock heat pump with Tube-in-Tube heat exchanger and R134a Zero-ODP eco-refrigerant.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="background: #FFFFFF; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft);">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block;">ANNUAL SAVINGS</span>
+                <strong id="savingsAmount" style="font-size: 1.4rem; color: var(--color-accent); font-weight: 900;">₹52,400</strong>
+              </div>
+
+              <div style="background: #FFFFFF; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft);">
+                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block;">ESTIMATED ROI PAYBACK</span>
+                <strong id="roiPaybackPeriod" style="font-size: 1.4rem; color: var(--color-primary); font-weight: 900;">14 Months</strong>
+              </div>
+            </div>
+
+            <div class="comparison-bars" style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <div class="bar-item">
+                <div class="bar-header" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                  <span>Electric Geyser Annual Cost</span>
+                  <strong id="geyserCost" style="color: #E53935;">₹68,850</strong>
+                </div>
+                <div class="bar-bg" style="height: 10px; background: #E2E4E8; border-radius: 5px; overflow: hidden;">
+                  <div class="bar-fill geyser" id="barGeyser" style="width: 100%; height: 100%; background: #E53935; border-radius: 5px;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-header" style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                  <span>VINDSOL Heat Pump Annual Cost</span>
+                  <strong id="vindsolCost" style="color: var(--color-primary);">₹16,450</strong>
+                </div>
+                <div class="bar-bg" style="height: 10px; background: #E2E4E8; border-radius: 5px; overflow: hidden;">
+                  <div class="bar-fill vindsol" id="barVindsol" style="width: 24%; height: 100%; background: var(--color-primary); border-radius: 5px; transition: width 0.5s ease;"></div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div style="margin-top: 1.5rem;">
+            <a href="contact.html#quote" class="btn btn-primary open-quote-modal" style="width: 100%;">Request Proposal for <span id="btnModelName" style="margin-left: 0.35rem;">VDHP-11000MB</span></a>
+          </div>
+
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section" id="quote">
-    <div class="container">
-      <div class="cta-box reveal">
-        <div class="blueprint-tag">PARTNER & CONSULTATION</div>
-        <h2 style="font-size: 2.5rem; font-weight: 700;">Ready to Cut Heating Bills by 75%?</h2>
-        <p>Consult with Mechzephyr's application engineering team in Bengaluru for customized heat pump sizing.</p>
-        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center;">
-          <a href="contact.html" class="btn btn-primary">Request Technical Proposal</a>
-          <a href="tel:+919900095490" class="btn btn-secondary">Call Engineering: +91 9900095490</a>
-        </div>
+  <!-- CTA CONSULTATION -->
+  <section class="cta-section reveal-on-scroll" id="quote" style="padding: 5rem 0; background: var(--gradient-hero); color: #FFFFFF;">
+    <div class="container" style="text-align: center; max-width: 860px;">
+      <div class="blueprint-tag" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #FFFFFF; margin-bottom: 1rem;">PARTNER &amp; CONSULTATION</div>
+      <h2 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 1rem; color: #FFFFFF;">Ready to Cut Water Heating Bills by 75%?</h2>
+      <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.6;">Consult with Mechzephyr's application engineering team in Bengaluru for customized heat pump sizing and factory-direct pricing.</p>
+      <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center;">
+        <a href="contact.html" class="btn btn-primary" style="background: var(--gradient-copper);">Request Technical Proposal</a>
+        <a href="tel:+919900095490" class="btn btn-secondary" style="background: #FFFFFF; color: var(--color-primary);">Call Engineering: +91 9900095490</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" style="background: var(--color-graphite); color: #FFFFFF; padding: 4.5rem 0 2rem 0;">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid" style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.25fr; gap: 3rem; margin-bottom: 3rem;">
         <div class="footer-col">
-          <div class="logo-text-group"><span class="logo-title" style="color: #FFFFFF;">VIND<span style="color: var(--color-secondary);">SOL</span></span><span class="logo-sub" style="color: var(--color-primary-light);">MECHZEPHYR ENGINEERING PVT. LTD</span></div>
-          <p style="color: #94A3B8; font-size: 0.88rem;">Indian manufacturer of air-source heat pumps and thermodynamic solar heating systems in Bengaluru, Karnataka.</p>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <img src="assets/images/vindsol-official-logo.png" alt="VINDSOL Official Logo" style="height: 42px; width: auto;">
+            <div class="logo-text-group">
+              <span class="logo-title" style="color: #FFFFFF; font-size: 1.4rem; font-weight: 900;">VIND<span style="color: var(--color-accent);">SOL</span></span>
+              <span class="logo-sub" style="color: var(--color-secondary-light); font-size: 0.65rem; font-weight: 700;">MECHZEPHYR ENGINEERING PVT. LTD</span>
+            </div>
+          </div>
+          <p style="color: #94A3B8; font-size: 0.88rem; line-height: 1.6;">Indian manufacturer of air-source heat pumps and thermodynamic solar heating systems in Bengaluru, Karnataka.</p>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Navigation</h4>
-          <ul class="footer-links">
+          <h4 class="footer-title" style="color: #FFFFFF; font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Navigation</h4>
+          <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; color: #94A3B8; font-size: 0.9rem;">
             <li><a href="about.html">About Us</a></li>
             <li><a href="sustainability.html">About Heat Pump</a></li>
             <li><a href="products.html">Product Range</a></li>
@@ -330,26 +414,25 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Product Ranges</h4>
-          <ul class="footer-links">
+          <h4 class="footer-title" style="color: #FFFFFF; font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Product Ranges</h4>
+          <ul class="footer-links" style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; color: #94A3B8; font-size: 0.9rem;">
             <li><a href="products.html#domestic">Domestic Monoblock</a></li>
             <li><a href="products.html#commercial">Commercial V-Type</a></li>
             <li><a href="products.html#pool">Swimming Pool Titanium</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4 class="footer-title">Factory Address</h4>
-          <p style="color: #94A3B8; font-size: 0.9rem;">Bommasandra Industrial Area, Bangalore - 560099, Karnataka, India<br>Phone: +91 9900095490<br>Email: deepak@vindsol.in</p>
+          <h4 class="footer-title" style="color: #FFFFFF; font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Factory Address</h4>
+          <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.6;">Bommasandra Industrial Area, Bangalore - 560099, Karnataka, India<br>Phone: +91 9900095490<br>Email: deepak@vindsol.in</p>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748B;">
         <span>&copy; 2026 VINDSOL (Mechzephyr Engineering Pvt. Ltd)</span>
         <span>Zero ODP Eco-Refrigerant HVAC</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/thermal-flow.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMouseParallax();
   initScrollSpy();
   initProductTabs();
+  initProductShowcase();
   initSavingsCalculator();
   initQuoteModal();
 });
@@ -224,12 +225,71 @@ function initProductTabs() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. Interactive Energy Savings & Cost Calculator                           */
+/* 4.1 Flagship Product Showcase Advertising Rotator                          */
+/* -------------------------------------------------------------------------- */
+function initProductShowcase() {
+  const slides = document.querySelectorAll('.product-slide');
+  const dots = document.querySelectorAll('.showcase-dot');
+  if (!slides.length || !dots.length) return;
+
+  let currentSlide = 0;
+  let showcaseInterval = null;
+
+  function showSlide(index) {
+    slides.forEach((s, idx) => {
+      if (idx === index) {
+        s.style.display = 'flex';
+        setTimeout(() => { s.style.opacity = '1'; }, 20);
+      } else {
+        s.style.opacity = '0';
+        s.style.display = 'none';
+      }
+    });
+
+    dots.forEach((d, idx) => {
+      if (idx === index) {
+        d.style.background = 'var(--color-accent)';
+        d.style.width = '28px';
+        d.classList.add('active');
+      } else {
+        d.style.background = 'var(--border-divider)';
+        d.style.width = '10px';
+        d.classList.remove('active');
+      }
+    });
+
+    currentSlide = index;
+  }
+
+  function startAutoPlay() {
+    showcaseInterval = setInterval(() => {
+      let next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }, 4500);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      clearInterval(showcaseInterval);
+      const targetIdx = parseInt(e.target.getAttribute('data-target-slide'), 10);
+      if (!isNaN(targetIdx)) {
+        showSlide(targetIdx);
+        startAutoPlay();
+      }
+    });
+  });
+
+  showSlide(0);
+  startAutoPlay();
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. Smart Heat Pump Sizing & Calculator Bot                                */
 /* -------------------------------------------------------------------------- */
 function initSavingsCalculator() {
   const litresInput = document.getElementById('calcLitres');
   const tariffInput = document.getElementById('calcTariff');
-  const deltaInput = document.getElementById('calcDelta');
+  const segmentSelect = document.getElementById('botSegment');
 
   const geyserCostEl = document.getElementById('geyserCost');
   const vindsolCostEl = document.getElementById('vindsolCost');
@@ -237,25 +297,83 @@ function initSavingsCalculator() {
   const barGeyser = document.getElementById('barGeyser');
   const barVindsol = document.getElementById('barVindsol');
 
+  const modelBadge = document.getElementById('recommendedModelBadge');
+  const modelTitle = document.getElementById('recommendedModelTitle');
+  const modelDesc = document.getElementById('recommendedModelDesc');
+  const roiPayback = document.getElementById('roiPaybackPeriod');
+  const btnModelName = document.getElementById('btnModelName');
+
   if (!litresInput || !tariffInput) return;
+
+  function getProductRecommendation(litres, segment) {
+    if (segment === 'pool') {
+      return {
+        badge: 'VCHP-POOL-35KW',
+        title: 'VCHP Pool Titanium Series 35kW',
+        desc: 'High-flow anti-corrosion Titanium in PVC heat exchanger for resort pools & Jacuzzis.',
+        cop: 5.2,
+        estPrice: 225000
+      };
+    }
+
+    if (litres <= 300) {
+      return {
+        badge: 'VDHP-3000MB',
+        title: 'VDHP Domestic Monoblock 3.16kW',
+        desc: 'Compact residential heat pump for 150L–300L domestic hot water supply.',
+        cop: 4.29,
+        estPrice: 65000
+      };
+    } else if (litres <= 750) {
+      return {
+        badge: 'VDHP-11000MB',
+        title: 'VDHP Domestic Monoblock 11kW',
+        desc: 'High-efficiency villa heat pump with Tube-in-Tube exchanger for 500L–750L demand.',
+        cop: 4.85,
+        estPrice: 115000
+      };
+    } else if (litres <= 2000) {
+      return {
+        badge: 'VCHP-1720',
+        title: 'VCHP Commercial V-Type 17kW',
+        desc: 'Modular commercial heat pump with Saginomya EEV & auto-defrost valve.',
+        cop: 4.6,
+        estPrice: 185000
+      };
+    } else {
+      return {
+        badge: 'VCHP-3500-VTYPE',
+        title: 'VCHP Heavy-Duty Commercial 35kW',
+        desc: 'Industrial-grade dual-compressor heat pump for hotels, hospitals & factories.',
+        cop: 5.1,
+        estPrice: 310000
+      };
+    }
+  }
 
   function calculate() {
     const litres = parseFloat(litresInput.value) || 500;
     const tariff = parseFloat(tariffInput.value) || 8.5; // Rs / kWh
-    const deltaT = parseFloat(deltaInput ? deltaInput.value : 40) || 40; // °C temp rise (e.g. 15°C to 55°C)
+    const segment = segmentSelect ? segmentSelect.value : 'residential';
+    const deltaT = 40; // °C temp rise (15°C to 55°C)
+
+    const rec = getProductRecommendation(litres, segment);
 
     // Heat energy formula: Q (kWh) = (Litres * 4.186 * deltaT) / 3600
     const dailyKWhRequired = (litres * 4.186 * deltaT) / 3600;
 
-    // Conventional Electric Resistance Geyser efficiency ~ 90% (COP 0.9)
+    // Electric Resistance Geyser efficiency ~ 90%
     const geyserDailyKWh = dailyKWhRequired / 0.9;
     const geyserAnnualCost = geyserDailyKWh * 365 * tariff;
 
-    // VINDSOL Air-Source Heat Pump COP ~ 4.25 (Average across operating spectrum)
-    const vindsolDailyKWh = dailyKWhRequired / 4.25;
+    // VINDSOL Heat Pump COP
+    const vindsolDailyKWh = dailyKWhRequired / rec.cop;
     const vindsolAnnualCost = vindsolDailyKWh * 365 * tariff;
 
     const annualSavings = geyserAnnualCost - vindsolAnnualCost;
+
+    // Estimated Payback Period in Months
+    const paybackMonths = Math.max(8, Math.round((rec.estPrice / annualSavings) * 12));
 
     // Format currency to Indian Rupees
     const formatINR = (val) => '₹' + Math.round(val).toLocaleString('en-IN');
@@ -263,16 +381,23 @@ function initSavingsCalculator() {
     if (geyserCostEl) geyserCostEl.textContent = formatINR(geyserAnnualCost);
     if (vindsolCostEl) vindsolCostEl.textContent = formatINR(vindsolAnnualCost);
     if (savingsAmtEl) savingsAmtEl.textContent = formatINR(annualSavings);
+    if (roiPayback) roiPayback.textContent = `${paybackMonths} Months`;
+
+    if (modelBadge) modelBadge.textContent = rec.badge;
+    if (modelTitle) modelTitle.textContent = rec.title;
+    if (modelDesc) modelDesc.textContent = rec.desc;
+    if (btnModelName) btnModelName.textContent = rec.badge;
 
     // Update comparative bar widths
     if (barGeyser) barGeyser.style.width = '100%';
     if (barVindsol) {
-      const pct = Math.max(12, (vindsolAnnualCost / geyserAnnualCost) * 100);
+      const pct = Math.max(15, (vindsolAnnualCost / geyserAnnualCost) * 100);
       barVindsol.style.width = `${pct}%`;
     }
   }
 
-  [litresInput, tariffInput, deltaInput].forEach(el => {
+  [litresInput, tariffInput, segmentSelect].forEach(el => {
+    if (el) el.addEventListener('change', calculate);
     if (el) el.addEventListener('input', calculate);
   });
 
