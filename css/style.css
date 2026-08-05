@@ -895,6 +895,44 @@ img {
   letter-spacing: 0.05em;
 }
 
+/* Spec Tables Styling */
+.spec-table-wrapper {
+  overflow-x: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.spec-table th {
+  background-color: var(--bg-surface);
+  color: var(--color-primary);
+  font-weight: 800;
+  padding: 0.85rem 1rem;
+  border-bottom: 1.5px solid var(--border-soft);
+}
+
+.spec-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-soft);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.spec-table td.highlight-col {
+  font-weight: 800;
+  color: var(--color-primary);
+  background-color: rgba(220, 252, 231, 0.25);
+}
+
 /* Consultation Dark Banner */
 .consultation-banner {
   margin: 3rem 0;
