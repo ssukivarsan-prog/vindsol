@@ -383,7 +383,7 @@ img {
 .hero-banner-slider {
   position: relative;
   width: 100%;
-  min-height: 580px;
+  min-height: 640px;
   background-color: #0F3D22;
   overflow: hidden;
 }
@@ -718,13 +718,13 @@ img {
 }
 
 /* ==========================================================================
-   FLOATING KEY STATS STRIP
+   KEY STATS STRIP (Positioned down cleanly below hero buttons)
    ========================================================================== */
 .stats-strip-section {
-  margin-top: -2.5rem;
+  margin-top: 2rem;
   position: relative;
   z-index: 10;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 .stats-card-row {
