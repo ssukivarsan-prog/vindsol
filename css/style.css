@@ -456,53 +456,65 @@ img {
   margin-bottom: 1.25rem;
 }
 
-/* Floating Product Cards Container Row Sitting Right Under H1 */
+/* Pure Transparent Floating Product Cutout Images */
 .hero-floating-products-row {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 1.25rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
 .floating-prod-item {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(74, 222, 128, 0.4);
-  border-radius: 12px;
-  padding: 0.75rem 1.1rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  padding: 0.85rem 1.2rem;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  gap: 1rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  animation: floatProductTransparent 3.5s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.floating-prod-item:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+@keyframes floatProductTransparent {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 
 .floating-prod-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 35px rgba(74, 222, 128, 0.3);
+  transform: translateY(-8px) scale(1.03);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #4ADE80;
+  box-shadow: 0 20px 40px rgba(74, 222, 128, 0.3);
 }
 
 .floating-prod-img {
-  width: 65px;
-  height: 65px;
+  width: 75px;
+  height: 75px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
 }
 
 .floating-prod-text label {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
-  color: #15803D;
+  color: #4ADE80;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   display: block;
 }
 
 .floating-prod-text strong {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  color: #0F172A;
+  color: #FFFFFF;
   display: block;
   line-height: 1.2;
 }
