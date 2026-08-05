@@ -91,12 +91,13 @@ function initSavingsCalculator() {
   const yearlySavingsEl = document.getElementById('yearlySavingsVal');
   const co2El = document.getElementById('co2ReductionVal');
   const paybackEl = document.getElementById('paybackPeriodVal');
+  const recModelEl = document.getElementById('recommendedModelVal');
 
   if (!litresInput || !tariffInput) return;
 
   function calculate() {
     const people = parseFloat(peopleInput ? peopleInput.value : 4) || 4;
-    const litres = parseFloat(litresInput.value) || (people * 50);
+    let litres = parseFloat(litresInput.value) || 200;
     const tariff = parseFloat(tariffInput.value) || 8.00; // Rs / kWh
     const heaterType = heaterSelect ? heaterSelect.value : 'geyser';
 
@@ -125,20 +126,51 @@ function initSavingsCalculator() {
     const kwhSavedPerYear = (geyserDailyKWh - vindsolDailyKWh) * 365;
     const co2Tonnes = (kwhSavedPerYear * 0.82) / 1000;
 
-    // Estimated Payback (Average heat pump system cost ~ Rs 75,000 for residential)
-    const estPrice = litres > 1000 ? 220000 : 78000;
-    const paybackYears = Math.max(1.2, (estPrice / yearlySavings)).toFixed(1);
+    // Model Recommendation & System Cost based on Litres
+    let recModel = 'VDHP 4500 MB (200L)';
+    let estPrice = 65000;
+
+    if (litres <= 150) {
+      recModel = 'VDHP 3000 MB (150L)';
+      estPrice = 48000;
+    } else if (litres <= 250) {
+      recModel = 'VDHP 4500 MB (200L)';
+      estPrice = 65000;
+    } else if (litres <= 400) {
+      recModel = 'VDHP 6000 MB (300L)';
+      estPrice = 78000;
+    } else if (litres <= 600) {
+      recModel = 'VDHP 7500 MB (500L)';
+      estPrice = 95000;
+    } else if (litres <= 1200) {
+      recModel = 'VCHP 3500 V Commercial (35kW)';
+      estPrice = 165000;
+    } else {
+      recModel = 'VCHP 7500 V Heavy Duty (75kW)';
+      estPrice = 285000;
+    }
+
+    const paybackYears = Math.max(1.1, (estPrice / yearlySavings)).toFixed(1);
 
     // Format currency to Indian Rupees
     const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
 
     if (monthlySavingsEl) monthlySavingsEl.textContent = formatINR(monthlySavings);
     if (yearlySavingsEl) yearlySavingsEl.textContent = formatINR(yearlySavings);
-    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes`;
+    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes / Yr`;
     if (paybackEl) paybackEl.textContent = `${paybackYears} Years`;
+    if (recModelEl) recModelEl.textContent = recModel;
   }
 
-  [peopleInput, heaterSelect, litresInput, tariffInput].forEach(el => {
+  if (peopleInput) {
+    peopleInput.addEventListener('input', () => {
+      const p = parseFloat(peopleInput.value) || 4;
+      litresInput.value = Math.max(100, p * 50);
+      calculate();
+    });
+  }
+
+  [heaterSelect, litresInput, tariffInput].forEach(el => {
     if (el) {
       el.addEventListener('input', calculate);
       el.addEventListener('change', calculate);

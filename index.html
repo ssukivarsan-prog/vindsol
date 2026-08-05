@@ -460,9 +460,9 @@
       <div class="form-field-group">
         <label class="form-label-custom" for="calcHeaterType">Existing Heater Type</label>
         <select id="calcHeaterType" class="form-select-custom">
-          <option value="geyser" selected>Electric Geyser</option>
-          <option value="boiler">Diesel / Gas Boiler</option>
-          <option value="solar">Solar Backup Heater</option>
+          <option value="geyser" selected>Electric Geyser (COP 0.9)</option>
+          <option value="boiler">Diesel / Gas Boiler (COP 0.7)</option>
+          <option value="solar">Solar Backup Heater (COP 1.5)</option>
         </select>
       </div>
 
@@ -476,8 +476,36 @@
         <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
       </div>
 
+      <!-- Live Calculation Results Card -->
+      <div style="background: #F8FAF8; border: 1px solid rgba(21, 128, 61, 0.2); border-radius: 12px; padding: 1.25rem; margin-top: 1.25rem;">
+        <div style="font-size: 0.78rem; font-weight: 800; color: #15803D; text-transform: uppercase; margin-bottom: 0.75rem;">Your Estimated VINDSOL Savings</div>
+        
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Monthly Savings</div>
+            <strong id="monthlySavingsVal" style="font-size: 1.3rem; color: #15803D; font-weight: 900;">₹ 1,922</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Annual Savings</div>
+            <strong id="yearlySavingsVal" style="font-size: 1.3rem; color: #15803D; font-weight: 900;">₹ 23,068</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Est. Payback</div>
+            <strong id="paybackPeriodVal" style="font-size: 1.1rem; color: var(--color-primary); font-weight: 900;">2.8 Years</strong>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">CO₂ Reduction</div>
+            <strong id="co2ReductionVal" style="font-size: 1.1rem; color: #166534; font-weight: 900;">2.4 Tonnes / Yr</strong>
+          </div>
+        </div>
+
+        <div style="padding-top: 0.75rem; border-top: 1px solid #E2E8F0; font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
+          Recommended Unit: <span id="recommendedModelVal" style="color: #15803D; font-weight: 900;">VDHP 4500 MB (200L)</span>
+        </div>
+      </div>
+
       <button id="calcModalApplyBtn" class="btn-calc-submit" style="margin-top: 1.25rem;">
-        Recalculate &amp; View Results 🧮
+        Get Factory Quotation For Recommended Unit 📋
       </button>
     </div>
   </div>
