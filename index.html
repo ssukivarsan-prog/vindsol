@@ -446,67 +446,163 @@
     <div class="calc-modal-card">
       <button class="calc-modal-close" id="closeCalcModalBtn" aria-label="Close Calculator Modal">&times;</button>
       
-      <div style="margin-bottom: 1.5rem;">
-        <div class="blueprint-tag">INTERACTIVE CALCULATOR</div>
-        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-top: 0.35rem;">Estimate Your Savings</h3>
-        <p style="color: var(--text-muted); font-size: 0.88rem;">Adjust values below to instantly update live monthly savings &amp; CO₂ payback period.</p>
+      <div style="margin-bottom: 1.25rem;">
+        <div class="blueprint-tag">OFFICIAL VINDSOL ENGINEERING CALCULATOR HUB</div>
+        <h3 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary); margin-top: 0.35rem;">Thermal Sizing &amp; Financial ROI Calculator</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">Powered by Mechzephyr Engineering formulas extracted from official VINDSOL data sheets.</p>
       </div>
 
-      <div class="form-field-group">
-        <label class="form-label-custom" for="calcPeople">Number of People</label>
-        <input type="number" id="calcPeople" class="form-input-custom" value="4" min="1" max="100">
+      <!-- Mode Switcher Tabs -->
+      <div class="calc-nav-tabs">
+        <button class="calc-nav-btn active" data-calc-tab="tab-comm-calc">
+          🏢 Commercial Hot Water
+        </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-pool-calc">
+          🏊 Swimming Pool &amp; Spa
+        </button>
       </div>
 
-      <div class="form-field-group">
-        <label class="form-label-custom" for="calcHeaterType">Existing Heater Type</label>
-        <select id="calcHeaterType" class="form-select-custom">
-          <option value="geyser" selected>Electric Geyser (COP 0.9)</option>
-          <option value="boiler">Diesel / Gas Boiler (COP 0.7)</option>
-          <option value="solar">Solar Backup Heater (COP 1.5)</option>
-        </select>
-      </div>
+      <!-- TAB 1: Commercial Hot Water Sizer -->
+      <div class="calc-tab-pane active" id="tab-comm-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">1. Operating Parameters</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="commVolume">Daily Hot Water Demand (Liters / Day)</label>
+              <input type="number" id="commVolume" class="form-input-custom" value="2000" step="100">
+            </div>
 
-      <div class="form-field-group">
-        <label class="form-label-custom" for="calcLitres">Daily Hot Water Usage (Liters)</label>
-        <input type="number" id="calcLitres" class="form-input-custom" value="200" step="50">
-      </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commT1">Cold Water In (°C)</label>
+                <input type="number" id="commT1" class="form-input-custom" value="20" step="1">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commT2">Target Hot Water (°C)</label>
+                <input type="number" id="commT2" class="form-input-custom" value="55" step="1">
+              </div>
+            </div>
 
-      <div class="form-field-group">
-        <label class="form-label-custom" for="calcTariff">Electricity Tariff (Per Unit ₹)</label>
-        <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
-      </div>
-
-      <!-- Live Calculation Results Card -->
-      <div style="background: #F8FAF8; border: 1px solid rgba(21, 128, 61, 0.2); border-radius: 12px; padding: 1.25rem; margin-top: 1.25rem;">
-        <div style="font-size: 0.78rem; font-weight: 800; color: #15803D; text-transform: uppercase; margin-bottom: 0.75rem;">Your Estimated VINDSOL Savings</div>
-        
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
-          <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Monthly Savings</div>
-            <strong id="monthlySavingsVal" style="font-size: 1.3rem; color: #15803D; font-weight: 900;">₹ 1,922</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commHT">Heating Window (Hrs/Day)</label>
+                <input type="number" id="commHT" class="form-input-custom" value="8" step="0.5">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commTariff">Tariff Rate (₹ / kWh)</label>
+                <input type="number" id="commTariff" class="form-input-custom" value="8.00" step="0.25">
+              </div>
+            </div>
           </div>
-          <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Annual Savings</div>
-            <strong id="yearlySavingsVal" style="font-size: 1.3rem; color: #15803D; font-weight: 900;">₹ 23,068</strong>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>VINDSOL Engineering Sizing Output</span>
+              <span>⚡ COP 4.25x</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Required Heat Pump</span>
+                <div class="calc-metric-val" id="commKWVal">10.2 kW</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Daily Thermal Load</span>
+                <div class="calc-metric-val" id="commKcalVal">81 kWh/day</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Annual Savings</span>
+                <div class="calc-metric-val" id="commYearlySavingsVal" style="color: #86EFAC;">₹ 1,76,200</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Est. Payback</span>
+                <div class="calc-metric-val" id="commPaybackVal">1.2 Years</div>
+              </div>
+            </div>
+
+            <div class="calc-rec-banner">
+              Recommended Heat Pump Model:
+              <strong id="commRecModelVal">VCHP 3500 V Commercial (35 kW)</strong>
+            </div>
+
+            <a href="contact.html#quote" class="btn-buy-primary" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
+              📋 Request Official Proforma Quotation
+            </a>
           </div>
-          <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Est. Payback</div>
-            <strong id="paybackPeriodVal" style="font-size: 1.1rem; color: var(--color-primary); font-weight: 900;">2.8 Years</strong>
-          </div>
-          <div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">CO₂ Reduction</div>
-            <strong id="co2ReductionVal" style="font-size: 1.1rem; color: #166534; font-weight: 900;">2.4 Tonnes / Yr</strong>
-          </div>
+
         </div>
+      </div>
 
-        <div style="padding-top: 0.75rem; border-top: 1px solid #E2E8F0; font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
-          Recommended Unit: <span id="recommendedModelVal" style="color: #15803D; font-weight: 900;">VDHP 4500 MB (200L)</span>
+      <!-- TAB 2: Swimming Pool & Spa Sizer -->
+      <div class="calc-tab-pane" id="tab-pool-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 1rem; font-weight: 800; color: #15803D; margin-bottom: 1rem;">1. Pool Dimensions &amp; Environment</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="poolVol">Pool Volume (m³ / Cubic Meters)</label>
+              <input type="number" id="poolVol" class="form-input-custom" value="100" step="10">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolType">Pool Environment</label>
+                <select id="poolType" class="form-select-custom">
+                  <option value="outdoor" selected>Outdoor Pool (Wind 2m/s)</option>
+                  <option value="indoor">Indoor Pool (Wind 0.5m/s)</option>
+                </select>
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolAmb">Ambient Air Temp (°C)</label>
+                <input type="number" id="poolAmb" class="form-input-custom" value="20" step="1">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolT2">Target Water Temp (°C)</label>
+                <input type="number" id="poolT2" class="form-input-custom" value="28" step="1">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolT1">Fresh Water Input (°C)</label>
+                <input type="number" id="poolT1" class="form-input-custom" value="15" step="1">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>Pool Thermal Loss Output</span>
+              <span>🏊 Titanium Exchanger</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card" style="grid-column: span 2;">
+                <span class="calc-metric-label">Total Pool Heat Capacity Needed</span>
+                <div class="calc-metric-val" id="poolKWVal" style="font-size: 1.6rem; color: #86EFAC;">31.5 kW / hr</div>
+              </div>
+              <div class="calc-metric-card" style="grid-column: span 2;">
+                <span class="calc-metric-label">Initial Warm-up Capacity</span>
+                <div class="calc-metric-val" id="poolFHVal" style="font-size: 1.1rem;">23.0 kW</div>
+              </div>
+            </div>
+
+            <div class="calc-rec-banner">
+              Recommended Titanium Pool Heater:
+              <strong id="poolRecModelVal">VPHP 3500 Pool (35 kW Titanium)</strong>
+            </div>
+
+            <a href="product-detail.html?id=pool" id="poolRecModelLink" class="btn-buy-primary" style="margin-top: 1.25rem; width: 100%; justify-content: center;">
+              🌊 View Titanium Pool Heater Specs →
+            </a>
+          </div>
+
         </div>
       </div>
 
-      <button id="calcModalApplyBtn" class="btn-calc-submit" style="margin-top: 1.25rem;">
-        Get Factory Quotation For Recommended Unit 📋
-      </button>
     </div>
   </div>
 

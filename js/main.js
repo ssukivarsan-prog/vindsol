@@ -78,115 +78,179 @@ function initMobileNav() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 3. Interactive Energy Savings & ROI Calculator                             */
+/* 3. Multi-Tab Modern Engineering Sizing Calculator (Commercial & Pool)      */
 /* -------------------------------------------------------------------------- */
 function initSavingsCalculator() {
-  const peopleInput = document.getElementById('calcPeople');
-  const heaterSelect = document.getElementById('calcHeaterType');
-  const litresInput = document.getElementById('calcLitres');
-  const tariffInput = document.getElementById('calcTariff');
-  const submitBtn = document.getElementById('calcModalApplyBtn');
+  // Commercial Hot Water Inputs
+  const commVolume = document.getElementById('commVolume');
+  const commT1 = document.getElementById('commT1');
+  const commT2 = document.getElementById('commT2');
+  const commHT = document.getElementById('commHT');
+  const commTariff = document.getElementById('commTariff');
 
-  const monthlySavingsEl = document.getElementById('monthlySavingsVal');
-  const yearlySavingsEl = document.getElementById('yearlySavingsVal');
-  const co2El = document.getElementById('co2ReductionVal');
-  const paybackEl = document.getElementById('paybackPeriodVal');
-  const recModelEl = document.getElementById('recommendedModelVal');
+  // Commercial Outputs
+  const commKWEl = document.getElementById('commKWVal');
+  const commKcalEl = document.getElementById('commKcalVal');
+  const commYearlySavingsEl = document.getElementById('commYearlySavingsVal');
+  const commPaybackEl = document.getElementById('commPaybackVal');
+  const commRecModelEl = document.getElementById('commRecModelVal');
 
-  if (!litresInput || !tariffInput) return;
+  // Swimming Pool Inputs
+  const poolVol = document.getElementById('poolVol');
+  const poolType = document.getElementById('poolType');
+  const poolT2 = document.getElementById('poolT2');
+  const poolT1 = document.getElementById('poolT1');
+  const poolAmb = document.getElementById('poolAmb');
 
-  function calculate() {
-    const people = parseFloat(peopleInput ? peopleInput.value : 4) || 4;
-    let litres = parseFloat(litresInput.value) || 200;
-    const tariff = parseFloat(tariffInput.value) || 8.00; // Rs / kWh
-    const heaterType = heaterSelect ? heaterSelect.value : 'geyser';
+  // Pool Outputs
+  const poolKWEl = document.getElementById('poolKWVal');
+  const poolFHEl = document.getElementById('poolFHVal');
+  const poolRecModelEl = document.getElementById('poolRecModelVal');
+  const poolRecModelLinkEl = document.getElementById('poolRecModelLink');
 
-    // Temp rise: 15°C ambient air to 55°C water = 40°C rise
-    const deltaT = 40;
+  // Tab Switchers
+  const tabs = document.querySelectorAll('.calc-nav-btn');
+  const panes = document.querySelectorAll('.calc-tab-pane');
 
-    // Daily Thermal Energy needed Q (kWh) = (Litres * 4.186 * 40) / 3600
-    const dailyKWhRequired = (litres * 4.186 * deltaT) / 3600;
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const targetId = tab.getAttribute('data-calc-tab');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.classList.add('active');
+    });
+  });
 
-    // Conventional Efficiency COP
-    let conventionalCOP = 0.9; // Electric Geyser
-    if (heaterType === 'boiler') conventionalCOP = 0.7;
-    if (heaterType === 'solar') conventionalCOP = 1.5;
+  // Commercial Calculation Formula: Q_net = V * (T2-T1) / 860, Q_pump = Q_net / HT
+  function calcCommercial() {
+    if (!commVolume) return;
+    const V = parseFloat(commVolume.value) || 1000;
+    const T1 = parseFloat(commT1 ? commT1.value : 20) || 20;
+    const T2 = parseFloat(commT2 ? commT2.value : 55) || 55;
+    const HT = parseFloat(commHT ? commHT.value : 8) || 8;
+    const tariff = parseFloat(commTariff ? commTariff.value : 8) || 8;
 
-    const geyserDailyKWh = dailyKWhRequired / conventionalCOP;
-    const geyserAnnualCost = geyserDailyKWh * 365 * tariff;
+    const heatKcal = V * 1 * (T2 - T1); // Kcal
+    const netKWh = heatKcal / 860; // kWh net load
+    const reqKW = netKWh / HT; // Required Heat Pump Capacity in kW
 
-    // VINDSOL Air-Source Heat Pump COP ~ 4.25
-    const vindsolDailyKWh = dailyKWhRequired / 4.25;
-    const vindsolAnnualCost = vindsolDailyKWh * 365 * tariff;
-
+    // Conventional Electric Heating Cost vs VINDSOL Heat Pump (COP 4.25)
+    const geyserKWh = netKWh / 0.9;
+    const geyserAnnualCost = geyserKWh * 365 * tariff;
+    const vindsolKWh = netKWh / 4.25;
+    const vindsolAnnualCost = vindsolKWh * 365 * tariff;
     const yearlySavings = Math.max(0, geyserAnnualCost - vindsolAnnualCost);
-    const monthlySavings = yearlySavings / 12;
 
-    // CO2 reduction: ~0.82 kg CO2 per kWh saved in India grid
-    const kwhSavedPerYear = (geyserDailyKWh - vindsolDailyKWh) * 365;
-    const co2Tonnes = (kwhSavedPerYear * 0.82) / 1000;
+    let recModel = 'VCHP 3500 V Commercial (35 kW)';
+    let recModelId = 'commercial';
+    let estPrice = 165000;
 
-    // Model Recommendation & System Cost based on Litres
-    let recModel = 'VDHP 4500 MB (200L)';
-    let estPrice = 65000;
-
-    if (litres <= 150) {
-      recModel = 'VDHP 3000 MB (150L)';
-      estPrice = 48000;
-    } else if (litres <= 250) {
-      recModel = 'VDHP 4500 MB (200L)';
-      estPrice = 65000;
-    } else if (litres <= 400) {
-      recModel = 'VDHP 6000 MB (300L)';
-      estPrice = 78000;
-    } else if (litres <= 600) {
-      recModel = 'VDHP 7500 MB (500L)';
-      estPrice = 95000;
-    } else if (litres <= 1200) {
-      recModel = 'VCHP 3500 V Commercial (35kW)';
+    if (reqKW <= 12) {
+      recModel = 'VDHP 11000 MB Monoblock (10 kW)';
+      recModelId = 'dhw';
+      estPrice = 98000;
+    } else if (reqKW <= 35) {
+      recModel = 'VCHP 3500 V Commercial (35 kW)';
+      recModelId = 'commercial';
       estPrice = 165000;
+    } else if (reqKW <= 50) {
+      recModel = 'VCHP 5000 V Commercial (50 kW)';
+      recModelId = 'commercial';
+      estPrice = 220000;
+    } else if (reqKW <= 75) {
+      recModel = 'VCHP 7500 V Heavy Duty (75 kW)';
+      recModelId = 'commercial';
+      estPrice = 310000;
     } else {
-      recModel = 'VCHP 7500 V Heavy Duty (75kW)';
-      estPrice = 285000;
+      recModel = 'VCHP 15000 V Industrial (150 kW)';
+      recModelId = 'commercial';
+      estPrice = 520000;
     }
 
-    const paybackYears = Math.max(1.1, (estPrice / yearlySavings)).toFixed(1);
-
-    // Format currency to Indian Rupees
+    const paybackYears = Math.max(0.9, (estPrice / yearlySavings)).toFixed(1);
     const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
 
-    if (monthlySavingsEl) monthlySavingsEl.textContent = formatINR(monthlySavings);
-    if (yearlySavingsEl) yearlySavingsEl.textContent = formatINR(yearlySavings);
-    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes / Yr`;
-    if (paybackEl) paybackEl.textContent = `${paybackYears} Years`;
-    if (recModelEl) recModelEl.textContent = recModel;
+    if (commKWEl) commKWEl.textContent = `${reqKW.toFixed(1)} kW`;
+    if (commKcalEl) commKcalEl.textContent = `${Math.round(netKWh).toLocaleString()} kWh/day`;
+    if (commYearlySavingsEl) commYearlySavingsEl.textContent = formatINR(yearlySavings);
+    if (commPaybackEl) commPaybackEl.textContent = `${paybackYears} Years`;
+    if (commRecModelEl) commRecModelEl.textContent = recModel;
   }
 
-  if (peopleInput) {
-    peopleInput.addEventListener('input', () => {
-      const p = parseFloat(peopleInput.value) || 4;
-      litresInput.value = Math.max(100, p * 50);
-      calculate();
-    });
+  // Swimming Pool Sizing Formula (From Sheet: Simming Pool in MD file)
+  function calcPool() {
+    if (!poolVol) return;
+    const V = parseFloat(poolVol.value) || 100; // m3
+    const isOutdoor = (poolType ? poolType.value : 'outdoor') === 'outdoor';
+    const T2 = parseFloat(poolT2 ? poolT2.value : 28) || 28;
+    const T1 = parseFloat(poolT1 ? poolT1.value : 15) || 15;
+    const amb = parseFloat(poolAmb ? poolAmb.value : 20) || 20;
+
+    // Approximate Pool Surface Area: Area ~ sqrt(V/1.5) * 8.366
+    const side = Math.sqrt(V);
+    const area = side * side;
+
+    // Surface Heat Loss Factor f (W/m2) based on Ambient Temp lookup table
+    let f = isOutdoor ? 953 : 512; // default 20°C
+    if (amb <= 10) f = isOutdoor ? 1163 : 605;
+    if (amb <= 15) f = isOutdoor ? 1070 : 558;
+    if (amb <= 20) f = isOutdoor ? 953 : 512;
+    if (amb <= 25) f = isOutdoor ? 814 : 419;
+    if (amb >= 28) f = isOutdoor ? 721 : 372;
+
+    const Q1 = (area * f) / 1000; // kW/h Surface Loss
+
+    // Water Supply Makeup Loss Q2 = ((V * 0.05 * 1000/24) * (T2 - T1)) / 860
+    const Q2 = ((V * 0.05 * 1000 / 24) * (T2 - T1)) / 860; // kW/h
+
+    // Total Pool Heating Capacity Q = Q1 + Q2
+    const Q_total = Q1 + Q2;
+
+    // Initial Warm-up Time FH = (4200 * V * (T2-T1)) / (3600 * 24) kW
+    const FH = (4200 * V * (T2 - T1)) / (3600 * 24);
+
+    let recModel = 'VPHP 2500 Pool (25 kW Titanium)';
+    let recModelId = 'pool';
+
+    if (Q_total <= 16) {
+      recModel = 'VPHP 1500 Pool (15 kW Titanium)';
+      recModelId = 'pool';
+    } else if (Q_total <= 28) {
+      recModel = 'VPHP 2500 Pool (25 kW Titanium)';
+      recModelId = 'pool';
+    } else if (Q_total <= 40) {
+      recModel = 'VPHP 3500 Pool (35 kW Titanium)';
+      recModelId = 'pool';
+    } else {
+      const units = Math.ceil(Q_total / 35);
+      recModel = `VPHP Multi-Module Array (${units}x 35kW Units = ${units * 35}kW)`;
+      recModelId = 'pool';
+    }
+
+    if (poolKWEl) poolKWEl.textContent = `${Q_total.toFixed(1)} kW`;
+    if (poolFHEl) poolFHEl.textContent = `${FH.toFixed(1)} kW (Initial Warmup)`;
+    if (poolRecModelEl) poolRecModelEl.textContent = recModel;
+    if (poolRecModelLinkEl) poolRecModelLinkEl.href = `product-detail.html?id=${recModelId}`;
   }
 
-  [heaterSelect, litresInput, tariffInput].forEach(el => {
+  [commVolume, commT1, commT2, commHT, commTariff].forEach(el => {
     if (el) {
-      el.addEventListener('input', calculate);
-      el.addEventListener('change', calculate);
+      el.addEventListener('input', calcCommercial);
+      el.addEventListener('change', calcCommercial);
     }
   });
 
-  if (submitBtn) {
-    submitBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      calculate();
-      const overlay = document.getElementById('calcModalOverlay');
-      if (overlay) overlay.classList.remove('active');
-    });
-  }
+  [poolVol, poolType, poolT2, poolT1, poolAmb].forEach(el => {
+    if (el) {
+      el.addEventListener('input', calcPool);
+      el.addEventListener('change', calcPool);
+    }
+  });
 
-  calculate();
+  calcCommercial();
+  calcPool();
 }
 
 /* -------------------------------------------------------------------------- */
