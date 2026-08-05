@@ -1282,6 +1282,86 @@ img {
   margin-top: 0.2rem;
 }
 
+/* Quotation BOM Table Styles */
+.quote-bom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: #FFFFFF;
+}
+
+.quote-bom-table th {
+  background: rgba(255, 255, 255, 0.15);
+  color: #86EFAC;
+  padding: 0.5rem 0.6rem;
+  font-weight: 800;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quote-bom-table td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quote-total-row td {
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #FFD700;
+  border-top: 2px solid #86EFAC;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Printable Official Quotation Styling */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #calcModalOverlay, #calcModalOverlay * {
+    visibility: visible;
+  }
+  #calcModalOverlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #FFFFFF !important;
+    display: block !important;
+  }
+  .calc-modal-card {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .calc-modal-close, .floating-calc-trigger, .btn-buy-primary, .calc-nav-tabs {
+    display: none !important;
+  }
+  .calc-results-box {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #15803D !important;
+    box-shadow: none !important;
+  }
+  .calc-results-title, .calc-metric-label {
+    color: #15803D !important;
+  }
+  .calc-metric-val {
+    color: #000000 !important;
+  }
+  .quote-bom-table {
+    color: #000000 !important;
+  }
+  .quote-bom-table th {
+    background: #F1F5F9 !important;
+    color: #000000 !important;
+  }
+  .quote-total-row td {
+    color: #15803D !important;
+    background: #DCFCE7 !important;
+  }
+}
+
 /* ==========================================================================
    AMAZON-STYLE PRODUCT CARDS & PRICING
    ========================================================================== */

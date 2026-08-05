@@ -132,6 +132,9 @@ function initSavingsCalculator() {
     const HT = parseFloat(commHT ? commHT.value : 8) || 8;
     const tariff = parseFloat(commTariff ? commTariff.value : 8) || 8;
 
+    const custName = document.getElementById('custName') ? document.getElementById('custName').value : 'Valued Client';
+    const custCity = document.getElementById('custCity') ? document.getElementById('custCity').value : 'Site';
+
     const heatKcal = V * 1 * (T2 - T1); // Kcal
     const netKWh = heatKcal / 860; // kWh net load
     const reqKW = netKWh / HT; // Required Heat Pump Capacity in kW
@@ -144,42 +147,90 @@ function initSavingsCalculator() {
     const yearlySavings = Math.max(0, geyserAnnualCost - vindsolAnnualCost);
 
     let recModel = 'VCHP 3500 V Commercial (35 kW)';
-    let recModelId = 'commercial';
-    let estPrice = 165000;
+    let unitPrice = 165000;
+    let tankPrice = 45000;
+    const safetyPrice = 8500;
+    const freightPrice = 6500;
 
     if (reqKW <= 12) {
       recModel = 'VDHP 11000 MB Monoblock (10 kW)';
-      recModelId = 'dhw';
-      estPrice = 98000;
+      unitPrice = 98000;
+      tankPrice = 35000;
     } else if (reqKW <= 35) {
       recModel = 'VCHP 3500 V Commercial (35 kW)';
-      recModelId = 'commercial';
-      estPrice = 165000;
+      unitPrice = 165000;
+      tankPrice = 45000;
     } else if (reqKW <= 50) {
       recModel = 'VCHP 5000 V Commercial (50 kW)';
-      recModelId = 'commercial';
-      estPrice = 220000;
+      unitPrice = 220000;
+      tankPrice = 65000;
     } else if (reqKW <= 75) {
       recModel = 'VCHP 7500 V Heavy Duty (75 kW)';
-      recModelId = 'commercial';
-      estPrice = 310000;
+      unitPrice = 310000;
+      tankPrice = 85000;
     } else {
       recModel = 'VCHP 15000 V Industrial (150 kW)';
-      recModelId = 'commercial';
-      estPrice = 520000;
+      unitPrice = 520000;
+      tankPrice = 120000;
     }
 
-    const paybackYears = Math.max(0.9, (estPrice / yearlySavings)).toFixed(1);
+    const subtotal = unitPrice + tankPrice + safetyPrice + freightPrice;
+    const gst = subtotal * 0.18;
+    const grandTotal = subtotal + gst;
+    const paybackYears = Math.max(0.7, (grandTotal / yearlySavings)).toFixed(1);
+
     const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
 
     if (commKWEl) commKWEl.textContent = `${reqKW.toFixed(1)} kW`;
     if (commKcalEl) commKcalEl.textContent = `${Math.round(netKWh).toLocaleString()} kWh/day`;
     if (commYearlySavingsEl) commYearlySavingsEl.textContent = formatINR(yearlySavings);
-    if (commPaybackEl) commPaybackEl.textContent = `${paybackYears} Years`;
-    if (commRecModelEl) commRecModelEl.textContent = recModel;
+    if (commPaybackEl) commPaybackEl.textContent = `${paybackYears} Yrs`;
+
+    const subEl = document.getElementById('commSubtotalVal');
+    const grandEl = document.getElementById('commGrandTotalVal');
+    if (subEl) subEl.textContent = formatINR(subtotal);
+    if (grandEl) grandEl.textContent = formatINR(grandTotal);
+
+    // Update BOM Table
+    const bomBody = document.getElementById('commBomTableBody');
+    if (bomBody) {
+      bomBody.innerHTML = `
+        <tr>
+          <td>${recModel}</td>
+          <td style="text-align: right;">${formatINR(unitPrice)}</td>
+        </tr>
+        <tr>
+          <td>Quartz Blue Glass Tank (${Math.round(V)}L)</td>
+          <td style="text-align: right;">${formatINR(tankPrice)}</td>
+        </tr>
+        <tr>
+          <td>Hydraulic Safety Valve Pack (VRV + TPRV)</td>
+          <td style="text-align: right;">${formatINR(safetyPrice)}</td>
+        </tr>
+        <tr>
+          <td>Factory Freight &amp; Commissioning</td>
+          <td style="text-align: right;">${formatINR(freightPrice)}</td>
+        </tr>
+        <tr class="quote-total-row">
+          <td>Subtotal Excl. Tax</td>
+          <td style="text-align: right;">${formatINR(subtotal)}</td>
+        </tr>
+        <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+          <td>Grand Total (Incl. 18% GST)</td>
+          <td style="text-align: right; font-size: 1.1rem; color: #FFD700;">${formatINR(grandTotal)}</td>
+        </tr>
+      `;
+    }
+
+    // Dynamic WhatsApp Link
+    const commWaBtn = document.getElementById('commWaBtn');
+    if (commWaBtn) {
+      const msg = encodeURIComponent(`Hello VINDSOL Team,\n\nI would like an Official Quotation for ${custName} (${custCity}):\n- Required Model: ${recModel}\n- Demand: ${V}L/day (${reqKW.toFixed(1)} kW)\n- Estimated Total: ${formatINR(grandTotal)} (Incl. 18% GST)\n- Annual Savings: ${formatINR(yearlySavings)}`);
+      commWaBtn.href = `https://wa.me/918041231313?text=${msg}`;
+    }
   }
 
-  // Swimming Pool Sizing Formula (From Sheet: Simming Pool in MD file)
+  // Swimming Pool Sizing & Quotation Formula
   function calcPool() {
     if (!poolVol) return;
     const V = parseFloat(poolVol.value) || 100; // m3
@@ -188,51 +239,87 @@ function initSavingsCalculator() {
     const T1 = parseFloat(poolT1 ? poolT1.value : 15) || 15;
     const amb = parseFloat(poolAmb ? poolAmb.value : 20) || 20;
 
-    // Approximate Pool Surface Area: Area ~ sqrt(V/1.5) * 8.366
+    const custName = document.getElementById('custName') ? document.getElementById('custName').value : 'Valued Client';
+    const custCity = document.getElementById('custCity') ? document.getElementById('custCity').value : 'Site';
+
     const side = Math.sqrt(V);
     const area = side * side;
 
-    // Surface Heat Loss Factor f (W/m2) based on Ambient Temp lookup table
-    let f = isOutdoor ? 953 : 512; // default 20°C
+    let f = isOutdoor ? 953 : 512;
     if (amb <= 10) f = isOutdoor ? 1163 : 605;
     if (amb <= 15) f = isOutdoor ? 1070 : 558;
     if (amb <= 20) f = isOutdoor ? 953 : 512;
     if (amb <= 25) f = isOutdoor ? 814 : 419;
     if (amb >= 28) f = isOutdoor ? 721 : 372;
 
-    const Q1 = (area * f) / 1000; // kW/h Surface Loss
-
-    // Water Supply Makeup Loss Q2 = ((V * 0.05 * 1000/24) * (T2 - T1)) / 860
-    const Q2 = ((V * 0.05 * 1000 / 24) * (T2 - T1)) / 860; // kW/h
-
-    // Total Pool Heating Capacity Q = Q1 + Q2
+    const Q1 = (area * f) / 1000;
+    const Q2 = ((V * 0.05 * 1000 / 24) * (T2 - T1)) / 860;
     const Q_total = Q1 + Q2;
-
-    // Initial Warm-up Time FH = (4200 * V * (T2-T1)) / (3600 * 24) kW
     const FH = (4200 * V * (T2 - T1)) / (3600 * 24);
 
     let recModel = 'VPHP 2500 Pool (25 kW Titanium)';
-    let recModelId = 'pool';
+    let unitPrice = 145000;
+    const freightPrice = 8500;
 
     if (Q_total <= 16) {
       recModel = 'VPHP 1500 Pool (15 kW Titanium)';
-      recModelId = 'pool';
+      unitPrice = 85000;
     } else if (Q_total <= 28) {
       recModel = 'VPHP 2500 Pool (25 kW Titanium)';
-      recModelId = 'pool';
+      unitPrice = 145000;
     } else if (Q_total <= 40) {
       recModel = 'VPHP 3500 Pool (35 kW Titanium)';
-      recModelId = 'pool';
+      unitPrice = 195000;
     } else {
       const units = Math.ceil(Q_total / 35);
-      recModel = `VPHP Multi-Module Array (${units}x 35kW Units = ${units * 35}kW)`;
-      recModelId = 'pool';
+      recModel = `VPHP Pool Array (${units}x 35kW Units = ${units * 35}kW)`;
+      unitPrice = units * 195000;
     }
 
+    const subtotal = unitPrice + freightPrice;
+    const gst = subtotal * 0.18;
+    const grandTotal = subtotal + gst;
+    const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
+
     if (poolKWEl) poolKWEl.textContent = `${Q_total.toFixed(1)} kW`;
-    if (poolFHEl) poolFHEl.textContent = `${FH.toFixed(1)} kW (Initial Warmup)`;
-    if (poolRecModelEl) poolRecModelEl.textContent = recModel;
-    if (poolRecModelLinkEl) poolRecModelLinkEl.href = `product-detail.html?id=${recModelId}`;
+    if (poolFHEl) poolFHEl.textContent = `${FH.toFixed(1)} kW`;
+
+    const subEl = document.getElementById('poolSubtotalVal');
+    const grandEl = document.getElementById('poolGrandTotalVal');
+    if (subEl) subEl.textContent = formatINR(subtotal);
+    if (grandEl) grandEl.textContent = formatINR(grandTotal);
+
+    const bomBody = document.getElementById('poolBomTableBody');
+    if (bomBody) {
+      bomBody.innerHTML = `
+        <tr>
+          <td>${recModel}</td>
+          <td style="text-align: right;">${formatINR(unitPrice)}</td>
+        </tr>
+        <tr>
+          <td>Titanium Anti-Corrosion Exchanger Circuit</td>
+          <td style="text-align: right;">Included</td>
+        </tr>
+        <tr>
+          <td>Freight &amp; Commissioning</td>
+          <td style="text-align: right;">${formatINR(freightPrice)}</td>
+        </tr>
+        <tr class="quote-total-row">
+          <td>Subtotal Excl. Tax</td>
+          <td style="text-align: right;">${formatINR(subtotal)}</td>
+        </tr>
+        <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+          <td>Grand Total (Incl. 18% GST)</td>
+          <td style="text-align: right; font-size: 1.1rem; color: #FFD700;">${formatINR(grandTotal)}</td>
+        </tr>
+      `;
+    }
+
+    const poolWaBtn = document.getElementById('poolWaBtn');
+    if (poolWaBtn) {
+      const msg = encodeURIComponent(`Hello VINDSOL Team,\n\nI would like an Official Quotation for Swimming Pool Heating (${custName}, ${custCity}):\n- Pool Volume: ${V} m³ (${Q_total.toFixed(1)} kW)\n- Recommended Model: ${recModel}\n- Total Investment: ${formatINR(grandTotal)} (Incl. 18% GST)`);
+      poolWaBtn.href = `https://wa.me/918041231313?text=${msg}`;
+    }
   }
 
   // Residential Domestic Calculation
@@ -243,10 +330,10 @@ function initSavingsCalculator() {
     const tariffInput = document.getElementById('calcTariff');
 
     const monthlySavingsEl = document.getElementById('monthlySavingsVal');
-    const yearlySavingsEl = document.getElementById('yearlySavingsVal');
-    const co2El = document.getElementById('co2ReductionVal');
     const paybackEl = document.getElementById('paybackPeriodVal');
-    const recModelEl = document.getElementById('recommendedModelVal');
+
+    const custName = document.getElementById('custName') ? document.getElementById('custName').value : 'Valued Client';
+    const custCity = document.getElementById('custCity') ? document.getElementById('custCity').value : 'Site';
 
     if (!litresInput) return;
 
@@ -270,37 +357,65 @@ function initSavingsCalculator() {
     const yearlySavings = Math.max(0, geyserAnnualCost - vindsolAnnualCost);
     const monthlySavings = yearlySavings / 12;
 
-    const kwhSavedPerYear = (geyserDailyKWh - vindsolDailyKWh) * 365;
-    const co2Tonnes = (kwhSavedPerYear * 0.82) / 1000;
-
-    let recModel = 'VDHP 4500 MB (200L)';
-    let estPrice = 65000;
+    let recModel = 'VDHP 4500 MB All-in-One (200L)';
+    let unitPrice = 65000;
+    const installPrice = 4500;
 
     if (litres <= 150) {
-      recModel = 'VDHP 3000 MB (150L)';
-      estPrice = 48000;
+      recModel = 'VDHP 3000 MB All-in-One (150L)';
+      unitPrice = 48000;
     } else if (litres <= 250) {
-      recModel = 'VDHP 4500 MB (200L)';
-      estPrice = 65000;
+      recModel = 'VDHP 4500 MB All-in-One (200L)';
+      unitPrice = 65000;
     } else if (litres <= 400) {
-      recModel = 'VDHP 6000 MB (300L)';
-      estPrice = 78000;
-    } else if (litres <= 600) {
-      recModel = 'VDHP 7500 MB (500L)';
-      estPrice = 95000;
+      recModel = 'VDHP 6000 MB All-in-One (300L)';
+      unitPrice = 78000;
     } else {
-      recModel = 'VDHP 11000 MB (750L+)';
-      estPrice = 125000;
+      recModel = 'VDHP 7500 MB All-in-One (500L)';
+      unitPrice = 95000;
     }
 
-    const paybackYears = Math.max(1.1, (estPrice / yearlySavings)).toFixed(1);
+    const subtotal = unitPrice + installPrice;
+    const gst = subtotal * 0.18;
+    const grandTotal = subtotal + gst;
+    const paybackYears = Math.max(1.1, (grandTotal / yearlySavings)).toFixed(1);
     const formatINR = (val) => '₹ ' + Math.round(val).toLocaleString('en-IN');
 
     if (monthlySavingsEl) monthlySavingsEl.textContent = formatINR(monthlySavings);
-    if (yearlySavingsEl) yearlySavingsEl.textContent = formatINR(yearlySavings);
-    if (co2El) co2El.textContent = `${co2Tonnes.toFixed(1)} Tonnes`;
-    if (paybackEl) paybackEl.textContent = `${paybackYears} Years`;
-    if (recModelEl) recModelEl.textContent = recModel;
+    if (paybackEl) paybackEl.textContent = `${paybackYears} Yrs`;
+
+    const subEl = document.getElementById('domSubtotalVal');
+    const grandEl = document.getElementById('domGrandTotalVal');
+    if (subEl) subEl.textContent = formatINR(subtotal);
+    if (grandEl) grandEl.textContent = formatINR(grandTotal);
+
+    const bomBody = document.getElementById('domBomTableBody');
+    if (bomBody) {
+      bomBody.innerHTML = `
+        <tr>
+          <td>${recModel}</td>
+          <td style="text-align: right;">${formatINR(unitPrice)}</td>
+        </tr>
+        <tr>
+          <td>Standard Installation &amp; Hydraulic Piping Kit</td>
+          <td style="text-align: right;">${formatINR(installPrice)}</td>
+        </tr>
+        <tr class="quote-total-row">
+          <td>Subtotal Excl. Tax</td>
+          <td style="text-align: right;">${formatINR(subtotal)}</td>
+        </tr>
+        <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+          <td>Grand Total (Incl. 18% GST)</td>
+          <td style="text-align: right; font-size: 1.1rem; color: #FFD700;">${formatINR(grandTotal)}</td>
+        </tr>
+      `;
+    }
+
+    const domWaBtn = document.getElementById('domWaBtn');
+    if (domWaBtn) {
+      const msg = encodeURIComponent(`Hello VINDSOL Team,\n\nI would like an Official Quotation for Domestic Heat Pump (${custName}, ${custCity}):\n- Recommended Model: ${recModel}\n- Daily Usage: ${litres}L/day\n- Total Investment: ${formatINR(grandTotal)} (Incl. 18% GST)\n- Monthly Power Savings: ${formatINR(monthlySavings)}`);
+      domWaBtn.href = `https://wa.me/918041231313?text=${msg}`;
+    }
   }
 
   [commVolume, commT1, commT2, commHT, commTariff].forEach(el => {
