@@ -291,22 +291,98 @@
       element.classList.add('active');
     }
 
+  <!-- VIEW CUSTOM SPECIAL SPECIFICATIONS MODAL FOR ADMIN -->
+  <div class="product-detail-modal-overlay" id="viewCustomSpecModal">
+    <div class="product-detail-modal-card" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeCustomSpecModal()">&times;</button>
+      <span style="background: #10B981; color: #022C1E; font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.75rem; border-radius: 99px; text-transform: uppercase;">
+        🛠️ CUSTOM SPECIAL PRODUCT SPECIFICATIONS
+      </span>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: var(--color-primary); margin: 0.5rem 0 1.25rem 0;" id="specModalRefTitle">Ref: SP-8425</h2>
+
+      <div style="background: #F8FAF8; border: 1px solid var(--border-soft); border-radius: 12px; padding: 1.25rem; font-size: 0.9rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div><label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Customer Name</label><strong id="specCustName">Client</strong></div>
+          <div><label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Contact Phone</label><strong id="specCustPhone">+91 98000 00000</strong></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div><label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Target Heating Capacity</label><strong id="specCapacity" style="color: var(--color-primary);">150 kW</strong></div>
+          <div><label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Target Water Temp</label><strong id="specTemp" style="color: #059669;">85°C</strong></div>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Special Exchanger / Fluid Shell</label>
+          <strong id="specFluid" style="color: #D97706;">SS316L Stainless Steel Heat Exchanger</strong>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="color: var(--text-muted); font-size: 0.78rem; font-weight: 700; display: block;">Detailed Site &amp; Plumbing Notes</label>
+          <p id="specNotes" style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 8px; padding: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">Site notes...</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+        <a id="specWhatsAppBtn" href="#" target="_blank" class="btn-amazon-primary" style="flex: 1; text-align: center; justify-content: center; background: #25D366; color: #FFF;">
+          📱 Proceed &amp; Send WhatsApp Quote
+        </a>
+        <button onclick="closeCustomSpecModal()" class="btn-amazon-secondary" style="flex: 1;">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Ensure Admin Security Authorization Check
+    function checkAdminAuth() {
+      const isLogged = localStorage.getItem('vindsol_admin_logged_in') === 'true';
+      if (!isLogged) {
+        window.location.href = 'profile.html';
+      }
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('vindsol_admin_logged_in');
+      window.location.href = 'profile.html';
+    }
+
+    // Navigation Tab Switcher
+    function showAdminTab(tabId, element) {
+      document.querySelectorAll('.admin-tab-pane').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.admin-nav-item').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).style.display = 'block';
+      element.classList.add('active');
+    }
+
     // Default Customer Leads Dataset
-    let sampleInquiries = [
-      { id: 'QT-8421', name: 'Sheraton Grand Resort', phone: '+91 98450 12345', city: 'Bengaluru', model: 'VCHP 5000 V Commercial (50 kW)', amount: '₹ 2,59,600', status: 'New Lead', date: '2026-08-05' },
-      { id: 'QT-8422', name: 'Dr. Ramesh Kumar (Fortis)', phone: '+91 97110 56789', city: 'Mysuru', model: 'VIHP 2500 HT (80°C High Temp)', amount: '₹ 2,18,300', status: 'In Progress', date: '2026-08-04' },
-      { id: 'QT-8423', name: 'Manipal International School', phone: '+91 94480 99887', city: 'Mangaluru', model: 'VPHP 3500 Pool (35 kW Titanium)', amount: '₹ 2,40,130', status: 'Quotation Sent', date: '2026-08-04' },
-      { id: 'QT-8424', name: 'Prestige Lakeside Villa', phone: '+91 98800 44332', city: 'Bengaluru', model: 'VDHP 4500 MB All-in-One (200L)', amount: '₹ 82,010', status: 'Quotation Sent', date: '2026-08-03' }
+    let defaultInquiries = [
+      { id: 'QT-8421', name: 'Sheraton Grand Resort', phone: '+91 98450 12345', city: 'Bengaluru', model: 'VCHP 5000 V Commercial (50 kW)', amount: '₹ 2,59,600', status: 'New Lead', date: '2026-08-05', type: 'Standard Quotation' },
+      { id: 'SP-8425', name: 'Amul Dairy Processing Plant', phone: '+91 98765 11223', city: 'Anand, GJ', model: '[SPECIAL PRODUCT] Dairy Pasteurization 85°C System', amount: 'Custom Engineering Estimate', status: 'Custom Review Required', date: '2026-08-05', type: 'Custom Special Product', customSpecs: { capacity: '200 kW', temp: '85°C', fluid: 'SS316L Stainless Steel', notes: 'Needs 3-Phase 415V electrical panel and sanitary tri-clamp fittings for food grade wash.' } },
+      { id: 'QT-8422', name: 'Dr. Ramesh Kumar (Fortis)', phone: '+91 97110 56789', city: 'Mysuru', model: 'VIHP 2500 HT (80°C High Temp)', amount: '₹ 2,18,300', status: 'In Progress', date: '2026-08-04', type: 'Standard Quotation' },
+      { id: 'QT-8423', name: 'Manipal International School', phone: '+91 94480 99887', city: 'Mangaluru', model: 'VPHP 3500 Pool (35 kW Titanium)', amount: '₹ 2,40,130', status: 'Quotation Sent', date: '2026-08-04', type: 'Standard Quotation' }
     ];
+
+    function getAllInquiries() {
+      const stored = JSON.parse(localStorage.getItem('vindsol_inquiries') || '[]');
+      return [...stored, ...defaultInquiries];
+    }
 
     function renderInquiries() {
       const tbody = document.getElementById('inquiriesTableBody');
       if (!tbody) return;
 
-      tbody.innerHTML = sampleInquiries.map(inq => {
+      const list = getAllInquiries();
+
+      document.getElementById('statTotalInquiries').textContent = list.length;
+      document.getElementById('statPendingInquiries').textContent = list.filter(i => i.status.includes('New') || i.status.includes('Custom') || i.status.includes('Review')).length;
+
+      tbody.innerHTML = list.map(inq => {
         let badgeClass = 'badge-lead-new';
         if (inq.status.includes('Progress')) badgeClass = 'badge-lead-progress';
         if (inq.status.includes('Sent') || inq.status.includes('Resolved')) badgeClass = 'badge-lead-resolved';
+
+        const isCustom = inq.type === 'Custom Special Product' || inq.id.startsWith('SP-');
 
         return `
           <tr style="border-bottom: 1px solid #E2E8F0;">
@@ -314,18 +390,45 @@
             <td style="padding: 0.85rem 1rem; font-weight: 700;">${inq.name}</td>
             <td style="padding: 0.85rem 1rem;">${inq.phone}</td>
             <td style="padding: 0.85rem 1rem;">${inq.city}</td>
-            <td style="padding: 0.85rem 1rem;">${inq.model}</td>
+            <td style="padding: 0.85rem 1rem; font-weight: 600;">${inq.model}</td>
             <td style="padding: 0.85rem 1rem; font-weight: 800; color: #059669;">${inq.amount}</td>
             <td style="padding: 0.85rem 1rem;">
               <span class="badge-lead-status ${badgeClass}">${inq.status}</span>
             </td>
-            <td style="padding: 0.85rem 1rem; text-align: right;">
-              <a href="https://wa.me/${inq.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(inq.name)},%20here%20is%20your%20VINDSOL%20Quotation%20(${inq.id})" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; margin-right: 0.75rem;">📱 WhatsApp</a>
-              <button onclick="toggleInquiryStatus('${inq.id}')" style="background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #2563EB; font-weight: 700;">Update</button>
+            <td style="padding: 0.85rem 1rem; text-align: right; white-space: nowrap;">
+              ${isCustom ? `<button onclick="viewCustomSpecs('${inq.id}')" style="background: #10B981; color: #FFF; border: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-weight: 800; cursor: pointer; font-size: 0.78rem; margin-right: 0.5rem;">🔍 View Specs &amp; Proceed</button>` : ''}
+              <a href="https://wa.me/${inq.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(inq.name)},%20here%20is%20your%20VINDSOL%20Quotation%20(${inq.id})" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; margin-right: 0.5rem;">📱 WhatsApp</a>
+              <button onclick="toggleInquiryStatus('${inq.id}')" style="background: none; border: none; cursor: pointer; font-size: 0.82rem; color: #2563EB; font-weight: 700;">Update</button>
             </td>
           </tr>
         `;
       }).join('');
+    }
+
+    function viewCustomSpecs(id) {
+      const list = getAllInquiries();
+      const item = list.find(i => i.id === id);
+      if (item) {
+        document.getElementById('specModalRefTitle').textContent = `Ref: ${item.id} - ${item.model}`;
+        document.getElementById('specCustName').textContent = item.name;
+        document.getElementById('specCustPhone').textContent = item.phone;
+
+        const specs = item.customSpecs || {};
+        document.getElementById('specCapacity').textContent = specs.capacity || 'Custom Capacity';
+        document.getElementById('specTemp').textContent = specs.temp || 'Custom Temp';
+        document.getElementById('specFluid').textContent = specs.fluid || 'Standard Shell';
+        document.getElementById('specNotes').textContent = specs.notes || 'No site constraints specified.';
+
+        const waBtn = document.getElementById('specWhatsAppBtn');
+        const msg = encodeURIComponent(`Hello ${item.name},\n\nThis is VINDSOL Factory Engineering regarding your Custom Special Order Request (${item.id} - ${item.model}).\n\nWe have reviewed your target capacity (${specs.capacity}) and fluid specs (${specs.fluid}). Let's discuss site installation parameters.`);
+        waBtn.href = `https://wa.me/${item.phone.replace(/[^0-9]/g, '')}?text=${msg}`;
+
+        document.getElementById('viewCustomSpecModal').classList.add('active');
+      }
+    }
+
+    function closeCustomSpecModal() {
+      document.getElementById('viewCustomSpecModal').classList.remove('active');
     }
 
     function toggleInquiryStatus(id) {

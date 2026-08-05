@@ -517,6 +517,9 @@
         <button class="calc-nav-btn" data-calc-tab="tab-dom-calc">
           🏠 Residential Domestic Quote
         </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-custom-calc" style="color: #FFD700; font-weight: 900;">
+          🛠️ Custom Special Product Request
+        </button>
       </div>
 
       <!-- TAB 1: Commercial Hot Water Sizer & Quote -->
@@ -612,13 +615,16 @@
               <span>ROI Payback: <strong style="color: #86EFAC;" id="commPaybackVal">0.9 Yrs</strong></span>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.25rem;">
-              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                🖨️ Print Quotation PDF
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
               </button>
-              <a href="#" id="commWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                📱 Send via WhatsApp
+              <a href="#" id="commWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
               </a>
+              <button onclick="submitQuoteToVindsol('Commercial Hot Water')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
             </div>
 
           </div>
@@ -712,13 +718,16 @@
               </tbody>
             </table>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.25rem;">
-              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                🖨️ Print Quotation PDF
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
               </button>
-              <a href="#" id="poolWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                📱 Send via WhatsApp
+              <a href="#" id="poolWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
               </a>
+              <button onclick="submitQuoteToVindsol('Swimming Pool & Spa')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
             </div>
 
           </div>
@@ -803,17 +812,71 @@
               </tbody>
             </table>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.25rem;">
-              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                🖨️ Print Quotation PDF
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
               </button>
-              <a href="#" id="domWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.85rem; justify-content: center;">
-                📱 Send via WhatsApp
+              <a href="#" id="domWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
               </a>
+              <button onclick="submitQuoteToVindsol('Residential Domestic')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
             </div>
 
           </div>
 
+        </div>
+      </div>
+
+      <!-- TAB 4: Custom Special Products Engineering Request -->
+      <div class="calc-tab-pane" id="tab-custom-calc">
+        <div style="background: #022C1E; color: #FFF; border-radius: 16px; padding: 2rem;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <span style="background: #10B981; color: #022C1E; font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.75rem; border-radius: 99px; text-transform: uppercase;">
+              🛠️ Custom Special Engineering Request
+            </span>
+            <h3 style="font-size: 1.5rem; font-weight: 900; color: #FFF; margin-top: 0.5rem;">Need a Modified or Special Heat Pump Product?</h3>
+            <p style="font-size: 0.9rem; color: #A7F3D0;">Enter your custom site specifications below. Our Factory Engineering Team will design and prepare a custom quotation.</p>
+          </div>
+
+          <form onsubmit="submitCustomSpecialRequest(event)" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Custom Requirement Name / Application</label>
+              <input type="text" id="customAppName" required class="form-input-custom" placeholder="e.g. Dairy Pasteurization 85°C System / Resort Olympic Pool">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Target Heating Capacity (kW or Liters/Day)</label>
+              <input type="text" id="customCapacity" required class="form-input-custom" placeholder="e.g. 150 kW or 15,000 Liters/Day">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Target Water Temperature (°C)</label>
+              <input type="text" id="customTemp" required class="form-input-custom" placeholder="e.g. 75°C to 85°C">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Special Material / Fluid Requirements</label>
+              <select id="customFluid" class="form-select-custom">
+                <option value="Titanium PVC Shell">100% Pure Titanium PVC Shell (Pool/Saltwater)</option>
+                <option value="Quartz Glass Lined Tank">Quartz Glass Enamel Internal Tank (Hard Water)</option>
+                <option value="SS316L Stainless Steel">SS316L Stainless Steel Heat Exchanger (Dairy/Food)</option>
+                <option value="High Temp EVI R134a">High Temp EVI R134a Dual Compressor Circuit</option>
+              </select>
+            </div>
+
+            <div class="form-field-group" style="grid-column: span 2;">
+              <label class="form-label-custom" style="color: #E2E8F0;">Detailed Site Notes &amp; Engineering Constraints</label>
+              <textarea id="customNotes" class="form-input-custom" rows="3" placeholder="Describe roof space, electrical phase (Single 230V / 3-Phase 415V), plumbing diameter, or existing boiler backup details..."></textarea>
+            </div>
+
+            <div style="grid-column: span 2; margin-top: 0.5rem;">
+              <button type="submit" class="btn-amazon-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #047857 100%);">
+                📩 Submit Custom Product Specification to VINDSOL Factory →
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 

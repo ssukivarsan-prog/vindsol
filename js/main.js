@@ -492,10 +492,10 @@ function initSavingsCalculator() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. Calculator Modal Open / Close Handler                                   */
+/* 4. Calculator Modal Open / Close Handler & Inquiries Submission           */
 /* -------------------------------------------------------------------------- */
 function initCalculatorModal() {
-  const triggers = document.querySelectorAll('.open-calc-modal');
+  const triggers = document.querySelectorAll('.open-calc-modal, .btn-amazon-secondary, [href*="#quote"]');
   const overlay = document.getElementById('calcModalOverlay');
   const closeBtn = document.getElementById('closeCalcModalBtn');
 
@@ -519,6 +519,91 @@ function initCalculatorModal() {
       overlay.classList.remove('active');
     }
   });
+}
+
+function submitQuoteToVindsol(quoteType) {
+  const name = document.getElementById('custName') ? document.getElementById('custName').value : 'Valued Client';
+  const phone = document.getElementById('custMobile') ? document.getElementById('custMobile').value : '+91 98000 00000';
+  const city = document.getElementById('custCity') ? document.getElementById('custCity').value : 'Site Location';
+  
+  const refNo = 'QT-' + Math.floor(1000 + Math.random() * 9000);
+  const now = new Date().toISOString().split('T')[0];
+
+  let amount = '₹ 1,86,440';
+  let model = `${quoteType} Heat Pump System`;
+
+  if (quoteType.includes('Commercial')) {
+    const sub = document.getElementById('commGrandTotalVal');
+    if (sub) amount = sub.textContent;
+    model = 'VCHP Commercial Heavy Duty Multi-V';
+  } else if (quoteType.includes('Pool')) {
+    const sub = document.getElementById('poolGrandTotalVal');
+    if (sub) amount = sub.textContent;
+    model = 'VPHP Titanium Pool Heat Pump';
+  } else if (quoteType.includes('Domestic')) {
+    const sub = document.getElementById('domGrandTotalVal');
+    if (sub) amount = sub.textContent;
+    model = 'VDHP Domestic Monoblock (200L)';
+  }
+
+  const newInquiry = {
+    id: refNo,
+    name: name,
+    phone: phone,
+    city: city,
+    model: model,
+    amount: amount,
+    type: 'Standard Quotation',
+    status: 'New Lead',
+    date: now
+  };
+
+  const stored = JSON.parse(localStorage.getItem('vindsol_inquiries') || '[]');
+  stored.unshift(newInquiry);
+  localStorage.setItem('vindsol_inquiries', JSON.stringify(stored));
+
+  alert(`✓ SUCCESS!\n\nYour ${quoteType} Quotation (${refNo}) has been submitted to VINDSOL Factory Engineering.\n\nOur team will review your parameters and contact ${phone} shortly.`);
+  
+  const overlay = document.getElementById('calcModalOverlay');
+  if (overlay) overlay.classList.remove('active');
+}
+
+function submitCustomSpecialRequest(e) {
+  e.preventDefault();
+  const name = document.getElementById('custName') ? document.getElementById('custName').value : 'Valued Client';
+  const phone = document.getElementById('custMobile') ? document.getElementById('custMobile').value : '+91 98000 00000';
+  const city = document.getElementById('custCity') ? document.getElementById('custCity').value : 'Site Location';
+  
+  const appName = document.getElementById('customAppName').value;
+  const capacity = document.getElementById('customCapacity').value;
+  const temp = document.getElementById('customTemp').value;
+  const fluid = document.getElementById('customFluid').value;
+  const notes = document.getElementById('customNotes').value;
+
+  const refNo = 'SP-' + Math.floor(1000 + Math.random() * 9000);
+  const now = new Date().toISOString().split('T')[0];
+
+  const customInquiry = {
+    id: refNo,
+    name: name,
+    phone: phone,
+    city: city,
+    model: `[SPECIAL PRODUCT] ${appName}`,
+    amount: 'Custom Engineering Estimate',
+    type: 'Custom Special Product',
+    customSpecs: { capacity, temp, fluid, notes },
+    status: 'Custom Review Required',
+    date: now
+  };
+
+  const stored = JSON.parse(localStorage.getItem('vindsol_inquiries') || '[]');
+  stored.unshift(customInquiry);
+  localStorage.setItem('vindsol_inquiries', JSON.stringify(stored));
+
+  alert(`🛠️ CUSTOM SPECIAL REQUEST SUBMITTED!\n\nReference ID: ${refNo}\nApplication: ${appName}\nTarget Capacity: ${capacity}\n\nVINDSOL Factory Administrators have received your custom specifications and will initiate engineering review.`);
+
+  const overlay = document.getElementById('calcModalOverlay');
+  if (overlay) overlay.classList.remove('active');
 }
 
 /* -------------------------------------------------------------------------- */
