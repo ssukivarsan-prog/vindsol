@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalculatorModal();
   initHeroAdSlider();
   initMegaMenu();
+  initProductQuickViewModal();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -559,4 +560,307 @@ function initHeroAdSlider() {
   slider.addEventListener('mouseleave', startAutoPlay);
 
   startAutoPlay();
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. Global In-Page Product Quick-View Spec Modal (No Page Reload Needed)   */
+/* -------------------------------------------------------------------------- */
+const VINDSOL_PRODUCT_CATALOG = {
+  'dhw': {
+    title: 'All-in-One Domestic Hot Water Heat Pump',
+    category: 'AIR SOURCE &bull; RESIDENTIAL MONOBLOCK',
+    price: '₹ 45,000 - ₹ 85,000',
+    img: 'assets/images/products/dhw-monoblock.jpg',
+    reviews: '4.9 (142 Verified Factory Reviews)',
+    highlights: [
+      'Tank Capacity: 150L to 1000L Storage',
+      'Saginomya Electronic Expansion Valve for low ambient stability',
+      'Ultra-Quiet Operation (<48 dBA) with silent rotary compressor',
+      'Up to 75% Lower Operational Electricity Cost'
+    ],
+    specs: [
+      { model: 'VDHP 3000 MB', kw: '3.16 kW', cop: '2.92 – 4.21x', tank: '150 Litres', temp: '60°C' },
+      { model: 'VDHP 4500 MB', kw: '4.42 kW', cop: '3.38 – 4.70x', tank: '200 Litres', temp: '60°C' },
+      { model: 'VDHP 6000 MB', kw: '6.00 kW', cop: '3.90 – 4.92x', tank: '300 Litres', temp: '65°C' },
+      { model: 'VDHP 7500 MB', kw: '7.63 kW', cop: '4.29 – 5.25x', tank: '500 Litres', temp: '65°C' },
+      { model: 'VDHP 11000 MB', kw: '10.17 kW', cop: '4.90 – 5.83x', tank: '750L / 1000L', temp: '65°C' }
+    ]
+  },
+  'commercial': {
+    title: 'V-Type Heavy Duty Commercial Heat Pump',
+    category: 'AIR SOURCE &bull; COMMERCIAL MULTI-COMPRESSOR',
+    price: '₹ 1,20,000 - ₹ 3,50,000',
+    img: 'assets/images/products/vtype-commercial.jpg',
+    reviews: '4.9 (98 Verified Commercial Reviews)',
+    highlights: [
+      'Capacity: 35kW to 150kW Multi-Compressor System',
+      'Copeland Scroll Multi-Compressor V-Type Design',
+      'COP Rating: 4.25 to 5.2x High Efficiency',
+      'Replaces Commercial Diesel Boilers for Hotels & Hospitals'
+    ],
+    specs: [
+      { model: 'VCHP 3500 V', kw: '35 kW', cop: '4.25x', tank: '1000L - 3000L', temp: '60°C' },
+      { model: 'VCHP 5000 V', kw: '50 kW', cop: '4.40x', tank: '3000L - 5000L', temp: '60°C' },
+      { model: 'VCHP 7500 V', kw: '75 kW', cop: '4.65x', tank: '5000L - 10000L', temp: '60°C' },
+      { model: 'VCHP 15000 V', kw: '150 kW', cop: '4.85x', tank: '10000L+', temp: '60°C' }
+    ]
+  },
+  'pool': {
+    title: 'Titanium Swimming Pool & Spa Heat Pump',
+    category: 'AIR SOURCE &bull; POOLS & SPA',
+    price: '₹ 85,000 - ₹ 2,10,000',
+    img: 'assets/images/products/swimming-pool-titanium.png',
+    reviews: '5.0 (88 Verified Resort Reviews)',
+    highlights: [
+      '100% Pure Titanium PVC Shell Heat Exchanger',
+      'Maintains 28°C Constant Heated Pool Water All Year',
+      'Chlorine & Salt Water Anti-Corrosion Warranty',
+      'COP Rating: 4.25 to 6.0x Ultra High Efficiency'
+    ],
+    specs: [
+      { model: 'VPHP 1500 Pool', kw: '15 kW', cop: '4.25 – 5.50x', tank: 'Pool 40m³', temp: '28°C - 35°C' },
+      { model: 'VPHP 2500 Pool', kw: '25 kW', cop: '4.50 – 5.80x', tank: 'Pool 70m³', temp: '28°C - 35°C' },
+      { model: 'VPHP 3500 Pool', kw: '35 kW', cop: '4.75 – 6.00x', tank: 'Pool 110m³', temp: '28°C - 35°C' }
+    ]
+  },
+  'spa': {
+    title: 'Spa and Pool Anti-Corrosion Heat Pump',
+    category: 'AIR SOURCE &bull; SPA & JACUZZI',
+    price: '₹ 95,000 - ₹ 2,40,000',
+    img: 'assets/images/products/spa-pool-heater.png',
+    reviews: '4.9 (64 Verified Spa Reviews)',
+    highlights: [
+      'Designed for 40°C High Temp Spa & Jacuzzi Water',
+      'Compact Footprint for Resort Patios & Rooftops',
+      'Quiet Dual Rotary Compressor Operation',
+      'Automated Intelligent Defrost & Water Flow Control'
+    ],
+    specs: [
+      { model: 'VPHP Spa 10k', kw: '10 kW', cop: '4.15x', tank: 'Jacuzzi 15m³', temp: '40°C' },
+      { model: 'VPHP Spa 20k', kw: '20 kW', cop: '4.35x', tank: 'Resort Spa 35m³', temp: '40°C' }
+    ]
+  },
+  'high-temp': {
+    title: '80°C High Temp Industrial System',
+    category: 'AIR SOURCE &bull; INDUSTRIAL EXTREME 80°C',
+    price: '₹ 1,80,000 - ₹ 4,20,000',
+    img: 'assets/images/products/high-temp-industrial.jpg',
+    reviews: '4.9 (64 Industrial Reviews)',
+    highlights: [
+      'Extreme High Temp Output: Up to 80°C Water',
+      'Replaces Industrial Diesel & Heavy Oil Boilers',
+      'Ideal for Dairy, Textile, Chemical & Sterilization Wash',
+      'R134a EVI Dual Injection Compressor Circuit'
+    ],
+    specs: [
+      { model: 'VIHP 2500 HT', kw: '25 kW', cop: '3.85x', tank: 'Process 1000L', temp: '80°C' },
+      { model: 'VIHP 5000 HT', kw: '50 kW', cop: '4.10x', tank: 'Process 3000L', temp: '80°C' }
+    ]
+  },
+  'thermo-allinone': {
+    title: 'All-in-One Thermodynamic Solar Heat Pump',
+    category: 'THERMODYNAMIC &bull; RESIDENTIAL SOLAR',
+    price: '₹ 65,000 - ₹ 1,15,000',
+    img: 'assets/images/products/thermo-allinone-solar.jpg',
+    reviews: '4.8 (110 Solar Reviews)',
+    highlights: [
+      'Dual Solar Panel + Ambient Air Heat Source Integration',
+      'Heats Water Day & Night in Rain, Wind, or Sunshine',
+      'Lightweight Aluminum Solar Collector Panel',
+      'COP up to 5.50x Ultra High Energy Efficiency'
+    ],
+    specs: [
+      { model: 'VTSP 200L Solar', kw: '3.80 kW', cop: '5.20x', tank: '200 Litres', temp: '65°C' },
+      { model: 'VTSP 300L Solar', kw: '5.20 kW', cop: '5.50x', tank: '300 Litres', temp: '65°C' }
+    ]
+  },
+  'storage-tanks': {
+    title: 'Quartz Blue Glass Lined Storage Tank',
+    category: 'STORAGE &bull; GLASS LINED TANKS',
+    price: '₹ 25,000 - ₹ 65,000',
+    img: 'assets/images/products/quartz-glass-tank.png',
+    reviews: '4.9 (78 Tank Reviews)',
+    highlights: [
+      'German Glass Enamel Internal Lining',
+      '50mm High-Density PUF Thermal Insulation Layer',
+      'Resists Hard Water Corrosion & Mineral Scaling',
+      'Pressurized Storage Capacity: 200L to 1000L'
+    ],
+    specs: [
+      { model: 'VQBT 200L', kw: 'Storage Tank', cop: '50mm PUF', tank: '200 Litres', temp: '90°C' },
+      { model: 'VQBT 300L', kw: 'Storage Tank', cop: '50mm PUF', tank: '300 Litres', temp: '90°C' },
+      { model: 'VQBT 500L', kw: 'Storage Tank', cop: '50mm PUF', tank: '500 Litres', temp: '90°C' },
+      { model: 'VQBT 1000L', kw: 'Storage Tank', cop: '50mm PUF', tank: '1000 Litres', temp: '90°C' }
+    ]
+  },
+  'vacuum-valve': {
+    title: 'Vacuum Relief Valve (Safety Accessory)',
+    category: 'SAFETY &bull; VACUUM PROTECTION',
+    price: '₹ 4,500 - ₹ 8,500',
+    img: 'assets/images/products/vacuum-relief-valve.png',
+    reviews: '4.9 (62 Valve Reviews)',
+    highlights: [
+      'Prevents Internal Vacuum Collapse in Storage Tanks',
+      'High Temp Resistant SS304 / Brass Body Construction',
+      'Automatic Air Inlet & Hydraulic Pressure Balance',
+      'Rated Operating Pressure: Up to 7 Bar'
+    ],
+    specs: [
+      { model: 'VRV-15 (1/2")', kw: 'Safety Valve', cop: '7 Bar Max', tank: 'All Tanks', temp: '110°C' },
+      { model: 'VRV-20 (3/4")', kw: 'Safety Valve', cop: '7 Bar Max', tank: 'Commercial Tanks', temp: '110°C' }
+    ]
+  },
+  'tp-valve': {
+    title: 'Temperature & Pressure Relief Valve (T&P Valve)',
+    category: 'SAFETY &bull; T&P RELIEF VALVES',
+    price: '₹ 6,500 - ₹ 12,500',
+    img: 'assets/images/products/tp-relief-valve.png',
+    reviews: '4.8 (110 Valve Reviews)',
+    highlights: [
+      'Dual Protection: Discharges at 99°C or 7 Bar Pressure',
+      'Heavy-Duty Bronze Body with Stainless Steel Spring',
+      'Essential Safety Valve for Hot Water Vessels',
+      'ASME & ISO Factory Certified'
+    ],
+    specs: [
+      { model: 'TPRV-20 (3/4")', kw: 'T&P Relief Valve', cop: '99°C / 7 Bar', tank: '200L - 500L', temp: '99°C' },
+      { model: 'TPRV-25 (1")', kw: 'T&P Relief Valve', cop: '99°C / 7 Bar', tank: '1000L+', temp: '99°C' }
+    ]
+  }
+};
+
+function initProductQuickViewModal() {
+  // Inject Quick View Modal HTML if not present
+  if (!document.getElementById('productQuickViewModal')) {
+    const modalHTML = `
+      <div class="product-detail-modal-overlay" id="productQuickViewModal">
+        <div class="product-detail-modal-card" style="max-width: 840px;">
+          <button class="modal-close-btn" id="closeQuickViewModalBtn">&times;</button>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 2rem; align-items: start;">
+            
+            <div style="background: #F8FAF8; border: 1px solid var(--border-soft); border-radius: 16px; padding: 1.5rem; text-align: center;">
+              <img id="qvModalImg" src="assets/images/products/dhw-monoblock.jpg" alt="Product Image" style="max-height: 280px; width: auto; margin: 0 auto; object-fit: contain;">
+            </div>
+
+            <div>
+              <span class="grand-product-tag" id="qvModalCategory">AIR SOURCE &bull; DOMESTIC RANGE</span>
+              <h2 style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary); margin: 0.25rem 0 0.5rem 0;" id="qvModalTitle">Product Title</h2>
+              
+              <div class="product-rating-stars" style="margin-bottom: 0.75rem;">
+                ★★★★★ <span id="qvModalReviews">4.9 (142 Verified Reviews)</span>
+              </div>
+
+              <div class="amazon-price-tag" style="margin: 0.5rem 0 1rem 0;">
+                <span id="qvModalPrice">₹ 45,000 - ₹ 85,000</span>
+              </div>
+
+              <div style="font-size: 0.82rem; font-weight: 800; color: #10B981; margin-bottom: 0.75rem;">
+                ✓ IN STOCK &bull; DIRECT DISPATCH FROM BENGALURU FACTORY
+              </div>
+
+              <ul class="product-specs-mini-list" id="qvModalHighlights" style="margin-bottom: 1.25rem;">
+                <!-- Populated dynamically -->
+              </ul>
+
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button id="qvModalQuoteBtn" class="btn-amazon-primary" style="flex: 1;">
+                  📋 Request Official Quotation
+                </button>
+                <a href="tel:+918041231313" class="btn-amazon-secondary" style="flex: 1;">
+                  📞 Call Factory
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Spec Table Section -->
+          <div style="margin-top: 2rem; border-top: 1.5px solid var(--border-soft); padding-top: 1.5rem;">
+            <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 1rem;">Technical Specifications &amp; Model Lineup</h4>
+            <div style="overflow-x: auto;">
+              <table class="spec-table" style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                <thead>
+                  <tr style="background: #F1F5F9; text-align: left;">
+                    <th style="padding: 0.6rem 0.8rem;">Model Variant</th>
+                    <th style="padding: 0.6rem 0.8rem;">Heating Capacity</th>
+                    <th style="padding: 0.6rem 0.8rem;">COP Efficiency</th>
+                    <th style="padding: 0.6rem 0.8rem;">Storage / Pool Size</th>
+                    <th style="padding: 0.6rem 0.8rem;">Max Temp</th>
+                  </tr>
+                </thead>
+                <tbody id="qvModalSpecBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+
+  const modal = document.getElementById('productQuickViewModal');
+  const closeBtn = document.getElementById('closeQuickViewModalBtn');
+
+  function openQuickView(prodId) {
+    const data = VINDSOL_PRODUCT_CATALOG[prodId] || VINDSOL_PRODUCT_CATALOG['dhw'];
+    
+    document.getElementById('qvModalTitle').textContent = data.title;
+    document.getElementById('qvModalCategory').innerHTML = data.category;
+    document.getElementById('qvModalPrice').textContent = data.price;
+    document.getElementById('qvModalImg').src = data.img;
+    document.getElementById('qvModalReviews').textContent = data.reviews;
+
+    // Highlights
+    const hlEl = document.getElementById('qvModalHighlights');
+    hlEl.innerHTML = data.highlights.map(h => `<li>${h}</li>`).join('');
+
+    // Spec Table
+    const specBody = document.getElementById('qvModalSpecBody');
+    specBody.innerHTML = data.specs.map(s => `
+      <tr style="border-bottom: 1px solid #E2E8F0;">
+        <td style="padding: 0.6rem 0.8rem; font-weight: 800; color: var(--color-primary);">${s.model}</td>
+        <td style="padding: 0.6rem 0.8rem;">${s.kw}</td>
+        <td style="padding: 0.6rem 0.8rem; color: #10B981; font-weight: 700;">${s.cop}</td>
+        <td style="padding: 0.6rem 0.8rem;">${s.tank}</td>
+        <td style="padding: 0.6rem 0.8rem;">${s.temp}</td>
+      </tr>
+    `).join('');
+
+    // Setup Quote Button to open Calculator Modal
+    const quoteBtn = document.getElementById('qvModalQuoteBtn');
+    if (quoteBtn) {
+      quoteBtn.onclick = () => {
+        modal.classList.remove('active');
+        const calcOverlay = document.getElementById('calcModalOverlay');
+        if (calcOverlay) calcOverlay.classList.add('active');
+      };
+    }
+
+    modal.classList.add('active');
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
+
+  // Bind click listener on all "View Product Details", "View Details & Specs", and Mega Menu links
+  document.body.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-amazon-primary, [data-open-qv]');
+    if (btn) {
+      const href = btn.getAttribute('href') || '';
+      if (href.includes('product-detail.html?id=')) {
+        e.preventDefault();
+        const id = href.split('id=')[1];
+        openQuickView(id);
+      }
+    }
+  });
 }
