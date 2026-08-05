@@ -269,14 +269,122 @@ img {
   box-shadow: 0 8px 20px rgba(15, 61, 34, 0.25);
 }
 
-/* Mobile Nav Toggle */
-.mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+/* ==========================================================================
+   PRODUCT RANGE MEGA DROPDOWN MENU (Matching Reference Screenshots)
+   ========================================================================== */
+.nav-item-has-dropdown {
+  position: relative;
+}
+
+.mega-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  width: 580px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s var(--ease-out-expo);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.nav-item-has-dropdown:hover .mega-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mega-dropdown-sidebar {
+  width: 240px;
+  background: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-tab-item {
+  padding: 0.95rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #55B747;
+  border-bottom: 1px solid #E2E8F0;
   cursor: pointer;
-  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.mega-tab-item:hover, .mega-tab-item.active {
+  background: #1E241E;
+  color: #55B747;
+}
+
+.mega-tab-link {
+  padding: 0.95rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #55B747;
+  border-bottom: 1px solid #E2E8F0;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.mega-tab-link:hover {
+  background: #F1F5F9;
+  color: #15803D;
+}
+
+.mega-dropdown-content {
+  flex: 1;
+  background: #FFFFFF;
+  padding: 0.5rem 0;
+}
+
+.mega-sub-panel {
+  display: none;
+}
+
+.mega-sub-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-sub-item {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #F1F5F9;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.mega-sub-item:last-child {
+  border-bottom: none;
+}
+
+.mega-sub-item:hover {
+  background: #F8FAF8;
+}
+
+.mega-sub-item strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #55B747;
+  display: block;
+  line-height: 1.3;
+}
+
+.mega-sub-item p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
 }
 
 /* ==========================================================================
@@ -1034,11 +1142,160 @@ img {
   text-align: left;
 }
 
-.comp-table td {
-  padding: 0.55rem 0.5rem;
-  text-align: center;
-  border-bottom: 1px solid var(--border-soft);
+/* ==========================================================================
+   AMAZON-STYLE PRODUCT CARDS & PRICING
+   ========================================================================== */
+.amazon-price-tag {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #15803D;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0.75rem 0;
+}
+
+.amazon-price-tag small {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.product-rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #F59E0B;
+  margin-bottom: 0.5rem;
+}
+
+.product-rating-stars span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
   font-weight: 600;
+}
+
+.product-specs-mini-list {
+  list-style: none;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.product-specs-mini-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.product-specs-mini-list li::before {
+  content: '✓';
+  color: #15803D;
+  font-weight: 800;
+}
+
+.btn-amazon-primary {
+  background-color: #FF9900;
+  color: #111111;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-amazon-primary:hover {
+  background-color: #E68A00;
+  transform: translateY(-2px);
+}
+
+.btn-amazon-secondary {
+  background-color: #F8FAF8;
+  color: #0F3D22;
+  border: 1.5px solid #15803D;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-amazon-secondary:hover {
+  background-color: #15803D;
+  color: #FFFFFF;
+}
+
+/* Product Detail Modal Popup */
+.product-detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.product-detail-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.product-detail-modal-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  max-width: 780px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: #F1F5F9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #E2E8F0;
 }
 
 .comp-table td:first-child {
