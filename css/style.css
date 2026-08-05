@@ -456,27 +456,27 @@ img {
   margin-bottom: 1.25rem;
 }
 
-/* Pure Transparent Floating Product Cutout Images */
+/* Pure Transparent Floating Product Cutout Images (No Card Box) */
 .hero-floating-products-row {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 2rem;
+  margin: 1.25rem 0 1.5rem 0;
   flex-wrap: wrap;
 }
 
 .floating-prod-item {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 16px;
-  padding: 0.85rem 1.2rem;
+  background: none;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
   animation: floatProductTransparent 3.5s infinite ease-in-out;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .floating-prod-item:nth-child(2) {
@@ -485,25 +485,23 @@ img {
 
 @keyframes floatProductTransparent {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  50% { transform: translateY(-8px); }
 }
 
 .floating-prod-item:hover {
-  transform: translateY(-8px) scale(1.03);
-  background: rgba(255, 255, 255, 0.25);
-  border-color: #4ADE80;
-  box-shadow: 0 20px 40px rgba(74, 222, 128, 0.3);
+  transform: translateY(-10px) scale(1.05);
 }
 
 .floating-prod-img {
-  width: 75px;
-  height: 75px;
+  height: 110px;
+  width: auto;
+  max-width: 160px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.45));
 }
 
 .floating-prod-text label {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: #4ADE80;
   text-transform: uppercase;
@@ -512,11 +510,12 @@ img {
 }
 
 .floating-prod-text strong {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #FFFFFF;
   display: block;
   line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 .hero-banner-description {
