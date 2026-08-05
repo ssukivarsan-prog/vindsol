@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile & Administrator Portal | VINDSOL Heat Pumps</title>
+  <meta name="description" content="Access VINDSOL customer portal or administrator control application to manage inquiries, quote submissions, and catalog products.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- TOP UTILITY ANNOUNCEMENT BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-container">
+      <div class="top-bar-left">
+        <span class="top-bar-item">⚡ Energy Efficient</span>
+        <span class="top-bar-item">🌱 Eco Friendly</span>
+        <span class="top-bar-item">🇮🇳 Made in India</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="contact.html" class="top-bar-item">🔍 Sales Enquiry</a>
+        <a href="tel:+918041231313" class="top-bar-item">📞 +91 80 4123 1313</a>
+        <a href="mailto:info@vindsol.in" class="top-bar-item">✉️ info@vindsol.in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-brand" aria-label="VINDSOL Homepage">
+        <img src="assets/images/vindsol-official-logo.png" alt="Vindsol Heat Pump Solutions" class="logo-img">
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="sustainability.html" class="nav-link">About Heat Pump</a></li>
+          <li class="nav-item-has-dropdown">
+            <a href="products.html" class="nav-link">Product Range ▾</a>
+            <div class="mega-dropdown-menu">
+              <div class="mega-dropdown-sidebar">
+                <div class="mega-tab-item active" data-tab="tab-air-source">
+                  <span>Air Source Heat Pump</span>
+                  <span>▸</span>
+                </div>
+                <div class="mega-tab-item" data-tab="tab-thermo">
+                  <span>Thermodynamics Heat Pumps</span>
+                  <span>▸</span>
+                </div>
+                <div class="mega-tab-item" data-tab="tab-tanks">
+                  <span>Quartz Blue Glass Lined Storage Tank</span>
+                  <span>▸</span>
+                </div>
+                <div class="mega-tab-item" data-tab="tab-accessories">
+                  <span>Safety Accessories For Hot water Tank</span>
+                  <span>▸</span>
+                </div>
+                <div class="mega-tab-item" data-tab="tab-sectors">
+                  <span style="color: #10B981; font-weight: 800;">Explore By Interested Field</span>
+                  <span>▸</span>
+                </div>
+              </div>
+
+              <div class="mega-dropdown-content">
+                <div class="mega-sub-panel active" id="tab-air-source">
+                  <a href="product-detail.html?id=dhw" class="mega-sub-item">
+                    <strong>Domestic Hot Water Heat Pumps (DHW)</strong>
+                  </a>
+                  <a href="product-detail.html?id=commercial" class="mega-sub-item">
+                    <strong>Commercial Industrial Heat Pumps</strong>
+                  </a>
+                  <a href="product-detail.html?id=pool" class="mega-sub-item">
+                    <strong>Swimming pool Heat Pumps</strong>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="support.html" class="nav-link">Support</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact us</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a href="profile.html" class="nav-profile-btn" style="background: var(--color-primary); color: #FFF;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile / Admin</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- AUTHENTICATION SECTION -->
+  <section style="padding: 4rem 0; min-height: 70vh;">
+    <div class="container">
+      
+      <div class="auth-container">
+        
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tabCustomerBtn" onclick="switchAuthTab('customer')">
+            👤 User Login
+          </button>
+          <button class="auth-tab-btn" id="tabAdminBtn" onclick="switchAuthTab('admin')">
+            🛡️ Administrator Access
+          </button>
+        </div>
+
+        <!-- CUSTOMER / PUBLIC GOOGLE LOGIN -->
+        <div id="customerAuthPane">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Sign In to VINDSOL Portal</h2>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.35rem;">Track your proforma quotations, site inspection status, and warranty cards</p>
+          </div>
+
+          <button onclick="handleGoogleLogin()" class="btn-google-sso" style="margin-bottom: 1.5rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.29C.47 8.21 0 10.05 0 12s.47 3.79 1.29 5.42l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.58l3.99 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+            Sign in with Google Account
+          </button>
+
+          <div style="display: flex; align-items: center; margin: 1.5rem 0; gap: 1rem;">
+            <div style="flex: 1; height: 1px; background: #E2E8F0;"></div>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Or Email Sign In</span>
+            <div style="flex: 1; height: 1px; background: #E2E8F0;"></div>
+          </div>
+
+          <form onsubmit="handleUserEmailLogin(event)">
+            <div class="form-field-group">
+              <label class="form-label-custom">Email Address</label>
+              <input type="email" required placeholder="name@example.com" class="form-input-custom" id="userEmailInput">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom">Password</label>
+              <input type="password" required placeholder="••••••••" class="form-input-custom" id="userPasswordInput">
+            </div>
+
+            <button type="submit" class="btn-calc-submit" style="background: var(--color-primary); margin-top: 1rem;">
+              Sign In as Customer →
+            </button>
+          </form>
+        </div>
+
+        <!-- ADMINISTRATOR LOGIN PANE -->
+        <div id="adminAuthPane" style="display: none;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <span style="background: #ECFDF5; color: #044E36; font-size: 0.75rem; font-weight: 900; padding: 0.35rem 0.85rem; border-radius: 99px; text-transform: uppercase;">Protected Factory Portal</span>
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary); margin-top: 0.5rem;">Administrator Web App Login</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.25rem;">Manage customer inquiries, required forms, quote requests &amp; catalog products</p>
+          </div>
+
+          <div style="background: #EFF6FF; border: 1.5px solid #93C5FD; border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #1E40AF;">
+            🔑 <strong>Demo Administrator Credentials:</strong><br>
+            • Email: <code style="background: #DBEAFE; padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 800;">admin@vindsol.in</code><br>
+            • Password: <code style="background: #DBEAFE; padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 800;">admin123</code>
+          </div>
+
+          <form onsubmit="handleAdminLogin(event)">
+            <div class="form-field-group">
+              <label class="form-label-custom">Administrator Email ID</label>
+              <input type="email" id="adminEmail" required class="form-input-custom" value="admin@vindsol.in">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom">Admin Password</label>
+              <input type="password" id="adminPassword" required class="form-input-custom" value="admin123">
+            </div>
+
+            <div id="adminLoginError" style="color: #DC2626; font-size: 0.82rem; font-weight: 700; display: none; margin-bottom: 0.75rem;">
+              ⚠️ Invalid credentials. Please use admin@vindsol.in / admin123
+            </div>
+
+            <button type="submit" class="btn-calc-submit" style="background: linear-gradient(135deg, #044E36 0%, #022C1E 100%); margin-top: 1rem;">
+              🛡️ Launch Administrator Control Application →
+            </button>
+          </form>
+        </div>
+
+        <!-- LOGGED IN USER PROFILE PANE -->
+        <div id="userLoggedInProfilePane" style="display: none; text-align: center;">
+          <div style="background: #ECFDF5; border: 1.5px solid #A7F3D0; border-radius: 16px; padding: 2rem; margin-bottom: 1.5rem;">
+            <div id="userAvatarContainer" style="width: 72px; height: 72px; background: #044E36; color: #FFF; font-size: 2rem; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; overflow: hidden;">
+              👤
+            </div>
+            <h3 id="userNameDisplay" style="font-size: 1.4rem; font-weight: 900; color: var(--color-primary);">Welcome Back!</h3>
+            <p id="userEmailDisplay" style="font-size: 0.9rem; color: var(--text-muted);">user@example.com</p>
+            <div style="margin-top: 1rem; display: inline-block; background: #D1FAE5; color: #065F46; font-size: 0.8rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 99px;" id="userRoleBadge">
+              AUTHENTICATED VIA GOOGLE SSO
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <a href="index.html#calculator" class="btn-amazon-primary" style="flex: 1;">🧮 View My Quotations</a>
+            <button onclick="handleUserLogout()" class="btn-amazon-secondary" style="flex: 1;">Sign Out</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center; color: #94A3B8;">
+      <p>© 2026 VINDSOL - Mechzephyr Engineering Pvt. Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function switchAuthTab(tab) {
+      document.getElementById('tabCustomerBtn').classList.toggle('active', tab === 'customer');
+      document.getElementById('tabAdminBtn').classList.toggle('active', tab === 'admin');
+      document.getElementById('customerAuthPane').style.display = tab === 'customer' ? 'block' : 'none';
+      document.getElementById('adminAuthPane').style.display = tab === 'admin' ? 'block' : 'none';
+    }
+
+    function handleGoogleLogin() {
+      // Simulate Google Single Sign On
+      const googleUser = {
+        name: 'Alex Johnson',
+        email: 'alex.johnson@gmail.com',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+        role: 'Verified Google User'
+      };
+      localStorage.setItem('vindsol_user', JSON.stringify(googleUser));
+      checkLoginState();
+    }
+
+    function handleUserEmailLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('userEmailInput').value;
+      const user = {
+        name: email.split('@')[0],
+        email: email,
+        role: 'Verified Customer'
+      };
+      localStorage.setItem('vindsol_user', JSON.stringify(user));
+      checkLoginState();
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('adminEmail').value;
+      const pass = document.getElementById('adminPassword').value;
+
+      if (email === 'admin@vindsol.in' && pass === 'admin123') {
+        localStorage.setItem('vindsol_admin_logged_in', 'true');
+        window.location.href = 'admin.html';
+      } else {
+        document.getElementById('adminLoginError').style.display = 'block';
+      }
+    }
+
+    function handleUserLogout() {
+      localStorage.removeItem('vindsol_user');
+      localStorage.removeItem('vindsol_admin_logged_in');
+      checkLoginState();
+    }
+
+    function checkLoginState() {
+      const user = JSON.parse(localStorage.getItem('vindsol_user'));
+      const admin = localStorage.getItem('vindsol_admin_logged_in') === 'true';
+
+      if (admin) {
+        window.location.href = 'admin.html';
+        return;
+      }
+
+      if (user) {
+        document.getElementById('customerAuthPane').style.display = 'none';
+        document.getElementById('adminAuthPane').style.display = 'none';
+        document.getElementById('userLoggedInProfilePane').style.display = 'block';
+
+        document.getElementById('userNameDisplay').textContent = `Welcome, ${user.name}`;
+        document.getElementById('userEmailDisplay').textContent = user.email;
+        document.getElementById('userRoleBadge').textContent = user.role.toUpperCase();
+
+        if (user.avatar) {
+          document.getElementById('userAvatarContainer').innerHTML = `<img src="${user.avatar}" style="width:100%; height:100%; object-fit:cover;">`;
+        }
+      } else {
+        document.getElementById('userLoggedInProfilePane').style.display = 'none';
+        switchAuthTab('customer');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkLoginState);
+  </script>
+</body>
+</html>

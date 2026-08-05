@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator Control Web Application | VINDSOL Factory Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: #F8FAF8;">
+
+  <!-- ADMIN TOP HEADER BAR -->
+  <header class="header" style="background: #022C1E; color: #FFFFFF; border-bottom: 1.5px solid #10B981;">
+    <div class="container nav-container">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="index.html" class="logo-brand">
+          <img src="assets/images/vindsol-official-logo.png" alt="VINDSOL Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+        </a>
+        <span style="background: #10B981; color: #022C1E; font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.75rem; border-radius: 99px; text-transform: uppercase;">
+          🛡️ Administrator Control Web App
+        </span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1.25rem;">
+        <span style="font-size: 0.88rem; font-weight: 700; color: #E2E8F0;">
+          Logged in as: <strong style="color: #34D399;">admin@vindsol.in</strong>
+        </span>
+        <button onclick="adminLogout()" class="btn-amazon-secondary" style="background: rgba(255,255,255,0.1); color: #FFF; border-color: rgba(255,255,255,0.3); padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+          Sign Out 🚪
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ADMIN WEB APP MAIN WORKSPACE -->
+  <div class="admin-wrapper">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="admin-sidebar">
+      <div>
+        <div style="font-size: 0.75rem; font-weight: 800; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+          CONTROL PANELS
+        </div>
+        
+        <div class="admin-nav-item active" onclick="showAdminTab('tabInquiries', this)">
+          📥 Customer Inquiries &amp; Form Submissions
+        </div>
+        <div class="admin-nav-item" onclick="showAdminTab('tabProducts', this)">
+          📦 Product Catalog &amp; Sizing Management
+        </div>
+        <div class="admin-nav-item" onclick="showAdminTab('tabAnalytics', this)">
+          📊 Sizing Calculator &amp; Conversion Analytics
+        </div>
+        <div class="admin-nav-item" onclick="showAdminTab('tabSettings', this)">
+          ⚙️ Factory Pricing &amp; GST Settings
+        </div>
+      </div>
+
+      <div style="font-size: 0.78rem; color: #64748B; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        VINDSOL Administrative System v2.6<br>
+        Mechzephyr Engineering Pvt. Ltd
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="admin-content">
+      
+      <!-- TAB 1: CUSTOMER INQUIRIES & FORM SUBMISSIONS -->
+      <div id="tabInquiries" class="admin-tab-pane">
+        
+        <div class="admin-header-bar">
+          <div>
+            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Customer Inquiries &amp; Quotation Requests</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Manage incoming customer quote forms, sizing calculator leads, and WhatsApp inquiries</p>
+          </div>
+          <button onclick="exportInquiriesCSV()" class="btn-amazon-secondary" style="font-size: 0.85rem;">
+            📥 Export to CSV
+          </button>
+        </div>
+
+        <!-- STATS OVERVIEW CARDS -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem;">
+          <div class="admin-stat-card">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TOTAL INQUIRIES</span>
+            <div class="admin-stat-val" id="statTotalInquiries">48</div>
+            <span style="font-size: 0.75rem; color: #059669; font-weight: 800;">+12 this week</span>
+          </div>
+
+          <div class="admin-stat-card">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">PENDING ACTION</span>
+            <div class="admin-stat-val" style="color: #D97706;" id="statPendingInquiries">12</div>
+            <span style="font-size: 0.75rem; color: #D97706; font-weight: 800;">Requires Quote Follow-up</span>
+          </div>
+
+          <div class="admin-stat-card">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">QUOTATIONS DELIVERED</span>
+            <div class="admin-stat-val" style="color: #2563EB;">32</div>
+            <span style="font-size: 0.75rem; color: #2563EB; font-weight: 800;">Sent via WhatsApp &amp; Email</span>
+          </div>
+
+          <div class="admin-stat-card">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">PIPELINE VALUE</span>
+            <div class="admin-stat-val" style="color: #059669;">₹ 68.4 L</div>
+            <span style="font-size: 0.75rem; color: #059669; font-weight: 800;">Active Thermal Leads</span>
+          </div>
+        </div>
+
+        <!-- INQUIRIES TABLE -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+            <thead>
+              <tr style="background: #F1F5F9; text-align: left; color: var(--text-primary);">
+                <th style="padding: 0.85rem 1rem;">Ref ID</th>
+                <th style="padding: 0.85rem 1rem;">Customer / Company</th>
+                <th style="padding: 0.85rem 1rem;">Contact Phone</th>
+                <th style="padding: 0.85rem 1rem;">Site Location</th>
+                <th style="padding: 0.85rem 1rem;">Requested Model</th>
+                <th style="padding: 0.85rem 1rem;">Amount (₹)</th>
+                <th style="padding: 0.85rem 1rem;">Status</th>
+                <th style="padding: 0.85rem 1rem; text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="inquiriesTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: PRODUCT CATALOG MANAGEMENT -->
+      <div id="tabProducts" class="admin-tab-pane" style="display: none;">
+        
+        <div class="admin-header-bar">
+          <div>
+            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Product Catalog &amp; Inventory Control</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Add new heat pump models, adjust prices, edit specifications and stock availability</p>
+          </div>
+          <button onclick="openAddProductModal()" class="btn-amazon-primary">
+            ➕ Add New Product
+          </button>
+        </div>
+
+        <!-- PRODUCTS TABLE -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+            <thead>
+              <tr style="background: #F1F5F9; text-align: left;">
+                <th style="padding: 0.85rem 1rem;">Image</th>
+                <th style="padding: 0.85rem 1rem;">Product Title</th>
+                <th style="padding: 0.85rem 1rem;">Category</th>
+                <th style="padding: 0.85rem 1rem;">Wholesale Price Range</th>
+                <th style="padding: 0.85rem 1rem;">COP Rating</th>
+                <th style="padding: 0.85rem 1rem;">Status</th>
+                <th style="padding: 0.85rem 1rem; text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- TAB 3: CALCULATOR & CONVERSION ANALYTICS -->
+      <div id="tabAnalytics" class="admin-tab-pane" style="display: none;">
+        <div class="admin-header-bar">
+          <div>
+            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Sizing Calculator Analytics</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Insights on customer thermal sizing queries and payback conversions</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 1.5rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 1rem;">Top Sizing Categories Queried</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem;">
+              <li style="display: flex; justify-content: space-between;"><span>1. Commercial Hot Water (Hotels &amp; Hostels)</span> <strong>44%</strong></li>
+              <li style="display: flex; justify-content: space-between;"><span>2. Swimming Pool &amp; Spa Heating</span> <strong>31%</strong></li>
+              <li style="display: flex; justify-content: space-between;"><span>3. Domestic Residential Monoblocks</span> <strong>25%</strong></li>
+            </ul>
+          </div>
+
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 1.5rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 1rem;">Average Energy Payback Calculated</h3>
+            <div style="font-size: 2.5rem; font-weight: 900; color: #10B981;">2.1 Years</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Based on ₹8.00/kWh average commercial electricity tariff</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: FACTORY SETTINGS & RATES -->
+      <div id="tabSettings" class="admin-tab-pane" style="display: none;">
+        <div class="admin-header-bar">
+          <div>
+            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Factory System Settings</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Configure default quotation GST rates, freight fees, and WhatsApp hotline routing</p>
+          </div>
+        </div>
+
+        <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 2rem; max-width: 600px;">
+          <form onsubmit="saveAdminSettings(event)">
+            <div class="form-field-group">
+              <label class="form-label-custom">WhatsApp Hotline Number</label>
+              <input type="text" id="settingWhatsapp" class="form-input-custom" value="+91 80 4123 1313">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom">GST Rate (%)</label>
+              <input type="number" id="settingGST" class="form-input-custom" value="18">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom">Base Freight &amp; Installation Fee (₹)</label>
+              <input type="number" id="settingFreight" class="form-input-custom" value="6500">
+            </div>
+
+            <button type="submit" class="btn-amazon-primary" style="margin-top: 1rem;">
+              💾 Save Factory Configuration
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div class="product-detail-modal-overlay" id="adminProductModal">
+    <div class="product-detail-modal-card" style="max-width: 550px;">
+      <button class="modal-close-btn" onclick="closeAddProductModal()">&times;</button>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: var(--color-primary); margin-bottom: 1.25rem;" id="prodModalTitle">Add New Heat Pump Product</h2>
+
+      <form onsubmit="saveProductForm(event)">
+        <input type="hidden" id="prodFormId">
+        
+        <div class="form-field-group">
+          <label class="form-label-custom">Product Title</label>
+          <input type="text" id="prodFormTitle" required class="form-input-custom" placeholder="e.g. High Efficiency Monoblock 500L">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Category Tag</label>
+          <input type="text" id="prodFormCategory" required class="form-input-custom" placeholder="e.g. AIR SOURCE • DOMESTIC">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Wholesale Price Range (₹)</label>
+          <input type="text" id="prodFormPrice" required class="form-input-custom" placeholder="e.g. ₹ 75,000 - ₹ 1,20,000">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">COP Efficiency Rating</label>
+          <input type="text" id="prodFormCOP" required class="form-input-custom" placeholder="e.g. 4.25x - 5.80x">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Product Cutout Image Filename / URL</label>
+          <input type="text" id="prodFormImg" required class="form-input-custom" value="assets/images/products/dhw-monoblock.jpg">
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="submit" class="btn-amazon-primary" style="flex: 1;">Save Product</button>
+          <button type="button" onclick="closeAddProductModal()" class="btn-amazon-secondary" style="flex: 1;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Ensure Admin Security Authorization Check
+    function checkAdminAuth() {
+      const isLogged = localStorage.getItem('vindsol_admin_logged_in') === 'true';
+      if (!isLogged) {
+        window.location.href = 'profile.html';
+      }
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('vindsol_admin_logged_in');
+      window.location.href = 'profile.html';
+    }
+
+    // Navigation Tab Switcher
+    function showAdminTab(tabId, element) {
+      document.querySelectorAll('.admin-tab-pane').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.admin-nav-item').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).style.display = 'block';
+      element.classList.add('active');
+    }
+
+    // Default Customer Leads Dataset
+    let sampleInquiries = [
+      { id: 'QT-8421', name: 'Sheraton Grand Resort', phone: '+91 98450 12345', city: 'Bengaluru', model: 'VCHP 5000 V Commercial (50 kW)', amount: '₹ 2,59,600', status: 'New Lead', date: '2026-08-05' },
+      { id: 'QT-8422', name: 'Dr. Ramesh Kumar (Fortis)', phone: '+91 97110 56789', city: 'Mysuru', model: 'VIHP 2500 HT (80°C High Temp)', amount: '₹ 2,18,300', status: 'In Progress', date: '2026-08-04' },
+      { id: 'QT-8423', name: 'Manipal International School', phone: '+91 94480 99887', city: 'Mangaluru', model: 'VPHP 3500 Pool (35 kW Titanium)', amount: '₹ 2,40,130', status: 'Quotation Sent', date: '2026-08-04' },
+      { id: 'QT-8424', name: 'Prestige Lakeside Villa', phone: '+91 98800 44332', city: 'Bengaluru', model: 'VDHP 4500 MB All-in-One (200L)', amount: '₹ 82,010', status: 'Quotation Sent', date: '2026-08-03' }
+    ];
+
+    function renderInquiries() {
+      const tbody = document.getElementById('inquiriesTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = sampleInquiries.map(inq => {
+        let badgeClass = 'badge-lead-new';
+        if (inq.status.includes('Progress')) badgeClass = 'badge-lead-progress';
+        if (inq.status.includes('Sent') || inq.status.includes('Resolved')) badgeClass = 'badge-lead-resolved';
+
+        return `
+          <tr style="border-bottom: 1px solid #E2E8F0;">
+            <td style="padding: 0.85rem 1rem; font-weight: 800; color: var(--color-primary);">${inq.id}</td>
+            <td style="padding: 0.85rem 1rem; font-weight: 700;">${inq.name}</td>
+            <td style="padding: 0.85rem 1rem;">${inq.phone}</td>
+            <td style="padding: 0.85rem 1rem;">${inq.city}</td>
+            <td style="padding: 0.85rem 1rem;">${inq.model}</td>
+            <td style="padding: 0.85rem 1rem; font-weight: 800; color: #059669;">${inq.amount}</td>
+            <td style="padding: 0.85rem 1rem;">
+              <span class="badge-lead-status ${badgeClass}">${inq.status}</span>
+            </td>
+            <td style="padding: 0.85rem 1rem; text-align: right;">
+              <a href="https://wa.me/${inq.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(inq.name)},%20here%20is%20your%20VINDSOL%20Quotation%20(${inq.id})" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; margin-right: 0.75rem;">📱 WhatsApp</a>
+              <button onclick="toggleInquiryStatus('${inq.id}')" style="background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #2563EB; font-weight: 700;">Update</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function toggleInquiryStatus(id) {
+      const item = sampleInquiries.find(i => i.id === id);
+      if (item) {
+        if (item.status === 'New Lead') item.status = 'In Progress';
+        else if (item.status === 'In Progress') item.status = 'Quotation Sent';
+        else item.status = 'New Lead';
+        renderInquiries();
+      }
+    }
+
+    function exportInquiriesCSV() {
+      let csvContent = "data:text/csv;charset=utf-8,Ref ID,Customer Name,Phone,City,Model,Amount,Status,Date\n";
+      sampleInquiries.forEach(row => {
+        csvContent += `${row.id},"${row.name}",${row.phone},${row.city},"${row.model}",${row.amount},${row.status},${row.date}\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "VINDSOL_Customer_Inquiries_2026.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Products Management Table
+    let adminProducts = [
+      { id: 'dhw', title: 'Domestic Hot Water Heat Pumps (DHW)', category: 'AIR SOURCE • RESIDENTIAL', price: '₹ 45,000 - ₹ 85,000', cop: '2.92x - 5.83x', img: 'assets/images/products/dhw-monoblock.jpg', status: 'In Stock' },
+      { id: 'commercial', title: 'Commercial Industrial Heat Pumps', category: 'AIR SOURCE • COMMERCIAL', price: '₹ 1,20,000 - ₹ 3,50,000', cop: '4.25x - 5.20x', img: 'assets/images/products/vtype-commercial.jpg', status: 'In Stock' },
+      { id: 'pool', title: 'Swimming Pool Heat Pumps', category: 'AIR SOURCE • POOLS & SPA', price: '₹ 85,000 - ₹ 2,10,000', cop: '4.25x - 6.00x', img: 'assets/images/products/swimming-pool-titanium.png', status: 'In Stock' },
+      { id: 'high-temp', title: '80°C High Temp Industrial Systems', category: 'AIR SOURCE • INDUSTRIAL', price: '₹ 1,80,000 - ₹ 4,20,000', cop: '3.85x - 4.10x', img: 'assets/images/products/high-temp-industrial.jpg', status: 'In Stock' }
+    ];
+
+    function renderAdminProducts() {
+      const tbody = document.getElementById('adminProductsTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = adminProducts.map(p => `
+        <tr style="border-bottom: 1px solid #E2E8F0;">
+          <td style="padding: 0.85rem 1rem;">
+            <img src="${p.img}" style="width: 48px; height: 48px; object-fit: contain;">
+          </td>
+          <td style="padding: 0.85rem 1rem; font-weight: 800; color: var(--color-primary);">${p.title}</td>
+          <td style="padding: 0.85rem 1rem; font-size: 0.8rem; font-weight: 700; color: #64748B;">${p.category}</td>
+          <td style="padding: 0.85rem 1rem; font-weight: 800; color: #059669;">${p.price}</td>
+          <td style="padding: 0.85rem 1rem;">${p.cop}</td>
+          <td style="padding: 0.85rem 1rem;">
+            <span class="badge-lead-status badge-lead-resolved">${p.status}</span>
+          </td>
+          <td style="padding: 0.85rem 1rem; text-align: right;">
+            <button onclick="editAdminProduct('${p.id}')" style="background: none; border: none; cursor: pointer; color: #2563EB; font-weight: 700; margin-right: 0.5rem;">Edit</button>
+            <button onclick="deleteAdminProduct('${p.id}')" style="background: none; border: none; cursor: pointer; color: #DC2626; font-weight: 700;">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openAddProductModal() {
+      document.getElementById('prodFormId').value = '';
+      document.getElementById('prodModalTitle').textContent = 'Add New Heat Pump Product';
+      document.getElementById('prodFormTitle').value = '';
+      document.getElementById('prodFormCategory').value = 'AIR SOURCE • COMMERCIAL';
+      document.getElementById('prodFormPrice').value = '₹ 95,000 - ₹ 1,80,000';
+      document.getElementById('prodFormCOP').value = '4.50x';
+      document.getElementById('adminProductModal').classList.add('active');
+    }
+
+    function closeAddProductModal() {
+      document.getElementById('adminProductModal').classList.remove('active');
+    }
+
+    function editAdminProduct(id) {
+      const p = adminProducts.find(item => item.id === id);
+      if (p) {
+        document.getElementById('prodFormId').value = p.id;
+        document.getElementById('prodModalTitle').textContent = 'Edit Heat Pump Product';
+        document.getElementById('prodFormTitle').value = p.title;
+        document.getElementById('prodFormCategory').value = p.category;
+        document.getElementById('prodFormPrice').value = p.price;
+        document.getElementById('prodFormCOP').value = p.cop;
+        document.getElementById('prodFormImg').value = p.img;
+        document.getElementById('adminProductModal').classList.add('active');
+      }
+    }
+
+    function deleteAdminProduct(id) {
+      if (confirm("Are you sure you want to remove this product from the catalog?")) {
+        adminProducts = adminProducts.filter(p => p.id !== id);
+        renderAdminProducts();
+      }
+    }
+
+    function saveProductForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('prodFormId').value || ('prod_' + Date.now());
+      const title = document.getElementById('prodFormTitle').value;
+      const category = document.getElementById('prodFormCategory').value;
+      const price = document.getElementById('prodFormPrice').value;
+      const cop = document.getElementById('prodFormCOP').value;
+      const img = document.getElementById('prodFormImg').value;
+
+      const existingIndex = adminProducts.findIndex(p => p.id === id);
+      if (existingIndex >= 0) {
+        adminProducts[existingIndex] = { id, title, category, price, cop, img, status: 'In Stock' };
+      } else {
+        adminProducts.push({ id, title, category, price, cop, img, status: 'In Stock' });
+      }
+
+      closeAddProductModal();
+      renderAdminProducts();
+    }
+
+    function saveAdminSettings(e) {
+      e.preventDefault();
+      alert("✓ Factory settings updated successfully!");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAdminAuth();
+      renderInquiries();
+      renderAdminProducts();
+    });
+  </script>
+</body>
+</html>
