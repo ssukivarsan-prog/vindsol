@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details & Specification Sheet | VINDSOL Heat Pumps</title>
+  <meta name="description" content="Detailed technical specification, engineering characteristics, capacity ratings, and quotation request for VINDSOL heat pumps.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .product-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .product-gallery-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .main-detail-img {
+      max-width: 100%;
+      height: 380px;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
+    }
+    .gallery-thumbnails {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .thumb-item {
+      width: 70px;
+      height: 70px;
+      border: 2px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 0.35rem;
+      cursor: pointer;
+      object-fit: contain;
+      transition: all 0.2s ease;
+    }
+    .thumb-item.active, .thumb-item:hover {
+      border-color: #15803D;
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2);
+    }
+    .product-info-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .product-brand-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #15803D;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .product-detail-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .amazon-detail-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: #F59E0B;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .amazon-detail-price-box {
+      background: #F8FAF8;
+      border: 1px solid rgba(21, 128, 61, 0.2);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .amazon-detail-price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #15803D;
+    }
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #166534;
+      background: #DCFCE7;
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      margin-top: 0.5rem;
+    }
+    .detail-highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+    .detail-highlights-list li {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+    }
+    .detail-cta-row {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .btn-buy-primary {
+      background-color: #FF9900;
+      color: #111111;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 20px rgba(255, 153, 0, 0.3);
+      transition: all 0.25s ease;
+    }
+    .btn-buy-primary:hover {
+      background-color: #E68A00;
+      transform: translateY(-2px);
+    }
+    .btn-buy-secondary {
+      background-color: #15803D;
+      color: #FFFFFF;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 20px rgba(21, 128, 61, 0.3);
+      transition: all 0.25s ease;
+    }
+    .btn-buy-secondary:hover {
+      background-color: #166534;
+      transform: translateY(-2px);
+    }
+    .product-detail-tabs-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--border-soft);
+    }
+    .tab-headers {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 2px solid var(--border-soft);
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 1rem 1.75rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      border-bottom: 3.5px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      color: #15803D;
+      border-bottom-color: #15803D;
+    }
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY ANNOUNCEMENT BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-container">
+      <div class="top-bar-left">
+        <span class="top-bar-item">⚡ Energy Efficient</span>
+        <span class="top-bar-item">🌱 Eco Friendly</span>
+        <span class="top-bar-item">🇮🇳 Made in India</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="contact.html" class="top-bar-item">🔍 Sales Enquiry</a>
+        <a href="tel:+918041231313" class="top-bar-item">📞 +91 80 4123 1313</a>
+        <a href="mailto:info@vindsol.in" class="top-bar-item">✉️ info@vindsol.in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION HEADER -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-brand" aria-label="VINDSOL Homepage">
+        <img src="assets/images/vindsol-official-logo.png" alt="Vindsol Heat Pump Solutions" class="logo-img">
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="sustainability.html" class="nav-link">About Heat Pump</a></li>
+          <li class="nav-item-has-dropdown">
+            <a href="products.html" class="nav-link active">Product Range ▾</a>
+            <div class="mega-dropdown-menu">
+              <div class="mega-dropdown-sidebar">
+                <div class="mega-tab-item active" data-tab="tab-air-source">
+                  <span>Air Source Heat Pump</span>
+                  <span>▸</span>
+                </div>
+                <div class="mega-tab-item" data-tab="tab-thermo">
+                  <span>Thermodynamics Heat Pumps</span>
+                  <span>▸</span>
+                </div>
+                <a href="product-detail.html?id=storage-tanks" class="mega-tab-link">
+                  <span>Quartz Blue Glass Lined Storage Tank</span>
+                </a>
+                <a href="product-detail.html?id=accessories" class="mega-tab-link">
+                  <span>Safety Accessories For Hot water Tank</span>
+                </a>
+              </div>
+
+              <div class="mega-dropdown-content">
+                <!-- Submenu 1: Air Source Heat Pump -->
+                <div class="mega-sub-panel active" id="tab-air-source">
+                  <a href="product-detail.html?id=dhw" class="mega-sub-item">
+                    <strong>Domestic Hot Water Heat Pumps (DHW)</strong>
+                    <p>100L to 500L monoblock & split residential units</p>
+                  </a>
+                  <a href="product-detail.html?id=commercial" class="mega-sub-item">
+                    <strong>Commercial Industrial Heat Pumps</strong>
+                    <p>Heavy-duty V-Type & 80°C high-temp systems for hotels & factories</p>
+                  </a>
+                  <a href="product-detail.html?id=pool" class="mega-sub-item">
+                    <strong>Swimming pool Heat Pumps</strong>
+                    <p>All-season 28°C constant temperature swimming pool heating</p>
+                  </a>
+                  <a href="product-detail.html?id=spa" class="mega-sub-item">
+                    <strong>Spa and pool Heat Pumps</strong>
+                    <p>100% Titanium tube-in-shell anti-corrosion heat exchangers</p>
+                  </a>
+                </div>
+
+                <!-- Submenu 2: Thermodynamics Heat Pumps -->
+                <div class="mega-sub-panel" id="tab-thermo">
+                  <a href="sustainability.html" class="mega-sub-item">
+                    <strong>About Thermodynamics heat pump Technology</strong>
+                    <p>Dual-source heat technology combining solar panels & air heating</p>
+                  </a>
+                  <a href="product-detail.html?id=thermo-allinone" class="mega-sub-item">
+                    <strong>All-in-one Thermodynamics Solar Heat Pump</strong>
+                    <p>Integrated compact thermodynamic residential water heater</p>
+                  </a>
+                  <a href="product-detail.html?id=thermo-commercial" class="mega-sub-item">
+                    <strong>Commercial thermodynamic Solar Heat Pumps</strong>
+                    <p>Large-scale solar collector arrays for commercial hot water</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="support.html" class="nav-link">Support</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="contact.html" class="nav-link">Contact us</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <a href="contact.html#quote" class="btn-nav open-quote-modal">
+          Get a Free Quote
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB & MAIN DETAIL SECTION -->
+  <section style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 5rem;">
+    <div class="container">
+      
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 600;">
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none;">Home</a> &nbsp;/&nbsp; 
+        <a href="products.html" style="color: var(--text-muted); text-decoration: none;">Product Range</a> &nbsp;/&nbsp; 
+        <span id="breadcrumbCategory" style="color: #15803D; font-weight: 800;">Domestic Heat Pumps</span>
+      </div>
+
+      <div class="product-detail-layout">
+        
+        <!-- Left Column: Product Image Gallery -->
+        <div class="product-gallery-card">
+          <img id="mainProductImg" src="assets/images/domestic-monoblock.jpg" alt="Vindsol Product Image" class="main-detail-img">
+          
+          <div class="gallery-thumbnails" id="galleryThumbs">
+            <img src="assets/images/domestic-monoblock.jpg" alt="Thumb 1" class="thumb-item active" onclick="switchMainImg(this.src)">
+            <img src="assets/images/monoblock-detail.jpg" alt="Thumb 2" class="thumb-item" onclick="switchMainImg(this.src)">
+            <img src="assets/images/swimming-pool.png" alt="Thumb 3" class="thumb-item" onclick="switchMainImg(this.src)">
+          </div>
+        </div>
+
+        <!-- Right Column: Product Specs & Amazon-style Buy Box -->
+        <div class="product-info-box">
+          <span class="product-brand-tag" id="productTag">VINDSOL® FACTORY DIRECT &bull; MADE IN BANGALORE</span>
+          <h1 class="product-detail-title" id="productTitle">VDHP Domestic Monoblock Heat Pump Series</h1>
+
+          <div class="amazon-detail-rating">
+            <span>★★★★★</span>
+            <strong style="color: var(--text-primary);">4.9 out of 5 stars</strong>
+            <span>(142 Verified Factory & Installation Ratings)</span>
+          </div>
+
+          <div class="amazon-detail-price-box">
+            <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Estimated Wholesale & Installed Price Range</div>
+            <div class="amazon-detail-price" id="productPrice">₹ 45,000 - ₹ 85,000</div>
+            <div class="stock-badge">✓ In Stock &bull; Direct Dispatch from Bengaluru Factory</div>
+          </div>
+
+          <ul class="detail-highlights-list" id="productHighlights">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Up to 75% Electricity Savings over conventional water heaters</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Saginomya Electronic Expansion Valve for low ambient stability</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 5+ Years Heavy-Duty Compressor Warranty &amp; All-India Service</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Zero ODP Eco-Friendly R134a / R410A Refrigerants</li>
+          </ul>
+
+          <div class="detail-cta-row">
+            <a href="contact.html#quote" class="btn-buy-primary">
+              📋 Request Official Quote &amp; Price List
+            </a>
+            <a href="tel:+918041231313" class="btn-buy-secondary">
+              📞 Call Factory (+91 80 4123 1313)
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TABS SECTION: Technical Spec Sheet, Installation, Efficiency Chart -->
+      <div class="product-detail-tabs-section">
+        <div class="tab-headers">
+          <button class="tab-btn active" onclick="openTab(event, 'specTab')">Technical Spec Table</button>
+          <button class="tab-btn" onclick="openTab(event, 'featuresTab')">Engineering &amp; Features</button>
+          <button class="tab-btn" onclick="openTab(event, 'savingsTab')">COP &amp; Energy Savings</button>
+        </div>
+
+        <!-- Tab 1: Spec Table -->
+        <div class="tab-pane active" id="specTab">
+          <div class="spec-table-wrapper">
+            <table class="spec-table">
+              <thead>
+                <tr>
+                  <th>Model Variant</th>
+                  <th>Heating Capacity (kW)</th>
+                  <th>COP Efficiency</th>
+                  <th>Tank Capacity (L)</th>
+                  <th>Refrigerant</th>
+                  <th>Max Water Temp</th>
+                  <th>Piping Material</th>
+                </tr>
+              </thead>
+              <tbody id="specTableBody">
+                <tr>
+                  <td class="highlight-col">VDHP 3000 MB</td>
+                  <td>3.16 kW</td>
+                  <td>3.92 – 4.21x</td>
+                  <td>150 Litres</td>
+                  <td>R134a Eco</td>
+                  <td>60°C</td>
+                  <td>Copper ISO1337</td>
+                </tr>
+                <tr>
+                  <td class="highlight-col">VDHP 4500 MB</td>
+                  <td>4.42 kW</td>
+                  <td>4.38 – 4.70x</td>
+                  <td>200 Litres</td>
+                  <td>R134a Eco</td>
+                  <td>60°C</td>
+                  <td>Copper ISO1337</td>
+                </tr>
+                <tr>
+                  <td class="highlight-col">VDHP 6000 MB</td>
+                  <td>6.00 kW</td>
+                  <td>4.50 – 4.92x</td>
+                  <td>300 Litres</td>
+                  <td>R134a Eco</td>
+                  <td>65°C</td>
+                  <td>Copper ISO1337</td>
+                </tr>
+                <tr>
+                  <td class="highlight-col">VDHP 7500 MB</td>
+                  <td>7.50 kW</td>
+                  <td>4.79 – 5.25x</td>
+                  <td>500 Litres</td>
+                  <td>R134a Eco</td>
+                  <td>65°C</td>
+                  <td>Copper ISO1337</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: Features -->
+        <div class="tab-pane" id="featuresTab">
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+            <div style="background: #F8FAF8; border: 1px solid var(--border-soft); padding: 1.75rem; border-radius: 12px;">
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #15803D; margin-bottom: 0.5rem;">Tube-in-Tube Heat Exchanger</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">Higher heat exchange velocity than tube-in-shell, providing rapid thermal transfer and longer operational life without scaling.</p>
+            </div>
+            <div style="background: #F8FAF8; border: 1px solid var(--border-soft); padding: 1.75rem; border-radius: 12px;">
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #15803D; margin-bottom: 0.5rem;">Smart Microprocessor Touch Screen</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">Automated defrost cycles, dual timer settings, error diagnostics, and BMS / Wi-Fi smartphone app connectivity.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Savings -->
+        <div class="tab-pane" id="savingsTab">
+          <div style="background: #F8FAF8; border: 1px solid var(--border-soft); padding: 2rem; border-radius: 12px;">
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.75rem;">Annual Operating Cost Comparison (200L Hot Water / Day)</h3>
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Calculated at standard electricity tariff ₹ 8.00 / unit</p>
+
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th>Heating Technology</th>
+                  <th>Daily Consumption</th>
+                  <th>Annual Energy Cost</th>
+                  <th>Annual CO₂ Emission</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Electric Geyser (COP 0.9)</td>
+                  <td>10.3 kWh / day</td>
+                  <td>₹ 30,076 / year</td>
+                  <td>3.08 Tonnes</td>
+                </tr>
+                <tr style="background: #DCFCE7;">
+                  <td style="color: #15803D; font-weight: 800;">VINDSOL Heat Pump (COP 4.25)</td>
+                  <td style="color: #15803D; font-weight: 800;">2.4 kWh / day</td>
+                  <td style="color: #15803D; font-weight: 800;">₹ 7,008 / year</td>
+                  <td style="color: #15803D; font-weight: 800;">0.72 Tonnes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem;">
+        <div>
+          <img src="assets/images/vindsol-official-logo.png" alt="Vindsol Logo" style="height: 48px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+          <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.6; margin-bottom: 1.5rem;">Manufacturer of high-efficiency Thermodynamic Solar &amp; Air-Source Heat Pumps for residential, commercial, and industrial applications in India.</p>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #FFFFFF; text-transform: uppercase; margin-bottom: 1.25rem;">Quick Links</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+            <li><a href="about.html" style="color: #94A3B8; text-decoration: none;">About Us</a></li>
+            <li><a href="sustainability.html" style="color: #94A3B8; text-decoration: none;">About Heat Pump</a></li>
+            <li><a href="products.html" style="color: #94A3B8; text-decoration: none;">Product Range</a></li>
+            <li><a href="support.html" style="color: #94A3B8; text-decoration: none;">Support</a></li>
+            <li><a href="contact.html" style="color: #94A3B8; text-decoration: none;">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #FFFFFF; text-transform: uppercase; margin-bottom: 1.25rem;">Factory Info</h4>
+          <p style="font-size: 0.88rem; color: #94A3B8; line-height: 1.6;">Mechzephyr Engineering Pvt. Ltd, Bengaluru, Karnataka, India.</p>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #FFFFFF; text-transform: uppercase; margin-bottom: 1.25rem;">Sales Support</h4>
+          <p style="font-size: 0.88rem; color: #94A3B8;">Phone: +91 80 4123 1313</p>
+          <p style="font-size: 0.88rem; color: #94A3B8;">Email: info@vindsol.in</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const VINDSOL_PRODUCTS_DATA = {
+      'dhw': {
+        title: 'VDHP Domestic Hot Water Heat Pump Series',
+        category: 'DOMESTIC RANGE • ALL-IN-ONE MONOBLOCK',
+        price: '₹ 45,000 - ₹ 85,000',
+        img: 'assets/images/domestic-monoblock.jpg',
+        thumbs: ['assets/images/domestic-monoblock.jpg', 'assets/images/monoblock-detail.jpg', 'assets/images/swimming-pool.png'],
+        specs: [
+          { model: 'VDHP 3000 MB', kw: '3.16 kW', cop: '3.92 - 4.21x', tank: '150 Litres', ref: 'R134a Eco', temp: '60°C' },
+          { model: 'VDHP 4500 MB', kw: '4.42 kW', cop: '4.38 - 4.70x', tank: '200 Litres', ref: 'R134a Eco', temp: '60°C' },
+          { model: 'VDHP 6000 MB', kw: '6.00 kW', cop: '4.50 - 4.92x', tank: '300 Litres', ref: 'R134a Eco', temp: '65°C' },
+          { model: 'VDHP 7500 MB', kw: '7.50 kW', cop: '4.79 - 5.25x', tank: '500 Litres', ref: 'R134a Eco', temp: '65°C' }
+        ]
+      },
+      'commercial': {
+        title: 'VCHP Commercial V-Type Heavy Duty Heat Pump',
+        category: 'COMMERCIAL RANGE • V-TYPE MULTI-COMPRESSOR',
+        price: '₹ 1,20,000 - ₹ 3,50,000',
+        img: 'assets/images/commercial-vtype.jpg',
+        thumbs: ['assets/images/commercial-vtype.jpg', 'assets/images/high-temp-hp.jpg', 'assets/images/pool-35kw.jpg'],
+        specs: [
+          { model: 'VCHP 3500 V', kw: '35 kW', cop: '4.25x', tank: '1000L - 3000L', ref: 'R410A', temp: '60°C' },
+          { model: 'VCHP 5000 V', kw: '50 kW', cop: '4.40x', tank: '3000L - 5000L', ref: 'R410A', temp: '60°C' },
+          { model: 'VCHP 7500 V', kw: '75 kW', cop: '4.65x', tank: '5000L - 10000L', ref: 'R410A', temp: '60°C' },
+          { model: 'VCHP 15000 V', kw: '150 kW', cop: '4.85x', tank: '10000L+', ref: 'R410A', temp: '60°C' }
+        ]
+      },
+      'pool': {
+        title: 'VPHP Titanium Swimming Pool & Spa Heat Pump',
+        category: 'POOL RANGE • ALL-SEASON 28°C HEATER',
+        price: '₹ 85,000 - ₹ 2,10,000',
+        img: 'assets/images/swimming-pool.png',
+        thumbs: ['assets/images/swimming-pool.png', 'assets/images/pool-35kw.jpg', 'assets/images/commercial-vtype.jpg'],
+        specs: [
+          { model: 'VPHP 1500 Pool', kw: '15 kW', cop: '4.25x', tank: 'Pool 40m³', ref: 'R410A', temp: '28°C - 35°C' },
+          { model: 'VPHP 2500 Pool', kw: '25 kW', cop: '4.50x', tank: 'Pool 70m³', ref: 'R410A', temp: '28°C - 35°C' },
+          { model: 'VPHP 3500 Pool', kw: '35 kW', cop: '4.75x', tank: 'Pool 110m³', ref: 'R410A', temp: '28°C - 35°C' }
+        ]
+      },
+      'spa': {
+        title: 'VPHP Spa & Jacuzzi Anti-Corrosion Heat Pump',
+        category: 'SPA RANGE • 100% TITANIUM EXCHANGER',
+        price: '₹ 95,000 - ₹ 2,40,000',
+        img: 'assets/images/pool-35kw.jpg',
+        thumbs: ['assets/images/pool-35kw.jpg', 'assets/images/swimming-pool.png', 'assets/images/domestic-monoblock.jpg'],
+        specs: [
+          { model: 'VPHP Spa 10k', kw: '10 kW', cop: '4.15x', tank: 'Jacuzzi 15m³', ref: 'R410A', temp: '40°C' },
+          { model: 'VPHP Spa 20k', kw: '20 kW', cop: '4.35x', tank: 'Resort Spa 35m³', ref: 'R410A', temp: '40°C' }
+        ]
+      },
+      'high-temp': {
+        title: 'VIHP 80°C High Temperature Industrial Heat Pump',
+        category: 'INDUSTRIAL RANGE • EXTREME 80°C PROCESS HOT WATER',
+        price: '₹ 1,80,000 - ₹ 4,20,000',
+        img: 'assets/images/high-temp-hp.jpg',
+        thumbs: ['assets/images/high-temp-hp.jpg', 'assets/images/commercial-vtype.jpg', 'assets/images/monoblock-detail.jpg'],
+        specs: [
+          { model: 'VIHP 2500 HT', kw: '25 kW', cop: '3.85x', tank: 'Process 1000L', ref: 'R134a Dual', temp: '80°C' },
+          { model: 'VIHP 5000 HT', kw: '50 kW', cop: '4.10x', tank: 'Process 3000L', ref: 'R134a Dual', temp: '80°C' }
+        ]
+      },
+      'thermo-allinone': {
+        title: 'VTSP All-in-One Thermodynamic Solar Heat Pump',
+        category: 'THERMODYNAMIC SOLAR RANGE • RESIDENTIAL',
+        price: '₹ 65,000 - ₹ 1,15,000',
+        img: 'assets/images/monoblock-detail.jpg',
+        thumbs: ['assets/images/monoblock-detail.jpg', 'assets/images/domestic-monoblock.jpg', 'assets/images/swimming-pool.png'],
+        specs: [
+          { model: 'VTSP 200L Solar', kw: '3.80 kW', cop: '5.20x', tank: '200 Litres', ref: 'R134a Solar', temp: '65°C' },
+          { model: 'VTSP 300L Solar', kw: '5.20 kW', cop: '5.50x', tank: '300 Litres', ref: 'R134a Solar', temp: '65°C' }
+        ]
+      },
+      'storage-tanks': {
+        title: 'Quartz Blue Glass Lined Storage Tanks',
+        category: 'ACCESSORIES • INSULATED HOT WATER TANKS',
+        price: '₹ 25,000 - ₹ 65,000',
+        img: 'assets/images/commercial-pool.png',
+        thumbs: ['assets/images/commercial-pool.png', 'assets/images/domestic-monoblock.jpg', 'assets/images/monoblock-detail.jpg'],
+        specs: [
+          { model: 'VQBT 200L', kw: 'N/A Storage', cop: 'Insulation 50mm', tank: '200 Litres', ref: 'Quartz Glass', temp: '90°C' },
+          { model: 'VQBT 500L', kw: 'N/A Storage', cop: 'Insulation 50mm', tank: '500 Litres', ref: 'Quartz Glass', temp: '90°C' }
+        ]
+      },
+      'accessories': {
+        title: 'Hydro-Kit & Safety Accessories for Heat Pump Tanks',
+        category: 'ACCESSORIES • SMART CONTROL & PROTECTION',
+        price: '₹ 8,500 - ₹ 18,500',
+        img: 'assets/images/monoblock-detail.jpg',
+        thumbs: ['assets/images/monoblock-detail.jpg', 'assets/images/domestic-monoblock.jpg', 'assets/images/swimming-pool.png'],
+        specs: [
+          { model: 'VHK Smart Control', kw: 'Control Panel', cop: 'Wi-Fi / BMS', tank: 'N/A', ref: 'Saginomya Valve', temp: 'N/A' }
+        ]
+      }
+    };
+
+    function loadProductFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const prodId = params.get('id') || 'dhw';
+      const data = VINDSOL_PRODUCTS_DATA[prodId] || VINDSOL_PRODUCTS_DATA['dhw'];
+
+      document.getElementById('breadcrumbCategory').textContent = data.title;
+      document.getElementById('productTitle').textContent = data.title;
+      document.getElementById('productTag').textContent = data.category;
+      document.getElementById('productPrice').textContent = data.price;
+      document.getElementById('mainProductImg').src = data.img;
+
+      // Render Thumbs
+      const thumbsBox = document.getElementById('galleryThumbs');
+      thumbsBox.innerHTML = '';
+      data.thumbs.forEach((tSrc, idx) => {
+        const imgEl = document.createElement('img');
+        imgEl.src = tSrc;
+        imgEl.className = 'thumb-item' + (idx === 0 ? ' active' : '');
+        imgEl.onclick = function() { switchMainImg(tSrc); };
+        thumbsBox.appendChild(imgEl);
+      });
+
+      // Render Spec Table
+      const tableBody = document.getElementById('specTableBody');
+      tableBody.innerHTML = '';
+      data.specs.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="highlight-col">${s.model}</td>
+          <td>${s.kw}</td>
+          <td>${s.cop}</td>
+          <td>${s.tank}</td>
+          <td>${s.ref}</td>
+          <td>${s.temp}</td>
+          <td>Copper ISO1337</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function switchMainImg(src) {
+      document.getElementById('mainProductImg').src = src;
+      document.querySelectorAll('.thumb-item').forEach(t => {
+        t.classList.toggle('active', t.src === src);
+      });
+    }
+
+    function openTab(evt, tabName) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProductFromURL);
+  </script>
+</body>
+</html>
