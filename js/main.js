@@ -11,7 +11,44 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroAdSlider();
   initMegaMenu();
   initProductQuickViewModal();
+  initSectorFilter();
 });
+
+/* -------------------------------------------------------------------------- */
+/* Sector Filter for Interested Fields (Schools, Hotels, Pools, etc.)          */
+/* -------------------------------------------------------------------------- */
+function initSectorFilter() {
+  const filterBtns = document.querySelectorAll('.sector-filter-btn');
+  const cards = document.querySelectorAll('.grand-product-card');
+
+  if (!filterBtns.length || !cards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const targetSector = btn.getAttribute('data-sector') || 'all';
+
+      cards.forEach(card => {
+        const cardSectors = (card.getAttribute('data-sectors') || '').toLowerCase();
+        if (targetSector === 'all' || cardSectors.includes(targetSector)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Auto-activate filter button if URL parameter ?sector=... is present
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramSector = urlParams.get('sector');
+  if (paramSector) {
+    const targetBtn = document.querySelector(`.sector-filter-btn[data-sector="${paramSector}"]`);
+    if (targetBtn) targetBtn.click();
+  }
+}
 
 /* -------------------------------------------------------------------------- */
 /* 6. Product Range Mega Menu Tab Switching                                   */

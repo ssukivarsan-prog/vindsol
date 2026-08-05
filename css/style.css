@@ -252,25 +252,58 @@ img {
   transform: scaleX(1);
 }
 
-.btn-nav {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
-  padding: 0.65rem 1.3rem;
+.nav-profile-btn {
+  background: var(--bg-surface);
+  color: var(--color-primary);
+  border: 1.5px solid #10B981;
+  padding: 0.55rem 1.15rem;
   border-radius: var(--radius-full);
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 800;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  transition: all var(--transition-fast);
+  gap: 0.45rem;
+  transition: all 0.25s var(--ease-out-expo);
   white-space: nowrap;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
-.btn-nav:hover {
-  background-color: var(--color-primary-dark);
+.nav-profile-btn:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(15, 61, 34, 0.25);
+  box-shadow: 0 6px 18px rgba(4, 78, 54, 0.2);
+}
+
+/* Sector Filter Bar inside Product Range */
+.product-category-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.sector-filter-btn {
+  background: #FFFFFF;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-soft);
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out-expo);
+}
+
+.sector-filter-btn:hover, .sector-filter-btn.active {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 16px rgba(4, 78, 54, 0.18);
 }
 
 /* ==========================================================================
