@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
   initMobileNav();
   initSavingsCalculator();
-  initVideoDiagram();
+  initCalculatorModal();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -61,7 +61,7 @@ function initSavingsCalculator() {
   const heaterSelect = document.getElementById('calcHeaterType');
   const litresInput = document.getElementById('calcLitres');
   const tariffInput = document.getElementById('calcTariff');
-  const submitBtn = document.getElementById('calcSubmitBtn');
+  const submitBtn = document.getElementById('calcModalApplyBtn');
 
   const monthlySavingsEl = document.getElementById('monthlySavingsVal');
   const yearlySavingsEl = document.getElementById('yearlySavingsVal');
@@ -125,6 +125,8 @@ function initSavingsCalculator() {
     submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
       calculate();
+      const overlay = document.getElementById('calcModalOverlay');
+      if (overlay) overlay.classList.remove('active');
     });
   }
 
@@ -132,13 +134,31 @@ function initSavingsCalculator() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. Diagram Play Button Video Modal                                         */
+/* 4. Calculator Modal Open / Close Handler                                   */
 /* -------------------------------------------------------------------------- */
-function initVideoDiagram() {
-  const playBtn = document.getElementById('playDiagramBtn');
-  if (!playBtn) return;
+function initCalculatorModal() {
+  const triggers = document.querySelectorAll('.open-calc-modal');
+  const overlay = document.getElementById('calcModalOverlay');
+  const closeBtn = document.getElementById('closeCalcModalBtn');
 
-  playBtn.addEventListener('click', () => {
-    alert('VINDSOL Thermodynamic Cycle Demonstration: Air-Source heat pumps extract 75% ambient heat energy from outdoor air using eco-friendly refrigerant cycles.');
+  if (!overlay) return;
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      overlay.classList.add('active');
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+    });
+  }
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+    }
   });
 }

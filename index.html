@@ -183,53 +183,17 @@
   </div>
 
   <!-- =========================================================================
-       5. INTERACTIVE 4-COLUMN FEATURE & CALCULATOR GRID
+       5. SPACIOUS 2-COLUMN DASHBOARD GRID
        ========================================================================= -->
   <section class="grid-dashboard-section" id="calculator">
     <div class="container">
-      <div class="dashboard-4col-grid">
+      <div class="dashboard-2col-grid">
         
-        <!-- Column 1: Savings Calculator Form -->
-        <div class="dashboard-card">
-          <div>
-            <h3 class="dashboard-card-title">Savings Calculator</h3>
-            <p class="dashboard-card-sub">See how much you can save with Vindsol Heat Pumps</p>
-            
-            <div class="form-field-group">
-              <label class="form-label-custom" for="calcPeople">Number of People</label>
-              <input type="number" id="calcPeople" class="form-input-custom" value="4" min="1" max="100">
-            </div>
-
-            <div class="form-field-group">
-              <label class="form-label-custom" for="calcHeaterType">Existing Heater Type</label>
-              <select id="calcHeaterType" class="form-select-custom">
-                <option value="geyser" selected>Electric Geyser</option>
-                <option value="boiler">Diesel / Gas Boiler</option>
-                <option value="solar">Solar Backup Heater</option>
-              </select>
-            </div>
-
-            <div class="form-field-group">
-              <label class="form-label-custom" for="calcLitres">Daily Hot Water Usage (Liters)</label>
-              <input type="number" id="calcLitres" class="form-input-custom" value="200" step="50">
-            </div>
-
-            <div class="form-field-group">
-              <label class="form-label-custom" for="calcTariff">Electricity Tariff (Per Unit)</label>
-              <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
-            </div>
-          </div>
-
-          <button id="calcSubmitBtn" class="btn-calc-submit">
-            Calculate Savings 🧮
-          </button>
-        </div>
-
-        <!-- Column 2: Your Potential Savings Output Card -->
+        <!-- Column 1: Your Potential Savings Output Card -->
         <div class="dashboard-card" style="background-color: #F8FAF8;">
           <div>
             <h3 class="dashboard-card-title" style="color: var(--color-primary);">Your Potential Savings</h3>
-            <p class="dashboard-card-sub">Estimated annual financial return</p>
+            <p class="dashboard-card-sub">Estimated annual financial return with Vindsol Heat Pumps</p>
 
             <div class="savings-metric-box">
               <div class="metric-row">
@@ -266,16 +230,18 @@
             </div>
           </div>
 
-          <a href="contact.html#quote" class="card-bottom-link">
-            View Detailed Report →
-          </a>
+          <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
+            <button class="btn-primary open-calc-modal" style="width: 100%; justify-content: center; font-size: 0.9rem; padding: 0.75rem 1rem;">
+              🧮 Launch Sizing Calculator
+            </button>
+          </div>
         </div>
 
-        <!-- Column 3: Heat Pump vs Others Comparison Table -->
+        <!-- Column 2: Heat Pump vs Others Comparison Table -->
         <div class="dashboard-card">
           <div>
             <h3 class="dashboard-card-title">Heat Pump vs Others</h3>
-            <p class="dashboard-card-sub">The smarter choice for a better future</p>
+            <p class="dashboard-card-sub">The smarter choice for a sustainable &amp; cost-effective future</p>
 
             <table class="comp-table">
               <thead>
@@ -327,39 +293,63 @@
             </table>
           </div>
 
-          <a href="sustainability.html" class="btn-secondary-white" style="width: 100%; text-align: center; justify-content: center; font-size: 0.88rem; padding: 0.65rem;">
-            Compare in Detail →
-          </a>
-        </div>
-
-        <!-- Column 4: How Heat Pumps Work Interactive Video Diagram -->
-        <div class="dashboard-card">
-          <div>
-            <h3 class="dashboard-card-title">How Heat Pumps Work</h3>
-            <p class="dashboard-card-sub">Extracts heat from air &amp; converts it into hot water efficiently.</p>
-
-            <div class="diagram-box">
-              <div style="font-size: 0.75rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem; text-transform: uppercase;">THERMODYNAMIC REFRIGERANT CYCLE</div>
-              
-              <button class="play-video-btn" id="playDiagramBtn" aria-label="Play Heat Pump Demonstration Video">
-                ▶
-              </button>
-
-              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); margin-top: 0.5rem;">
-                <span>Ambient Air (In)</span>
-                <span style="color: var(--color-secondary);">Hot Water (Out)</span>
-              </div>
-            </div>
+          <div style="margin-top: 1rem; text-align: right;">
+            <a href="sustainability.html" class="card-bottom-link">
+              Compare Detailed Engineering Specs →
+            </a>
           </div>
-
-          <a href="sustainability.html" class="card-bottom-link">
-            Watch How It Works →
-          </a>
         </div>
 
       </div>
     </div>
   </section>
+
+  <!-- =========================================================================
+       FLOATING CALCULATOR MODAL & TRIGGER BUTTON
+       ========================================================================= -->
+  <button class="floating-calc-trigger open-calc-modal" aria-label="Open Savings Calculator">
+    🧮 Live Calculator
+  </button>
+
+  <div class="calc-modal-overlay" id="calcModalOverlay">
+    <div class="calc-modal-card">
+      <button class="calc-modal-close" id="closeCalcModalBtn" aria-label="Close Calculator Modal">&times;</button>
+      
+      <div style="margin-bottom: 1.5rem;">
+        <div class="blueprint-tag">INTERACTIVE CALCULATOR</div>
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-top: 0.35rem;">Estimate Your Savings</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">Adjust values below to instantly update live monthly savings &amp; CO₂ payback period.</p>
+      </div>
+
+      <div class="form-field-group">
+        <label class="form-label-custom" for="calcPeople">Number of People</label>
+        <input type="number" id="calcPeople" class="form-input-custom" value="4" min="1" max="100">
+      </div>
+
+      <div class="form-field-group">
+        <label class="form-label-custom" for="calcHeaterType">Existing Heater Type</label>
+        <select id="calcHeaterType" class="form-select-custom">
+          <option value="geyser" selected>Electric Geyser</option>
+          <option value="boiler">Diesel / Gas Boiler</option>
+          <option value="solar">Solar Backup Heater</option>
+        </select>
+      </div>
+
+      <div class="form-field-group">
+        <label class="form-label-custom" for="calcLitres">Daily Hot Water Usage (Liters)</label>
+        <input type="number" id="calcLitres" class="form-input-custom" value="200" step="50">
+      </div>
+
+      <div class="form-field-group">
+        <label class="form-label-custom" for="calcTariff">Electricity Tariff (Per Unit ₹)</label>
+        <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
+      </div>
+
+      <button id="calcModalApplyBtn" class="btn-calc-submit" style="margin-top: 1.25rem;">
+        Recalculate &amp; View Results 🧮
+      </button>
+    </div>
+  </div>
 
   <!-- =========================================================================
        6. SOLUTIONS FOR EVERY INDUSTRY GRID
