@@ -92,9 +92,106 @@
         </div>
       </div>
 
-      <!-- Center Hero Visual (Heat Pump Product) -->
+      <!-- Center Hero Visual (Dynamic Ad Carousel with Floating Products) -->
       <div class="hero-visual-center">
-        <img src="assets/images/commercial-vtype.jpg" alt="Vindsol Industrial Air-Source Heat Pump Unit">
+        <div class="hero-slider-wrapper" id="heroAdSlider">
+          <!-- Slide 1: Family Pool Oasis -->
+          <div class="hero-slide active">
+            <img src="assets/images/hero-slides/hero-ad-1.jpg" alt="Vindsol Heated Swimming Pool" class="hero-slide-bg">
+            <div class="hero-slide-overlay">
+              <span class="slide-badge-tag">🌊 Swimming Pool Heating</span>
+              
+              <!-- Floating Product Image -->
+              <div class="floating-product-card">
+                <img src="assets/images/swimming-pool.png" alt="Vindsol Pool Heat Pump" class="floating-product-img">
+                <div class="floating-product-info">
+                  <label>VINDSOL POOL SERIES</label>
+                  <strong>28°C Constant Water All Year</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Poolside Heat Pump Unit -->
+          <div class="hero-slide">
+            <img src="assets/images/hero-slides/hero-ad-2.jpg" alt="Vindsol Compact Monoblock Heat Pump Installation" class="hero-slide-bg">
+            <div class="hero-slide-overlay">
+              <span class="slide-badge-tag">🌱 Quiet Eco Refrigerant</span>
+              
+              <!-- Floating Product Image -->
+              <div class="floating-product-card">
+                <img src="assets/images/commercial-vtype.jpg" alt="Vindsol Commercial V-Type Heat Pump" class="floating-product-img">
+                <div class="floating-product-info">
+                  <label>COMMERCIAL V-TYPE</label>
+                  <strong>Heavy Duty 75% Energy Saver</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Kids Splash Fun -->
+          <div class="hero-slide">
+            <img src="assets/images/hero-slides/hero-ad-3.jpg" alt="Kids enjoying warm water splash" class="hero-slide-bg">
+            <div class="hero-slide-overlay">
+              <span class="slide-badge-tag">⚡ 75% Electricity Savings</span>
+              
+              <!-- Floating Product Image -->
+              <div class="floating-product-card">
+                <img src="assets/images/domestic-monoblock.jpg" alt="Vindsol Domestic Monoblock Heat Pump" class="floating-product-img">
+                <div class="floating-product-info">
+                  <label>ALL-IN-ONE MONOBLOCK</label>
+                  <strong>Zero Maintenance Silent Unit</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Underwater Swimming Fun -->
+          <div class="hero-slide">
+            <img src="assets/images/hero-slides/hero-ad-4.jpg" alt="Underwater Swimming Pool Fun" class="hero-slide-bg">
+            <div class="hero-slide-overlay">
+              <span class="slide-badge-tag">🛡️ Titanium Anti-Corrosion</span>
+              
+              <!-- Floating Product Image -->
+              <div class="floating-product-card">
+                <img src="assets/images/swimming-pool.png" alt="Vindsol Titanium Heat Pump" class="floating-product-img">
+                <div class="floating-product-info">
+                  <label>TITANIUM EXCHANGER</label>
+                  <strong>Chlorine &amp; Salt Resistant</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Hybrid Pool System -->
+          <div class="hero-slide">
+            <img src="assets/images/hero-slides/hero-ad-5.jpg" alt="Above-Ground Swimming Pool Heating System" class="hero-slide-bg">
+            <div class="hero-slide-overlay">
+              <span class="slide-badge-tag">☀️ Dual Hybrid Heat Source</span>
+              
+              <!-- Floating Product Image -->
+              <div class="floating-product-card">
+                <img src="assets/images/commercial-vtype.jpg" alt="Vindsol Hybrid Commercial Heat Pump" class="floating-product-img">
+                <div class="floating-product-info">
+                  <label>HYBRID SOLUTION</label>
+                  <strong>Solar + Heat Pump Integration</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <button class="hero-slider-arrow hero-slider-prev" id="heroSlidePrev" aria-label="Previous Slide">❮</button>
+          <button class="hero-slider-arrow hero-slider-next" id="heroSlideNext" aria-label="Next Slide">❯</button>
+
+          <div class="hero-slider-dots" id="heroSlideDots">
+            <button class="hero-slider-dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="hero-slider-dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="hero-slider-dot" data-index="2" aria-label="Slide 3"></button>
+            <button class="hero-slider-dot" data-index="3" aria-label="Slide 4"></button>
+            <button class="hero-slider-dot" data-index="4" aria-label="Slide 5"></button>
+          </div>
+        </div>
       </div>
 
       <!-- Right Floating Why Vindsol Card (Redesigned Glassmorphic Dark Container) -->

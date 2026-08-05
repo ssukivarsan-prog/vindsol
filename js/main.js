@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSavingsCalculator();
   initCalculatorModal();
+  initHeroAdSlider();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -161,4 +162,82 @@ function initCalculatorModal() {
       overlay.classList.remove('active');
     }
   });
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. Dynamic Hero Ad Showcase Slider                                         */
+/* -------------------------------------------------------------------------- */
+function initHeroAdSlider() {
+  const slider = document.getElementById('heroAdSlider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.hero-slide');
+  const dots = slider.querySelectorAll('.hero-slider-dot');
+  const prevBtn = document.getElementById('heroSlidePrev');
+  const nextBtn = document.getElementById('heroSlideNext');
+
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let autoTimer = null;
+
+  function showSlide(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      if (i === currentIndex) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoTimer = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 4000);
+  }
+
+  function stopAutoPlay() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+      startAutoPlay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+      startAutoPlay();
+    });
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+      showSlide(idx);
+      startAutoPlay();
+    });
+  });
+
+  slider.addEventListener('mouseenter', stopAutoPlay);
+  slider.addEventListener('mouseleave', startAutoPlay);
+
+  startAutoPlay();
 }
