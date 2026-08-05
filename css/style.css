@@ -6,51 +6,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  /* Brand Color Tokens */
-  --color-primary: #0F3D22;          /* Forest Green - primary brand color */
-  --color-primary-dark: #072614;     /* Darker Forest Green */
-  --color-primary-light: #185934;    /* Mid Forest Green */
+  /* 2026 Clean-Tech Bio-Emerald Color System */
+  --color-primary: #044E36;          /* Deep Emerald Clean-Tech */
+  --color-primary-dark: #022C1E;     /* Obsidian Emerald Dark Surface */
+  --color-primary-light: #065F46;    /* Vibrant Mid Emerald */
   
-  --color-accent: #15803D;           /* Vibrant Green Accent */
-  --color-accent-light: #DCFCE7;     /* Light Mint Pill Tag */
-  --color-accent-badge: #E8F5E9;     /* Soft Mint Badge Background */
+  --color-accent: #10B981;           /* 2026 Neo Mint Emerald Glow */
+  --color-accent-hover: #059669;     /* Deep Emerald Accent */
+  --color-accent-light: #D1FAE5;     /* Soft Mint Tag Surface */
+  --color-accent-badge: #ECFDF5;     /* Clean Mint Badge Surface */
   
-  --color-secondary: #C1622E;        /* Warm Copper Accent */
-  --color-secondary-light: #FDBA74;  /* Light Copper */
+  --color-gold: #F59E0B;             /* Thermal Solar Amber Gold */
+  --color-secondary: #D97706;        /* Warm Copper Thermal Accent */
+  --color-secondary-light: #FFEDD5;  /* Soft Warm Amber Surface */
   
   /* Neutral Color Tokens */
-  --bg-topbar: #0B2A18;              /* Top Announcement Dark Green */
-  --bg-body: #F4F6F4;                /* Soft Light Gray Surface */
-  --bg-card: #FFFFFF;                /* Crisp Pure White */
-  --bg-surface: #F8FAF8;             /* Light Mint Off-White */
+  --bg-topbar: #022C1E;              /* Midnight Obsidian Topbar */
+  --bg-body: #F8FAF8;                /* 2026 Ultra-Clean Off-White */
+  --bg-card: #FFFFFF;                /* Crisp Pure White Surface */
+  --bg-surface: #F0FDF4;             /* Soft Emerald Light Tint */
+  --bg-glass: rgba(255, 255, 255, 0.85);
   
   --border-soft: #E2E8F0;
   --border-divider: #CBD5E1;
-  --border-primary: rgba(15, 61, 34, 0.2);
+  --border-primary: rgba(16, 185, 129, 0.25);
   
   /* Text Color Tokens */
   --text-primary: #0F172A;           /* Deep Charcoal Near-Black */
-  --text-secondary: #475569;         /* Slate Gray */
+  --text-secondary: #334155;         /* Slate Body Text */
   --text-muted: #64748B;           /* Muted Gray */
   --text-white: #FFFFFF;
   
-  /* Fonts */
+  /* 2026 Typography System */
   --font-display: 'Outfit', 'Inter', sans-serif;
   --font-heading: 'Space Grotesk', 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   
   /* Layout & Spacing */
   --container-max: 1320px;
   --header-height: 80px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
   --radius-full: 9999px;
   
-  /* Shadows & Glows */
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 10px 30px -4px rgba(15, 61, 34, 0.08);
-  --shadow-lg: 0 20px 40px -8px rgba(15, 61, 34, 0.12);
+  /* 2026 Elevated Shadows & Neo-Glows */
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 12px 32px -4px rgba(4, 78, 54, 0.08);
+  --shadow-lg: 0 24px 48px -8px rgba(4, 78, 54, 0.16);
+  --shadow-glow: 0 0 35px rgba(16, 185, 129, 0.3);
   
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -644,24 +648,24 @@ img {
 }
 
 .btn-banner-green {
-  background-color: #15803D;
+  background: linear-gradient(135deg, #10B981 0%, #047857 100%);
   color: #FFFFFF;
   font-size: 1rem;
   font-weight: 800;
   padding: 0.95rem 2.4rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 8px 25px rgba(21, 128, 61, 0.4);
+  transition: all 0.3s var(--ease-out-expo);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
 }
 
 .btn-banner-green:hover {
-  background-color: #166534;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(21, 128, 61, 0.5);
+  background: linear-gradient(135deg, #059669 0%, #064E3B 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(16, 185, 129, 0.5);
 }
 
 .btn-banner-outline {
@@ -896,33 +900,34 @@ img {
 /* Floating Corner Calculator Button */
 .floating-calc-trigger {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 2.25rem;
+  right: 2.25rem;
   z-index: 999;
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, #044E36 0%, #022C1E 100%);
   color: #FFFFFF;
-  padding: 0.85rem 1.5rem;
+  padding: 0.95rem 1.65rem;
   border-radius: var(--radius-full);
   font-size: 0.92rem;
   font-weight: 800;
-  border: 2px solid #4ADE80;
-  box-shadow: 0 10px 30px rgba(15, 61, 34, 0.4);
+  border: 1.5px solid #10B981;
+  box-shadow: 0 14px 35px -5px rgba(4, 78, 54, 0.45), 0 0 25px rgba(16, 185, 129, 0.35);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  transition: all 0.3s var(--ease-out-expo);
+  gap: 0.65rem;
+  transition: all 0.35s var(--ease-out-expo);
   animation: floatPulse 3s infinite ease-in-out;
 }
 
 @keyframes floatPulse {
-  0%, 100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(15, 61, 34, 0.4); }
-  50% { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(15, 61, 34, 0.5); }
+  0%, 100% { transform: translateY(0); box-shadow: 0 14px 35px -5px rgba(4, 78, 54, 0.45), 0 0 25px rgba(16, 185, 129, 0.35); }
+  50% { transform: translateY(-5px); box-shadow: 0 20px 42px -5px rgba(4, 78, 54, 0.55), 0 0 35px rgba(16, 185, 129, 0.5); }
 }
 
 .floating-calc-trigger:hover {
-  background-color: var(--color-primary-dark);
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #065F46 0%, #044E36 100%);
+  transform: scale(1.06) translateY(-2px);
+  border-color: #34D399;
 }
 
 /* Calculator Modal Overlay */
@@ -1419,12 +1424,12 @@ img {
 }
 
 .btn-amazon-primary {
-  background-color: #FF9900;
-  color: #111111;
-  font-weight: 800;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  font-weight: 900;
   font-size: 0.88rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: 6px;
+  padding: 0.72rem 1.25rem;
+  border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -1432,34 +1437,39 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  transition: all 0.3s var(--ease-out-expo);
 }
 
 .btn-amazon-primary:hover {
-  background-color: #E68A00;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.45);
 }
 
 .btn-amazon-secondary {
-  background-color: #F8FAF8;
-  color: #0F3D22;
-  border: 1.5px solid #15803D;
+  background-color: #ECFDF5;
+  color: #044E36;
+  border: 1.5px solid #10B981;
   font-weight: 800;
   font-size: 0.88rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: 6px;
+  padding: 0.72rem 1.25rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s var(--ease-out-expo);
 }
 
 .btn-amazon-secondary:hover {
-  background-color: #15803D;
+  background-color: #10B981;
   color: #FFFFFF;
+  border-color: #10B981;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
 /* Product Detail Modal Popup */
