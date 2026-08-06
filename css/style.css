@@ -881,6 +881,9 @@ img {
 /* ==========================================================================
    KEY STATS STRIP (Positioned down cleanly below hero buttons)
    ========================================================================== */
+/* ==========================================================================
+   KEY STATS STRIP (TRAIN LINE TRACK HORIZONTAL STRUCTURE)
+   ========================================================================== */
 .stats-strip-section {
   margin-top: 2rem;
   position: relative;
@@ -890,38 +893,75 @@ img {
 
 .stats-card-row {
   background: #FFFFFF;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 2rem;
-  box-shadow: var(--shadow-md);
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem;
+  border: 1.5px solid #A7F3D0;
+  border-radius: 20px;
+  padding: 1.25rem 1.75rem;
+  box-shadow: 0 12px 35px rgba(4, 78, 54, 0.08);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.stats-card-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Connecting Horizontal Train Track Line */
+.stats-card-row::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 3rem;
+  right: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, #10B981 0%, #34D399 50%, #10B981 100%);
+  transform: translateY(-50%);
+  z-index: 1;
+  opacity: 0.35;
+  border-radius: 99px;
 }
 
 .stat-box {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  border-right: 1px solid var(--border-soft);
-  padding-right: 1rem;
+  gap: 0.85rem;
+  position: relative;
+  z-index: 2;
+  background: #FFFFFF;
+  padding: 0.6rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  flex: 1;
+  min-width: 195px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.stat-box:last-child {
-  border-right: none;
-  padding-right: 0;
+.stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+  border-color: #10B981;
 }
 
 .stat-box-icon {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: var(--color-accent-badge);
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
   color: var(--color-primary);
+  border: 2px solid #10B981;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-size: 1.15rem;
+  box-shadow: 0 3px 8px rgba(16, 185, 129, 0.2);
 }
 
 .stat-box-content {
@@ -930,16 +970,18 @@ img {
 }
 
 .stat-box-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: var(--color-primary);
   line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .stat-box-desc {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 /* ==========================================================================
@@ -2333,9 +2375,6 @@ img {
   .dashboard-4col-grid {
     grid-template-columns: 1fr 1fr;
   }
-  .stats-card-row {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .industry-grid {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -2514,9 +2553,6 @@ img {
     grid-column: span 1;
   }
   .dashboard-4col-grid {
-    grid-template-columns: 1fr;
-  }
-  .stats-card-row {
     grid-template-columns: 1fr;
   }
   .industry-grid {
