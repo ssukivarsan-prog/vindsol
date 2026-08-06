@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSavingsCalculator();
   initCalculatorModal();
   initHeroAdSlider();
-  initMegaMenu();
   initProductQuickViewModal();
   initSectorFilter();
 });
@@ -50,27 +49,7 @@ function initSectorFilter() {
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* 6. Product Range Mega Menu Tab Switching                                   */
-/* -------------------------------------------------------------------------- */
-function initMegaMenu() {
-  const tabs = document.querySelectorAll('.mega-tab-item');
-  const panels = document.querySelectorAll('.mega-sub-panel');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('mouseenter', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      tab.classList.add('active');
-      const targetId = tab.getAttribute('data-tab');
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
-    });
-  });
-}
 
 /* -------------------------------------------------------------------------- */
 /* 1. Sticky Header Shadow on Scroll                                          */
