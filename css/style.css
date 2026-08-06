@@ -1912,6 +1912,52 @@ img {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+.project-product-spotlight {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  background: #FFFFFF;
+  border: 2px solid #10B981;
+  border-radius: 12px;
+  padding: 0.4rem 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+.project-card-modern:hover .project-product-spotlight {
+  transform: scale(1.05);
+}
+
+.project-product-spotlight-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.project-product-spotlight-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-product-spotlight-tag {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #047857;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-product-spotlight-name {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #022C1E;
+}
+
 .project-card-body {
   padding: 1.75rem;
   display: flex;

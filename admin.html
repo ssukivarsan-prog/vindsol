@@ -24,7 +24,7 @@
         <span style="font-size: 0.88rem; font-weight: 700; color: #E2E8F0;">
           Logged in as: <strong style="color: #34D399;">admin@vindsol.in</strong>
         </span>
-        <button onclick="adminLogout()" class="btn-amazon-secondary" style="background: rgba(255,255,255,0.1); color: #FFF; border-color: rgba(255,255,255,0.3); padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+        <button onclick="adminLogout()" class="btn-amazon-secondary" style="background: rgba(255,255,255,0.1); color: #FFF; border-color: rgba(255,255,255,0.3); padding: 0.45rem 0.95rem; font-size: 0.82rem; cursor: pointer;">
           Sign Out 🚪
         </button>
       </div>
@@ -70,9 +70,9 @@
         <div class="admin-header-bar">
           <div>
             <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Customer Inquiries &amp; Quotation Requests</h1>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Manage incoming customer quote forms, sizing calculator leads, and WhatsApp inquiries</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Manage incoming customer quote forms, sizing calculator leads, and custom engineering requests</p>
           </div>
-          <button onclick="exportInquiriesCSV()" class="btn-amazon-secondary" style="font-size: 0.85rem;">
+          <button onclick="exportInquiriesCSV()" class="btn-amazon-secondary" style="font-size: 0.85rem; cursor: pointer;">
             📥 Export to CSV
           </button>
         </div>
@@ -81,14 +81,14 @@
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem;">
           <div class="admin-stat-card">
             <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TOTAL INQUIRIES</span>
-            <div class="admin-stat-val" id="statTotalInquiries">48</div>
+            <div class="admin-stat-val" id="statTotalInquiries">4</div>
             <span style="font-size: 0.75rem; color: #059669; font-weight: 800;">+12 this week</span>
           </div>
 
           <div class="admin-stat-card">
             <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">PENDING ACTION</span>
-            <div class="admin-stat-val" style="color: #D97706;" id="statPendingInquiries">12</div>
-            <span style="font-size: 0.75rem; color: #D97706; font-weight: 800;">Requires Quote Follow-up</span>
+            <div class="admin-stat-val" style="color: #D97706;" id="statPendingInquiries">2</div>
+            <span style="font-size: 0.75rem; color: #D97706; font-weight: 800;">Requires Follow-up</span>
           </div>
 
           <div class="admin-stat-card">
@@ -113,14 +113,14 @@
                 <th style="padding: 0.85rem 1rem;">Customer / Company</th>
                 <th style="padding: 0.85rem 1rem;">Contact Phone</th>
                 <th style="padding: 0.85rem 1rem;">Site Location</th>
-                <th style="padding: 0.85rem 1rem;">Requested Model</th>
+                <th style="padding: 0.85rem 1rem;">Requested Model / Special</th>
                 <th style="padding: 0.85rem 1rem;">Amount (₹)</th>
                 <th style="padding: 0.85rem 1rem;">Status</th>
                 <th style="padding: 0.85rem 1rem; text-align: right;">Action</th>
               </tr>
             </thead>
             <tbody id="inquiriesTableBody">
-              <!-- Rendered via JS -->
+              <!-- Rendered dynamically via JS -->
             </tbody>
           </table>
         </div>
@@ -135,7 +135,7 @@
             <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Product Catalog &amp; Inventory Control</h1>
             <p style="font-size: 0.9rem; color: var(--text-muted);">Add new heat pump models, adjust prices, edit specifications and stock availability</p>
           </div>
-          <button onclick="openAddProductModal()" class="btn-amazon-primary">
+          <button onclick="openAddProductModal()" class="btn-amazon-primary" style="cursor: pointer;">
             ➕ Add New Product
           </button>
         </div>
@@ -215,7 +215,7 @@
               <input type="number" id="settingFreight" class="form-input-custom" value="6500">
             </div>
 
-            <button type="submit" class="btn-amazon-primary" style="margin-top: 1rem;">
+            <button type="submit" class="btn-amazon-primary" style="margin-top: 1rem; cursor: pointer;">
               💾 Save Factory Configuration
             </button>
           </form>
@@ -260,36 +260,12 @@
         </div>
 
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-          <button type="submit" class="btn-amazon-primary" style="flex: 1;">Save Product</button>
-          <button type="button" onclick="closeAddProductModal()" class="btn-amazon-secondary" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn-amazon-primary" style="flex: 1; cursor: pointer;">Save Product</button>
+          <button type="button" onclick="closeAddProductModal()" class="btn-amazon-secondary" style="flex: 1; cursor: pointer;">Cancel</button>
         </div>
       </form>
     </div>
   </div>
-
-  <script src="js/main.js"></script>
-  <script>
-    // Ensure Admin Security Authorization Check
-    function checkAdminAuth() {
-      const isLogged = localStorage.getItem('vindsol_admin_logged_in') === 'true';
-      if (!isLogged) {
-        window.location.href = 'profile.html';
-      }
-    }
-
-    function adminLogout() {
-      localStorage.removeItem('vindsol_admin_logged_in');
-      window.location.href = 'profile.html';
-    }
-
-    // Navigation Tab Switcher
-    function showAdminTab(tabId, element) {
-      document.querySelectorAll('.admin-tab-pane').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.admin-nav-item').forEach(el => el.classList.remove('active'));
-      
-      document.getElementById(tabId).style.display = 'block';
-      element.classList.add('active');
-    }
 
   <!-- VIEW CUSTOM SPECIAL SPECIFICATIONS MODAL FOR ADMIN -->
   <div class="product-detail-modal-overlay" id="viewCustomSpecModal">
@@ -323,10 +299,10 @@
       </div>
 
       <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-        <a id="specWhatsAppBtn" href="#" target="_blank" class="btn-amazon-primary" style="flex: 1; text-align: center; justify-content: center; background: #25D366; color: #FFF;">
+        <a id="specWhatsAppBtn" href="#" target="_blank" class="btn-amazon-primary" style="flex: 1; text-align: center; justify-content: center; background: #25D366; color: #FFF; text-decoration: none; padding: 0.75rem;">
           📱 Proceed &amp; Send WhatsApp Quote
         </a>
-        <button onclick="closeCustomSpecModal()" class="btn-amazon-secondary" style="flex: 1;">Close Window</button>
+        <button onclick="closeCustomSpecModal()" class="btn-amazon-secondary" style="flex: 1; cursor: pointer;">Close Window</button>
       </div>
     </div>
   </div>
@@ -357,10 +333,10 @@
 
     // Default Customer Leads Dataset
     let defaultInquiries = [
-      { id: 'QT-8421', name: 'Sheraton Grand Resort', phone: '+91 98450 12345', city: 'Bengaluru', model: 'VCHP 5000 V Commercial (50 kW)', amount: '₹ 2,59,600', status: 'New Lead', date: '2026-08-05', type: 'Standard Quotation' },
-      { id: 'SP-8425', name: 'Amul Dairy Processing Plant', phone: '+91 98765 11223', city: 'Anand, GJ', model: '[SPECIAL PRODUCT] Dairy Pasteurization 85°C System', amount: 'Custom Engineering Estimate', status: 'Custom Review Required', date: '2026-08-05', type: 'Custom Special Product', customSpecs: { capacity: '200 kW', temp: '85°C', fluid: 'SS316L Stainless Steel', notes: 'Needs 3-Phase 415V electrical panel and sanitary tri-clamp fittings for food grade wash.' } },
-      { id: 'QT-8422', name: 'Dr. Ramesh Kumar (Fortis)', phone: '+91 97110 56789', city: 'Mysuru', model: 'VIHP 2500 HT (80°C High Temp)', amount: '₹ 2,18,300', status: 'In Progress', date: '2026-08-04', type: 'Standard Quotation' },
-      { id: 'QT-8423', name: 'Manipal International School', phone: '+91 94480 99887', city: 'Mangaluru', model: 'VPHP 3500 Pool (35 kW Titanium)', amount: '₹ 2,40,130', status: 'Quotation Sent', date: '2026-08-04', type: 'Standard Quotation' }
+      { id: 'QT-8421', name: 'Sheraton Grand Resort', phone: '+91 98450 12345', city: 'Bengaluru', model: 'VCHP 5000 V Commercial (50 kW)', amount: '₹ 2,59,600', status: 'New Lead', date: '2026-08-06', type: 'Standard Quotation' },
+      { id: 'SP-8425', name: 'Amul Dairy Processing Plant', phone: '+91 98765 11223', city: 'Anand, GJ', model: '[SPECIAL PRODUCT] Dairy Pasteurization 85°C System', amount: 'Custom Engineering Estimate', status: 'Custom Review Required', date: '2026-08-06', type: 'Custom Special Product', customSpecs: { capacity: '200 kW', temp: '85°C', fluid: 'SS316L Stainless Steel', notes: 'Needs 3-Phase 415V electrical panel and sanitary tri-clamp fittings for food grade wash.' } },
+      { id: 'QT-8422', name: 'Dr. Ramesh Kumar (Fortis)', phone: '+91 97110 56789', city: 'Mysuru', model: 'VIHP 2500 HT (80°C High Temp)', amount: '₹ 2,18,300', status: 'In Progress', date: '2026-08-05', type: 'Standard Quotation' },
+      { id: 'QT-8423', name: 'Manipal International School', phone: '+91 94480 99887', city: 'Mangaluru', model: 'VPHP 3500 Pool (35 kW Titanium)', amount: '₹ 2,40,130', status: 'Quotation Sent', date: '2026-08-05', type: 'Standard Quotation' }
     ];
 
     function getAllInquiries() {
@@ -432,18 +408,28 @@
     }
 
     function toggleInquiryStatus(id) {
-      const item = sampleInquiries.find(i => i.id === id);
+      const stored = JSON.parse(localStorage.getItem('vindsol_inquiries') || '[]');
+      let item = stored.find(i => i.id === id);
       if (item) {
         if (item.status === 'New Lead') item.status = 'In Progress';
         else if (item.status === 'In Progress') item.status = 'Quotation Sent';
         else item.status = 'New Lead';
-        renderInquiries();
+        localStorage.setItem('vindsol_inquiries', JSON.stringify(stored));
+      } else {
+        item = defaultInquiries.find(i => i.id === id);
+        if (item) {
+          if (item.status === 'New Lead') item.status = 'In Progress';
+          else if (item.status === 'In Progress') item.status = 'Quotation Sent';
+          else item.status = 'New Lead';
+        }
       }
+      renderInquiries();
     }
 
     function exportInquiriesCSV() {
+      const list = getAllInquiries();
       let csvContent = "data:text/csv;charset=utf-8,Ref ID,Customer Name,Phone,City,Model,Amount,Status,Date\n";
-      sampleInquiries.forEach(row => {
+      list.forEach(row => {
         csvContent += `${row.id},"${row.name}",${row.phone},${row.city},"${row.model}",${row.amount},${row.status},${row.date}\n`;
       });
       const encodedUri = encodeURI(csvContent);
