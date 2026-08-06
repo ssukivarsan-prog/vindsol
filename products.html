@@ -371,6 +371,419 @@
     </div>
   </footer>
 
+  <!-- FLOATING CALCULATOR MODAL & TRIGGER BUTTON -->
+  <button class="floating-calc-trigger open-calc-modal" aria-label="Open Savings Calculator">
+    🧮 Live Calculator
+  </button>
+
+  <div class="calc-modal-overlay" id="calcModalOverlay">
+    <div class="calc-modal-card">
+      <button class="calc-modal-close" id="closeCalcModalBtn" aria-label="Close Calculator Modal">&times;</button>
+      
+      <div style="margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.85rem;">
+        <div>
+          <div class="blueprint-tag">OFFICIAL VINDSOL PROFORMA QUOTATION CALCULATOR</div>
+          <h3 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary); margin-top: 0.25rem;">Instant Proforma Quotation &amp; Sizing Hub</h3>
+        </div>
+        <div style="text-align: right; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+          <div>Ref: <strong style="color: var(--color-primary);" id="quoteRefNo">VIN/2026/QT-8421</strong></div>
+          <div>Date: <strong id="quoteDate">05 Aug 2026</strong></div>
+        </div>
+      </div>
+
+      <!-- Customer Details Header Inputs -->
+      <div style="background: #F8FAF8; border: 1px solid var(--border-soft); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.25rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem;">
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block;" for="custName">Customer / Company Name</label>
+          <input type="text" id="custName" class="form-input-custom" value="Royal Palms Hotel" style="padding: 0.4rem 0.6rem; font-size: 0.85rem;">
+        </div>
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block;" for="custMobile">WhatsApp / Phone No</label>
+          <input type="text" id="custMobile" class="form-input-custom" value="+91 98765 43210" style="padding: 0.4rem 0.6rem; font-size: 0.85rem;">
+        </div>
+        <div>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block;" for="custCity">Site Location / City</label>
+          <input type="text" id="custCity" class="form-input-custom" value="Bengaluru, KA" style="padding: 0.4rem 0.6rem; font-size: 0.85rem;">
+        </div>
+      </div>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="calc-nav-tabs">
+        <button class="calc-nav-btn active" data-calc-tab="tab-comm-calc">
+          🏢 Commercial Hot Water Quote
+        </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-pool-calc">
+          🏊 Swimming Pool &amp; Spa Quote
+        </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-dom-calc">
+          🏠 Residential Domestic Quote
+        </button>
+        <button class="calc-nav-btn" data-calc-tab="tab-custom-calc" style="color: #FFD700; font-weight: 900;">
+          🛠️ Custom Special Product Request
+        </button>
+      </div>
+
+      <!-- TAB 1: Commercial Hot Water Sizer & Quote -->
+      <div class="calc-tab-pane active" id="tab-comm-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: #15803D; margin-bottom: 0.85rem;">1. Operating Thermal Parameters</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="commVolume">Daily Hot Water Demand (Liters / Day)</label>
+              <input type="number" id="commVolume" class="form-input-custom" value="1000" step="100">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commT1">Cold Water In (°C)</label>
+                <input type="number" id="commT1" class="form-input-custom" value="20" step="1">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commT2">Target Hot Water (°C)</label>
+                <input type="number" id="commT2" class="form-input-custom" value="55" step="1">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commHT">Heating Window (Hrs/Day)</label>
+                <input type="number" id="commHT" class="form-input-custom" value="8" step="0.5">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="commTariff">Tariff Rate (₹ / kWh)</label>
+                <input type="number" id="commTariff" class="form-input-custom" value="8.00" step="0.25">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>Proforma Quotation Breakdown</span>
+              <span>⚡ COP 4.25x</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Required Heat Pump</span>
+                <div class="calc-metric-val" id="commKWVal">5.1 kW</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Daily Net Load</span>
+                <div class="calc-metric-val" id="commKcalVal">41 kWh/day</div>
+              </div>
+            </div>
+
+            <!-- Bill of Materials (BOM) Itemized Quotation Table -->
+            <table class="quote-bom-table">
+              <thead>
+                <tr>
+                  <th>Equipment Description</th>
+                  <th style="text-align: right;">Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="commBomTableBody">
+                <tr>
+                  <td>VDHP 11000 MB Monoblock (10 kW)</td>
+                  <td style="text-align: right;">₹ 98,000</td>
+                </tr>
+                <tr>
+                  <td>Quartz Blue Glass Tank (1000L)</td>
+                  <td style="text-align: right;">₹ 45,000</td>
+                </tr>
+                <tr>
+                  <td>Safety Valve Package (VRV + TPRV)</td>
+                  <td style="text-align: right;">₹ 8,500</td>
+                </tr>
+                <tr>
+                  <td>Freight &amp; Factory Commissioning</td>
+                  <td style="text-align: right;">₹ 6,500</td>
+                </tr>
+                <tr class="quote-total-row">
+                  <td>Total Investment Excl. Tax</td>
+                  <td style="text-align: right;" id="commSubtotalVal">₹ 1,58,000</td>
+                </tr>
+                <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+                  <td>Grand Total (Incl. 18% GST)</td>
+                  <td style="text-align: right; font-size: 1.15rem; color: #FFD700;" id="commGrandTotalVal">₹ 1,86,440</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top: 0.85rem; font-size: 0.8rem; color: #DCFCE7; display: flex; justify-content: space-between;">
+              <span>Annual Power Savings: <strong style="color: #FFD700;" id="commYearlySavingsVal">₹ 1,04,076</strong></span>
+              <span>ROI Payback: <strong style="color: #86EFAC;" id="commPaybackVal">0.9 Yrs</strong></span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
+              </button>
+              <a href="#" id="commWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
+              </a>
+              <button onclick="submitQuoteToVindsol('Commercial Hot Water')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 2: Swimming Pool & Spa Quote -->
+      <div class="calc-tab-pane" id="tab-pool-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: #15803D; margin-bottom: 0.85rem;">Pool Dimensions &amp; Environment</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="poolVol">Pool Volume (m³ / Cubic Meters)</label>
+              <input type="number" id="poolVol" class="form-input-custom" value="100" step="10">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolType">Pool Location</label>
+                <select id="poolType" class="form-select-custom">
+                  <option value="outdoor" selected>Outdoor Pool</option>
+                  <option value="indoor">Indoor Pool</option>
+                </select>
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolAmb">Ambient Temp (°C)</label>
+                <input type="number" id="poolAmb" class="form-input-custom" value="20" step="1">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolT2">Target Pool Temp (°C)</label>
+                <input type="number" id="poolT2" class="form-input-custom" value="28" step="1">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="poolT1">Fresh Water Input (°C)</label>
+                <input type="number" id="poolT1" class="form-input-custom" value="15" step="1">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>Titanium Pool Quotation</span>
+              <span>🏊 Titanium Exchanger</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Heat Load Capacity</span>
+                <div class="calc-metric-val" id="poolKWVal">31.5 kW</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Initial Warmup</span>
+                <div class="calc-metric-val" id="poolFHVal">23.0 kW</div>
+              </div>
+            </div>
+
+            <table class="quote-bom-table">
+              <thead>
+                <tr>
+                  <th>Equipment Description</th>
+                  <th style="text-align: right;">Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="poolBomTableBody">
+                <tr>
+                  <td>VPHP 3500 Pool Heater (35 kW Titanium)</td>
+                  <td style="text-align: right;">₹ 1,95,000</td>
+                </tr>
+                <tr>
+                  <td>Titanium Water Heat Exchanger Circuit</td>
+                  <td style="text-align: right;">Included</td>
+                </tr>
+                <tr>
+                  <td>Freight &amp; Commissioning</td>
+                  <td style="text-align: right;">₹ 8,500</td>
+                </tr>
+                <tr class="quote-total-row">
+                  <td>Subtotal Excl. Tax</td>
+                  <td style="text-align: right;" id="poolSubtotalVal">₹ 2,03,500</td>
+                </tr>
+                <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+                  <td>Grand Total (Incl. 18% GST)</td>
+                  <td style="text-align: right; font-size: 1.15rem; color: #FFD700;" id="poolGrandTotalVal">₹ 2,40,130</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
+              </button>
+              <a href="#" id="poolWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
+              </a>
+              <button onclick="submitQuoteToVindsol('Swimming Pool & Spa')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 3: Residential Domestic Quote -->
+      <div class="calc-tab-pane" id="tab-dom-calc">
+        <div class="calc-grid-layout">
+          
+          <div class="calc-input-box">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: #15803D; margin-bottom: 0.85rem;">Residential Water Usage</h4>
+            
+            <div class="form-field-group">
+              <label class="form-label-custom" for="calcPeople">Family Size / Occupants</label>
+              <input type="number" id="calcPeople" class="form-input-custom" value="4" min="1" max="50">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" for="calcLitres">Daily Hot Water Demand (Liters)</label>
+              <input type="number" id="calcLitres" class="form-input-custom" value="200" step="50">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-field-group">
+                <label class="form-label-custom" for="calcHeaterType">Existing System</label>
+                <select id="calcHeaterType" class="form-select-custom">
+                  <option value="geyser" selected>Electric Geyser (0.9)</option>
+                  <option value="boiler">Diesel Boiler (0.7)</option>
+                  <option value="solar">Solar Backup (1.5)</option>
+                </select>
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom" for="calcTariff">Tariff (₹/kWh)</label>
+                <input type="number" id="calcTariff" class="form-input-custom" value="8.00" step="0.25">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-results-box">
+            <div class="calc-results-title">
+              <span>Domestic Monoblock Quote</span>
+              <span>🏠 Residential</span>
+            </div>
+
+            <div class="calc-metric-grid">
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Monthly Savings</span>
+                <div class="calc-metric-val" id="monthlySavingsVal" style="color: #86EFAC;">₹ 1,922</div>
+              </div>
+              <div class="calc-metric-card">
+                <span class="calc-metric-label">Est. Payback</span>
+                <div class="calc-metric-val" id="paybackPeriodVal">2.8 Years</div>
+              </div>
+            </div>
+
+            <table class="quote-bom-table">
+              <thead>
+                <tr>
+                  <th>Equipment Description</th>
+                  <th style="text-align: right;">Amount (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="domBomTableBody">
+                <tr>
+                  <td>VDHP 4500 MB All-in-One (200L)</td>
+                  <td style="text-align: right;">₹ 65,000</td>
+                </tr>
+                <tr>
+                  <td>Standard Installation &amp; Piping Kit</td>
+                  <td style="text-align: right;">₹ 4,500</td>
+                </tr>
+                <tr class="quote-total-row">
+                  <td>Subtotal Excl. Tax</td>
+                  <td style="text-align: right;" id="domSubtotalVal">₹ 69,500</td>
+                </tr>
+                <tr class="quote-total-row" style="background: rgba(255, 215, 0, 0.2); color: #FFFFFF;">
+                  <td>Grand Total (Incl. 18% GST)</td>
+                  <td style="text-align: right; font-size: 1.15rem; color: #FFD700;" id="domGrandTotalVal">₹ 82,010</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.5rem; margin-top: 1.25rem;">
+              <button onclick="window.print()" class="btn-buy-secondary" style="background: rgba(255,255,255,0.2); color: #FFF; border: 1px solid #FFF; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                🖨️ Print PDF
+              </button>
+              <a href="#" id="domWaBtn" target="_blank" class="btn-buy-primary" style="background: #25D366; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center;">
+                📱 WhatsApp
+              </a>
+              <button onclick="submitQuoteToVindsol('Residential Domestic')" class="btn-buy-primary" style="background: #10B981; color: #FFF; border: none; padding: 0.6rem; font-size: 0.8rem; justify-content: center; font-weight: 900;">
+                📩 Submit to VINDSOL
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 4: Custom Special Products Engineering Request -->
+      <div class="calc-tab-pane" id="tab-custom-calc">
+        <div style="background: #022C1E; color: #FFF; border-radius: 16px; padding: 2rem;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <span style="background: #10B981; color: #022C1E; font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.75rem; border-radius: 99px; text-transform: uppercase;">
+              🛠️ Custom Special Engineering Request
+            </span>
+            <h3 style="font-size: 1.5rem; font-weight: 900; color: #FFF; margin-top: 0.5rem;">Need a Modified or Special Heat Pump Product?</h3>
+            <p style="font-size: 0.9rem; color: #A7F3D0;">Enter your custom site specifications below. Our Factory Engineering Team will design and prepare a custom quotation.</p>
+          </div>
+
+          <form onsubmit="submitCustomSpecialRequest(event)" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Custom Requirement Name / Application</label>
+              <input type="text" id="customAppName" required class="form-input-custom" placeholder="e.g. Dairy Pasteurization 85°C System / Resort Olympic Pool">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Target Heating Capacity (kW or Liters/Day)</label>
+              <input type="text" id="customCapacity" required class="form-input-custom" placeholder="e.g. 150 kW or 15,000 Liters/Day">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Target Water Temperature (°C)</label>
+              <input type="text" id="customTemp" required class="form-input-custom" placeholder="e.g. 75°C to 85°C">
+            </div>
+
+            <div class="form-field-group">
+              <label class="form-label-custom" style="color: #E2E8F0;">Special Material / Fluid Requirements</label>
+              <select id="customFluid" class="form-select-custom">
+                <option value="Titanium PVC Shell">100% Pure Titanium PVC Shell (Pool/Saltwater)</option>
+                <option value="Quartz Glass Lined Tank">Quartz Glass Enamel Internal Tank (Hard Water)</option>
+                <option value="SS316L Stainless Steel">SS316L Stainless Steel Heat Exchanger (Dairy/Food)</option>
+                <option value="High Temp EVI R134a">High Temp EVI R134a Dual Compressor Circuit</option>
+              </select>
+            </div>
+
+            <div class="form-field-group" style="grid-column: span 2;">
+              <label class="form-label-custom" style="color: #E2E8F0;">Detailed Site Notes &amp; Engineering Constraints</label>
+              <textarea id="customNotes" class="form-input-custom" rows="3" placeholder="Describe roof space, electrical phase (Single 230V / 3-Phase 415V), plumbing diameter, or existing boiler backup details..."></textarea>
+            </div>
+
+            <div style="grid-column: span 2; margin-top: 0.5rem;">
+              <button type="submit" class="btn-amazon-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #047857 100%);">
+                📩 Submit Custom Product Specification to VINDSOL Factory →
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
 </body>
 </html>
