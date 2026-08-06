@@ -277,6 +277,10 @@ img {
   box-shadow: 0 6px 18px rgba(4, 78, 54, 0.2);
 }
 
+.mobile-toggle {
+  display: none !important;
+}
+
 /* Sector Filter Bar inside Product Range */
 .product-category-filter-bar {
   display: flex;
