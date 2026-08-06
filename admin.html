@@ -528,10 +528,12 @@
       renderAdminProducts();
     }
 
-    function saveAdminSettings(e) {
-      e.preventDefault();
-      alert("✓ Factory settings updated successfully!");
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAdminAuth();
+      renderInquiries();
+      renderAdminProducts();
+    });
+  </script>
 
   <!-- FLOATING CALCULATOR MODAL & TRIGGER BUTTON -->
   <button class="floating-calc-trigger open-calc-modal" aria-label="Open Savings Calculator">
@@ -946,6 +948,5 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
 </body>
 </html>

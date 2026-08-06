@@ -666,7 +666,7 @@ function initHeroAdSlider() {
 /* -------------------------------------------------------------------------- */
 /* 6. Global In-Page Product Quick-View Spec Modal (No Page Reload Needed)   */
 /* -------------------------------------------------------------------------- */
-const VINDSOL_PRODUCT_CATALOG = {
+var VINDSOL_PRODUCT_CATALOG = {
   'dhw': {
     title: 'All-in-One Domestic Hot Water Heat Pump',
     category: 'AIR SOURCE &bull; RESIDENTIAL MONOBLOCK',

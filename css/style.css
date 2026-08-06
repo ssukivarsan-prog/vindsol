@@ -2181,13 +2181,13 @@ img {
 }
 
 /* ==========================================================================
-   FOOTER (2026 MODERN ALIGNED CLEAN-TECH DESIGN)
+   FOOTER (2026 MODERN COMPACT CLEAN-TECH DESIGN)
    ========================================================================== */
 .footer {
   background: linear-gradient(180deg, #022C1E 0%, #011D14 100%);
   color: #CBD5E1;
-  padding: 4.5rem 0 2rem 0;
-  font-size: 0.9rem;
+  padding: 2.25rem 0 1.25rem 0;
+  font-size: 0.85rem;
   border-top: 3px solid #10B981;
   position: relative;
   overflow: hidden;
@@ -2195,23 +2195,23 @@ img {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.1fr 1.25fr;
-  gap: 2.5rem;
-  margin-bottom: 3rem;
+  grid-template-columns: 1.35fr 1.05fr 1.05fr 1.25fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
   align-items: start;
 }
 
 .footer-col-title {
-  font-size: 1.1rem;
+  font-size: 0.98rem;
   font-weight: 900;
   color: #FFFFFF !important;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.65rem;
   letter-spacing: 0.02em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
 }
 
 .footer-col-title::after {
@@ -2219,8 +2219,8 @@ img {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 36px;
-  height: 2.5px;
+  width: 28px;
+  height: 2px;
   background: #10B981;
   border-radius: 2px;
 }
@@ -2229,7 +2229,7 @@ img {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.38rem;
   padding: 0;
   margin: 0;
 }
@@ -2244,11 +2244,11 @@ img {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.88rem;
+  gap: 0.45rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  transition: all 0.25 ease;
-  line-height: 1.5;
+  transition: all 0.2s ease;
+  line-height: 1.35;
 }
 
 .footer-links a:hover {
@@ -2260,29 +2260,29 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   flex-shrink: 0;
 }
 
 .footer-wa-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: #25D366;
   color: #FFFFFF !important;
   font-weight: 800;
-  font-size: 0.82rem;
-  padding: 0.5rem 1rem;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 99px;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
   transition: transform 0.2s ease;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .footer-wa-pill:hover {
@@ -2293,32 +2293,32 @@ img {
 .footer-trust-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
 }
 
 .footer-badge-item {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
-  padding: 0.3rem 0.65rem;
-  font-size: 0.75rem;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #A7F3D0;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 1.75rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.85rem;
+  gap: 0.75rem;
+  font-size: 0.8rem;
   color: #94A3B8;
 }
 
