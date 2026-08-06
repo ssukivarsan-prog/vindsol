@@ -48,38 +48,84 @@ function initDynamicAdminContent() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Sector Filter for Interested Fields (Schools, Hotels, Pools, etc.)          */
+/* 2-Tier Hierarchical Product Category & Sub-Topic Filtering System         */
 /* -------------------------------------------------------------------------- */
 function initSectorFilter() {
-  const filterBtns = document.querySelectorAll('.sector-filter-btn');
+  const mainCatBtns = document.querySelectorAll('.main-cat-btn');
+  const subCatBtns = document.querySelectorAll('.sub-cat-btn, .sector-filter-btn');
   const cards = document.querySelectorAll('.grand-product-card');
 
-  if (!filterBtns.length || !cards.length) return;
+  if (!cards.length) return;
 
-  filterBtns.forEach(btn => {
+  function filterCards() {
+    const activeMainBtn = document.querySelector('.main-cat-btn.active');
+    const activeSubBtn = document.querySelector('.sub-cat-pill-group[style*="display: flex"] .sub-cat-btn.active, .sector-filter-btn.active');
+
+    const selectedMain = activeMainBtn ? activeMainBtn.getAttribute('data-main-cat') : 'all';
+    const selectedSub = activeSubBtn ? (activeSubBtn.getAttribute('data-sub-cat') || activeSubBtn.getAttribute('data-sector')) : 'all';
+
+    cards.forEach(card => {
+      const cardMain = card.getAttribute('data-main-cat') || '';
+      const cardSub = card.getAttribute('data-sub-cat') || '';
+      const cardSectors = (card.getAttribute('data-sectors') || '').toLowerCase();
+
+      const matchesMain = (selectedMain === 'all' || cardMain === selectedMain);
+      const matchesSub = (selectedSub === 'all' || cardSub === selectedSub || cardSectors.includes(selectedSub));
+
+      if (matchesMain && matchesSub) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Tier 1: Main Category Buttons Click Handler
+  mainCatBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      mainCatBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const targetSector = btn.getAttribute('data-sector') || 'all';
+      const targetMain = btn.getAttribute('data-main-cat');
 
-      cards.forEach(card => {
-        const cardSectors = (card.getAttribute('data-sectors') || '').toLowerCase();
-        if (targetSector === 'all' || cardSectors.includes(targetSector)) {
-          card.style.display = 'flex';
+      // Toggle Sub-Topic Pill Groups
+      document.querySelectorAll('.sub-cat-pill-group').forEach(group => {
+        const groupMain = group.getAttribute('data-for-main');
+        if (targetMain === 'all' || groupMain === targetMain) {
+          group.style.display = 'flex';
         } else {
-          card.style.display = 'none';
+          group.style.display = 'none';
         }
       });
+
+      filterCards();
     });
   });
 
-  // Auto-activate filter button if URL parameter ?sector=... is present
+  // Tier 2: Sub-Topic Buttons Click Handler
+  subCatBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.sub-cat-btn, .sector-filter-btn').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+      filterCards();
+    });
+  });
+
+  // Query parameter auto-activation (?cat=... or ?sub=... or ?sector=...)
   const urlParams = new URLSearchParams(window.location.search);
-  const paramSector = urlParams.get('sector');
-  if (paramSector) {
-    const targetBtn = document.querySelector(`.sector-filter-btn[data-sector="${paramSector}"]`);
-    if (targetBtn) targetBtn.click();
+  const paramCat = urlParams.get('cat');
+  const paramSub = urlParams.get('sub') || urlParams.get('sector');
+
+  if (paramCat) {
+    const targetMainBtn = document.querySelector(`.main-cat-btn[data-main-cat="${paramCat}"]`);
+    if (targetMainBtn) targetMainBtn.click();
+  }
+  if (paramSub) {
+    const targetSubBtn = document.querySelector(`.sub-cat-btn[data-sub-cat="${paramSub}"], .sector-filter-btn[data-sector="${paramSub}"]`);
+    if (targetSubBtn) targetSubBtn.click();
   }
 }
 

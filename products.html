@@ -61,35 +61,64 @@
     </div>
   </section>
 
-  <!-- AMAZON-STYLE PRODUCT GRID CATALOG -->
-  <section style="padding: 4.5rem 0;">
+  <!-- AMAZON-STYLE PRODUCT GRID CATALOG WITH 2-TIER HIERARCHICAL NAVIGATION -->
+  <section style="padding: 4rem 0;">
     <div class="container">
       
-      <div class="section-header-compact">
-        <h2>Explore Products By Interested Field &amp; Sector</h2>
-        <p>Select your application sector below to filter relevant thermal energy solutions</p>
+      <div class="section-header-compact" style="text-align: center; margin-bottom: 2rem;">
+        <span class="blueprint-tag">OFFICIAL FACTORY CATALOGUE</span>
+        <h2 style="font-size: 2.2rem; font-weight: 900; color: var(--color-primary); margin-top: 0.35rem;">Explore By Product Category &amp; Technology</h2>
+        <p style="color: var(--text-secondary); max-width: 650px; margin: 0.35rem auto 0 auto;">Select a main category and sub-topic below to view technical specifications, image cutouts, and wholesale factory pricing</p>
       </div>
 
-      <!-- SECTOR FILTER BAR FOR CUSTOMER FIELD INTERESTS -->
-      <div class="product-category-filter-bar" id="sectorFilterBar" style="margin-top: 1.5rem;">
-        <button class="sector-filter-btn active" data-sector="all">All Fields &amp; Sectors</button>
-        <button class="sector-filter-btn" data-sector="schools">🏫 Schools &amp; Colleges</button>
-        <button class="sector-filter-btn" data-sector="hotels">🏨 Hotels &amp; Resorts</button>
-        <button class="sector-filter-btn" data-sector="hospitals">🏥 Hospitals &amp; Healthcare</button>
-        <button class="sector-filter-btn" data-sector="pools">🏊 Swimming Pools &amp; Spa</button>
-        <button class="sector-filter-btn" data-sector="industrial">🏭 Industrial &amp; Dairies</button>
-        <button class="sector-filter-btn" data-sector="residential">🏡 Residential Villas</button>
+      <!-- TIER 1: MAIN CATEGORY TABS (FROM IMAGE 2) -->
+      <div class="main-category-tab-bar">
+        <button class="main-cat-btn active" data-main-cat="all">🔘 All Categories</button>
+        <button class="main-cat-btn" data-main-cat="air-source">🔥 Air Source Heat Pump</button>
+        <button class="main-cat-btn" data-main-cat="thermo">☀️ Thermodynamics Heat Pumps</button>
+        <button class="main-cat-btn" data-main-cat="storage-tank">🛡️ Quartz Blue Glass Lined Storage Tank</button>
+        <button class="main-cat-btn" data-main-cat="safety-acc">⚙️ Safety Accessories For Hot water Tank</button>
       </div>
 
-      <div class="grand-products-grid" style="margin-top: 2.5rem;">
+      <!-- TIER 2: SUB-TOPIC FILTER PILL GROUPS (FROM IMAGES 3, 4, 5) -->
+      <div class="sub-category-filter-wrapper" style="margin-top: 1.25rem;">
         
-        <!-- Card 1: Domestic Monoblock -->
-        <div class="grand-product-card" id="dhw" data-sectors="residential hostels">
+        <!-- Sub-Group 1: Air Source Heat Pump Subtopics (Image 3) -->
+        <div class="sub-cat-pill-group product-category-filter-bar" data-for-main="air-source" style="display: flex;">
+          <button class="sub-cat-btn sector-filter-btn active" data-sub-cat="all">All Air Source</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="dhw">🏠 Domestic Hot Water Heat Pumps (DHW)</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="commercial">🏢 Commercial Industrial Heat Pumps</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="pool">🏊 Swimming pool Heat Pumps</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="spa">♨️ Spa and pool Heat Pumps</button>
+        </div>
+
+        <!-- Sub-Group 2: Thermodynamics Heat Pumps Subtopics (Image 4) -->
+        <div class="sub-cat-pill-group product-category-filter-bar" data-for-main="thermo" style="display: flex;">
+          <button class="sub-cat-btn sector-filter-btn active" data-sub-cat="all">All Thermodynamics</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="thermo-tech">📖 About Thermodynamics heat pump Technology</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="thermo-allinone">☀️ All-in-one Thermodynamics Solar Heat Pump</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="thermo-commercial">🏭 Commercial thermodynamic Solar Heat Pumps</button>
+        </div>
+
+        <!-- Sub-Group 3: Safety Accessories Subtopics (Image 5) -->
+        <div class="sub-cat-pill-group product-category-filter-bar" data-for-main="safety-acc" style="display: flex;">
+          <button class="sub-cat-btn sector-filter-btn active" data-sub-cat="all">All Safety Accessories</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="vacuum-relief">🛡️ Vacuum Relief Valve</button>
+          <button class="sub-cat-btn sector-filter-btn" data-sub-cat="tp-relief">⚠️ Temperature &amp; Pressure Relief Valve</button>
+        </div>
+
+      </div>
+
+      <!-- GRAND PRODUCTS GRID -->
+      <div class="grand-products-grid" style="margin-top: 2.25rem;">
+        
+        <!-- CARD 1: Domestic Hot Water Heat Pumps (DHW) (Image 3) -->
+        <div class="grand-product-card" id="dhw" data-main-cat="air-source" data-sub-cat="dhw" data-sectors="residential hostels">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/dhw-monoblock.jpg" alt="Vindsol Domestic Monoblock Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/dhw-monoblock.jpg" alt="Domestic Hot Water Heat Pumps (DHW)" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">AIR SOURCE &bull; DOMESTIC RANGE</span>
+            <span class="grand-product-tag">AIR SOURCE &bull; DOMESTIC DHW</span>
             <h3 class="grand-product-title">Domestic Hot Water Heat Pumps (DHW)</h3>
             <div class="product-rating-stars">★★★★★ <span>4.9 (142 Factory Reviews)</span></div>
 
@@ -98,10 +127,10 @@
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Integrated Storage Tank: 150L to 1000L</li>
-              <li>Saginomya Electronic Expansion Valve</li>
+              <li>Tank Capacity: 150L to 500L Monoblock</li>
+              <li>Saginomya EEV &amp; Panasonic Rotary Compressor</li>
               <li>Ultra-Quiet Operation (&lt;48 dBA)</li>
-              <li>COP Rating up to 5.83x</li>
+              <li>High COP Rating up to 5.83x</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -111,13 +140,13 @@
           </div>
         </div>
 
-        <!-- Card 2: Commercial V-Type -->
-        <div class="grand-product-card" id="commercial" data-sectors="hotels hospitals schools industrial hostels">
+        <!-- CARD 2: Commercial Industrial Heat Pumps (Image 3) -->
+        <div class="grand-product-card" id="commercial" data-main-cat="air-source" data-sub-cat="commercial" data-sectors="hotels hospitals schools industrial hostels">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/vtype-commercial.jpg" alt="Vindsol Commercial V-Type Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/vtype-commercial.jpg" alt="Commercial Industrial Heat Pumps" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">AIR SOURCE &bull; COMMERCIAL RANGE</span>
+            <span class="grand-product-tag">AIR SOURCE &bull; COMMERCIAL INDUSTRIAL</span>
             <h3 class="grand-product-title">Commercial Industrial Heat Pumps</h3>
             <div class="product-rating-stars">★★★★★ <span>4.9 (98 Factory Reviews)</span></div>
 
@@ -126,10 +155,10 @@
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Thermal Capacity: 35kW to 150kW</li>
-              <li>Copeland Scroll Multi-Compressor V-Type</li>
-              <li>Up to 75% Electricity Bill Savings</li>
-              <li>Ideal for Hotels, Hospitals &amp; Hostels</li>
+              <li>Thermal Capacity: 35kW to 150kW Modular V-Type</li>
+              <li>Copeland Scroll Multi-Compressor Independent Circuits</li>
+              <li>Up to 75% Electricity Bill Reduction</li>
+              <li>Hotels, Hospitals &amp; Hostels Hot Water</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -139,10 +168,10 @@
           </div>
         </div>
 
-        <!-- Card 3: Swimming Pool Heat Pump -->
-        <div class="grand-product-card" id="pool" data-sectors="pools hotels schools">
+        <!-- CARD 3: Swimming pool Heat Pumps (Image 3) -->
+        <div class="grand-product-card" id="pool" data-main-cat="air-source" data-sub-cat="pool" data-sectors="pools hotels schools">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/swimming-pool-titanium.png" alt="Vindsol Swimming Pool Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/swimming-pool-titanium.png" alt="Swimming pool Heat Pumps" class="grand-product-img">
           </div>
           <div class="grand-product-body">
             <span class="grand-product-tag">AIR SOURCE &bull; SWIMMING POOLS</span>
@@ -155,9 +184,9 @@
 
             <ul class="product-specs-mini-list">
               <li>100% Pure Titanium PVC Shell Heat Exchanger</li>
-              <li>Maintains 28°C Heated Pool Water All Year</li>
+              <li>Maintains 28°C Heated Pool Water Year-Round</li>
               <li>Chlorine &amp; Salt Water Anti-Corrosion</li>
-              <li>COP 4.25 - 6.0x High Energy Efficiency</li>
+              <li>High COP 4.25x - 6.00x Rating</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -167,10 +196,10 @@
           </div>
         </div>
 
-        <!-- Card 4: Spa & Jacuzzi Pool -->
-        <div class="grand-product-card" id="spa" data-sectors="pools hotels residential">
+        <!-- CARD 4: Spa and pool Heat Pumps (Image 3) -->
+        <div class="grand-product-card" id="spa" data-main-cat="air-source" data-sub-cat="spa" data-sectors="pools hotels residential">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/spa-pool-heater.png" alt="Vindsol Spa & Jacuzzi Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/spa-pool-heater.png" alt="Spa and pool Heat Pumps" class="grand-product-img">
           </div>
           <div class="grand-product-body">
             <span class="grand-product-tag">AIR SOURCE &bull; SPA &amp; JACUZZI</span>
@@ -182,8 +211,8 @@
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Designed for 40°C High Temp Spa Water</li>
-              <li>Compact Footprint for Resort Patios</li>
+              <li>Designed for 40°C High Temp Hydrotherapy Spa Water</li>
+              <li>Compact Footprint for Resort Patios &amp; Spas</li>
               <li>Quiet Dual Rotary Compressor</li>
               <li>Automated Defrost &amp; Flow Control</li>
             </ul>
@@ -195,53 +224,53 @@
           </div>
         </div>
 
-        <!-- Card 5: 80°C High Temp Industrial -->
-        <div class="grand-product-card" id="high-temp" data-sectors="industrial">
+        <!-- CARD 5: About Thermodynamics heat pump Technology (Image 4) -->
+        <div class="grand-product-card" id="thermo-tech" data-main-cat="thermo" data-sub-cat="thermo-tech" data-sectors="residential hotels industrial">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/high-temp-industrial.jpg" alt="Vindsol 80C High Temp Industrial Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/thermo-solar-collector.png" alt="About Thermodynamics heat pump Technology" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">AIR SOURCE &bull; HIGH TEMP INDUSTRIAL</span>
-            <h3 class="grand-product-title">80°C High Temp Industrial Systems</h3>
-            <div class="product-rating-stars">★★★★★ <span>4.9 (52 Factory Reviews)</span></div>
+            <span class="grand-product-tag">THERMODYNAMICS &bull; TECHNOLOGY</span>
+            <h3 class="grand-product-title">About Thermodynamics heat pump Technology</h3>
+            <div class="product-rating-stars">★★★★★ <span>4.9 (120 Tech Reviews)</span></div>
 
             <div class="amazon-price-tag">
-              ₹ 1,80,000 - ₹ 4,20,000 <small>/ Unit</small>
+              Next-Gen Solar Enthalpy <small>/ 24x7 Operation</small>
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Extreme High Temp Output: Up to 80°C</li>
-              <li>Replaces Industrial Diesel &amp; Electric Boilers</li>
-              <li>Dairy, Textile &amp; Sterilization Wash</li>
-              <li>R134a EVI Dual Injection Compressor Circuit</li>
+              <li>Absorbs Heat from Ambient Air, Rain &amp; Wind 24/7</li>
+              <li>Lightweight Anodized Aluminum Panel (8 kg)</li>
+              <li>No Direct Sunlight Required to Operate</li>
+              <li>Zero Backup Heating Element Needed</li>
             </ul>
 
             <div class="grand-product-footer">
-              <a href="product-detail.html?id=high-temp" class="btn-amazon-primary">View Product Details →</a>
+              <a href="sustainability.html" class="btn-amazon-primary">Learn Technology →</a>
               <a href="contact.html#quote" class="btn-amazon-secondary">Get Quote</a>
             </div>
           </div>
         </div>
 
-        <!-- Card 6: All-in-One Thermodynamic Solar -->
-        <div class="grand-product-card" id="thermo-allinone" data-sectors="residential hotels">
+        <!-- CARD 6: All-in-one Thermodynamics Solar Heat Pump (Image 4) -->
+        <div class="grand-product-card" id="thermo-allinone" data-main-cat="thermo" data-sub-cat="thermo-allinone" data-sectors="residential hotels">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/thermo-allinone-solar.jpg" alt="Vindsol Thermodynamic Solar Heat Pump" class="grand-product-img">
+            <img src="assets/images/products/thermo-allinone-solar.png" alt="All-in-one Thermodynamics Solar Heat Pump" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">THERMODYNAMIC &bull; SOLAR RANGE</span>
+            <span class="grand-product-tag">THERMODYNAMICS &bull; ALL-IN-ONE SOLAR</span>
             <h3 class="grand-product-title">All-in-one Thermodynamics Solar Heat Pump</h3>
             <div class="product-rating-stars">★★★★★ <span>4.8 (110 Factory Reviews)</span></div>
 
             <div class="amazon-price-tag">
-              ₹ 65,000 - ₹ 1,15,000 <small>/ Unit</small>
+              ₹ 68,000 - ₹ 1,15,000 <small>/ Unit</small>
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Dual Solar Panel + Ambient Air Heat Source</li>
-              <li>Heats Water Day &amp; Night in Rain or Sunshine</li>
-              <li>Lightweight Aluminum Solar Collector Panel</li>
-              <li>COP up to 5.50x Ultra High Efficiency</li>
+              <li>Integrated 200L / 300L Tank + 1x Solar Panel</li>
+              <li>24-Hour Hot Water Supply at 55°C</li>
+              <li>Ultra-Low Energy Draw (350W - 500W Input)</li>
+              <li>Zero Roof Glass Damage Risk</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -251,25 +280,53 @@
           </div>
         </div>
 
-        <!-- Card 7: Quartz Blue Glass Lined Storage Tank -->
-        <div class="grand-product-card" id="storage-tanks" data-sectors="hotels hospitals industrial residential">
+        <!-- CARD 7: Commercial thermodynamic Solar Heat Pumps (Image 4) -->
+        <div class="grand-product-card" id="thermo-commercial" data-main-cat="thermo" data-sub-cat="thermo-commercial" data-sectors="hotels hospitals industrial">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/quartz-glass-tank.png" alt="Vindsol Glass Lined Storage Tank" class="grand-product-img">
+            <img src="assets/images/products/thermo-commercial-array.png" alt="Commercial thermodynamic Solar Heat Pumps" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">TANKS &bull; STORAGE RANGE</span>
+            <span class="grand-product-tag">THERMODYNAMICS &bull; COMMERCIAL SOLAR</span>
+            <h3 class="grand-product-title">Commercial thermodynamic Solar Heat Pumps</h3>
+            <div class="product-rating-stars">★★★★★ <span>4.9 (76 Factory Reviews)</span></div>
+
+            <div class="amazon-price-tag">
+              ₹ 1,85,000 - ₹ 4,50,000 <small>/ System</small>
+            </div>
+
+            <ul class="product-specs-mini-list">
+              <li>Multi-Panel Solar Field (4 to 40 Panel Array)</li>
+              <li>Commercial Daily Output: 2,000L to 20,000L</li>
+              <li>Heavy-Duty R134a Industrial Compressor Block</li>
+              <li>Payback Period Under 1.8 Years</li>
+            </ul>
+
+            <div class="grand-product-footer">
+              <a href="product-detail.html?id=thermo-commercial" class="btn-amazon-primary">View Product Details →</a>
+              <a href="contact.html#quote" class="btn-amazon-secondary">Get Quote</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 8: Quartz Blue Glass Lined Storage Tank (Image 2 Main 3) -->
+        <div class="grand-product-card" id="storage-tank" data-main-cat="storage-tank" data-sub-cat="storage-tank" data-sectors="hotels hospitals industrial residential">
+          <div class="grand-product-img-wrap">
+            <img src="assets/images/products/quartz-glass-tank.png" alt="Quartz Blue Glass Lined Storage Tank" class="grand-product-img">
+          </div>
+          <div class="grand-product-body">
+            <span class="grand-product-tag">STORAGE TANKS &bull; QUARTZ GLASS LINED</span>
             <h3 class="grand-product-title">Quartz Blue Glass Lined Storage Tank</h3>
             <div class="product-rating-stars">★★★★★ <span>4.9 (78 Factory Reviews)</span></div>
 
             <div class="amazon-price-tag">
-              ₹ 25,000 - ₹ 65,000 <small>/ Tank</small>
+              ₹ 32,000 - ₹ 1,45,000 <small>/ Tank</small>
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>German Quartz Blue Glass Enamel Lining</li>
+              <li>Fused Quartz Blue Glass Enamel Lining (870°C DIN 4753)</li>
               <li>50mm High-Density PUF Thermal Insulation</li>
-              <li>Resists Hard Water &amp; Scaling Corrosion</li>
-              <li>Capacity: 200L to 1000L</li>
+              <li>Sacrificial Magnesium Anode for Hard Water Scale Protection</li>
+              <li>Capacities: 100L to 5000L (Rated 7 to 10 Bar)</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -279,25 +336,25 @@
           </div>
         </div>
 
-        <!-- Card 8: Vacuum Relief Valve -->
-        <div class="grand-product-card" id="vacuum-valve" data-sectors="hotels industrial residential">
+        <!-- CARD 9: Vacuum Relief Valve (Image 5) -->
+        <div class="grand-product-card" id="vacuum-relief" data-main-cat="safety-acc" data-sub-cat="vacuum-relief" data-sectors="hotels industrial residential">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/vacuum-relief-valve.png" alt="Vindsol Vacuum Relief Valve" class="grand-product-img">
+            <img src="assets/images/products/vacuum-relief-valve.png" alt="Vacuum Relief Valve" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">SAFETY ACCESSORIES &bull; VACUUM PROTECTION</span>
+            <span class="grand-product-tag">SAFETY ACCESSORIES &bull; VACUUM RELIEF</span>
             <h3 class="grand-product-title">Vacuum Relief Valve</h3>
             <div class="product-rating-stars">★★★★★ <span>4.9 (62 Factory Reviews)</span></div>
 
             <div class="amazon-price-tag">
-              ₹ 4,500 - ₹ 8,500 <small>/ Valve</small>
+              ₹ 2,800 <small>/ Unit Valve</small>
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Prevents Vacuum Collapse in Storage Tanks</li>
-              <li>High Temperature Resistant SS304 / Brass Construction</li>
-              <li>Automatic Air Inlet &amp; Pressure Balance</li>
-              <li>Rated Operating Pressure: Up to 7 Bar</li>
+              <li>Prevents Vacuum Inner Tank Collapse During Drainage</li>
+              <li>Forged Brass Body (DN15 / DN20 BSP Thread)</li>
+              <li>Automatic Air Inlet &amp; Negative Pressure Relief</li>
+              <li>Operating Pressure: Up to 10 Bar | Max Temp: 110°C</li>
             </ul>
 
             <div class="grand-product-footer">
@@ -307,25 +364,25 @@
           </div>
         </div>
 
-        <!-- Card 9: Temperature & Pressure Relief Valve -->
-        <div class="grand-product-card" id="tp-valve" data-sectors="hotels industrial residential">
+        <!-- CARD 10: Temperature & Pressure Relief Valve (Image 5) -->
+        <div class="grand-product-card" id="tp-relief" data-main-cat="safety-acc" data-sub-cat="tp-relief" data-sectors="hotels industrial residential">
           <div class="grand-product-img-wrap">
-            <img src="assets/images/products/tp-relief-valve.png" alt="Vindsol T&P Relief Valve" class="grand-product-img">
+            <img src="assets/images/products/tp-relief-valve.png" alt="Temperature & Pressure Relief Valve" class="grand-product-img">
           </div>
           <div class="grand-product-body">
-            <span class="grand-product-tag">SAFETY ACCESSORIES &bull; DUAL DISCHARGE</span>
+            <span class="grand-product-tag">SAFETY ACCESSORIES &bull; T&amp;P RELIEF</span>
             <h3 class="grand-product-title">Temperature &amp; Pressure Relief Valve</h3>
             <div class="product-rating-stars">★★★★★ <span>4.9 (84 Factory Reviews)</span></div>
 
             <div class="amazon-price-tag">
-              ₹ 6,500 - ₹ 12,500 <small>/ Valve</small>
+              ₹ 3,500 <small>/ Unit Valve</small>
             </div>
 
             <ul class="product-specs-mini-list">
-              <li>Dual Protection: Discharges at 99°C or 7 Bar</li>
-              <li>Heavy-Duty Bronze Body with Stainless Steel Spring</li>
-              <li>Essential Safety Valve for Hot Water Storage Vessels</li>
-              <li>ASME &amp; ISO Factory Certified</li>
+              <li>Dual Protection: Discharges at 99°C or 7 Bar Overpressure</li>
+              <li>Bronze Body with Stainless Steel Spring &amp; EPDM Seal</li>
+              <li>Manual Testing Lever for Routine Safety Inspections</li>
+              <li>Mandatory Safety Valve for Sealed Hot Water Vessels</li>
             </ul>
 
             <div class="grand-product-footer">
