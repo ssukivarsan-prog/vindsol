@@ -11,7 +11,41 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroAdSlider();
   initProductQuickViewModal();
   initSectorFilter();
+  initDynamicAdminContent();
 });
+
+/* -------------------------------------------------------------------------- */
+/* Dynamic Sitewide Admin Content Synchronizer                                */
+/* -------------------------------------------------------------------------- */
+function initDynamicAdminContent() {
+  // 1. Sitewide Announcement Banner Bar
+  try {
+    const bannerData = JSON.parse(localStorage.getItem('vindsol_site_banner') || '{}');
+    if (bannerData && bannerData.active && bannerData.text) {
+      let existingBanner = document.getElementById('vindsolDynamicBanner');
+      if (!existingBanner) {
+        existingBanner = document.createElement('div');
+        existingBanner.id = 'vindsolDynamicBanner';
+        existingBanner.style.cssText = 'background: linear-gradient(90deg, #10B981 0%, #047857 100%); color: #FFFFFF; text-align: center; padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 999;';
+        document.body.prepend(existingBanner);
+      }
+      existingBanner.innerHTML = `<span>${bannerData.text}</span>`;
+    }
+  } catch(e) {}
+
+  // 2. Home Hero Headline & Sub-headline
+  try {
+    const heroData = JSON.parse(localStorage.getItem('vindsol_hero_content') || '{}');
+    if (heroData && heroData.title) {
+      const heroTitleEl = document.querySelector('.hero-title, .hero-content h1');
+      if (heroTitleEl) heroTitleEl.textContent = heroData.title;
+    }
+    if (heroData && heroData.sub) {
+      const heroSubEl = document.querySelector('.hero-subtitle, .hero-content p');
+      if (heroSubEl) heroSubEl.textContent = heroData.sub;
+    }
+  } catch(e) {}
+}
 
 /* -------------------------------------------------------------------------- */
 /* Sector Filter for Interested Fields (Schools, Hotels, Pools, etc.)          */

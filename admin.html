@@ -37,76 +37,79 @@
     <!-- SIDEBAR NAVIGATION -->
     <aside class="admin-sidebar">
       <div>
-        <div style="font-size: 0.75rem; font-weight: 800; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+        <div style="font-size: 0.7rem; font-weight: 900; color: #A7F3D0; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.85rem; padding-left: 0.5rem;">
           CONTROL PANELS
         </div>
         
         <div class="admin-nav-item active" onclick="showAdminTab('tabInquiries', this)">
-          📥 Customer Inquiries &amp; Form Submissions
+          📥 Inquiries
         </div>
         <div class="admin-nav-item" onclick="showAdminTab('tabProducts', this)">
-          📦 Product Catalog &amp; Sizing Management
+          📦 Catalog
         </div>
         <div class="admin-nav-item" onclick="showAdminTab('tabAnalytics', this)">
-          📊 Sizing Calculator &amp; Conversion Analytics
+          📊 Analytics
+        </div>
+        <div class="admin-nav-item" onclick="showAdminTab('tabContent', this)">
+          📝 Content
         </div>
         <div class="admin-nav-item" onclick="showAdminTab('tabSettings', this)">
-          ⚙️ Factory Pricing &amp; GST Settings
+          ⚙️ Settings
         </div>
       </div>
 
-      <div style="font-size: 0.78rem; color: #64748B; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
-        VINDSOL Administrative System v2.6<br>
-        Mechzephyr Engineering Pvt. Ltd
+      <div style="font-size: 0.75rem; color: #A7F3D0; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.15); padding-left: 0.5rem;">
+        VINDSOL Admin v2.6<br>
+        Mechzephyr Eng. Pvt Ltd
       </div>
     </aside>
 
     <!-- MAIN CONTENT AREA -->
     <main class="admin-content">
       
-      <!-- TAB 1: CUSTOMER INQUIRIES & FORM SUBMISSIONS -->
+      <!-- TAB 1: INQUIRIES -->
       <div id="tabInquiries" class="admin-tab-pane">
         
         <div class="admin-header-bar">
           <div>
-            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Customer Inquiries &amp; Quotation Requests</h1>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Manage incoming customer quote forms, sizing calculator leads, and custom engineering requests</p>
+            <h1 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Customer Inquiries &amp; Quotation Requests</h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Manage incoming customer quote forms, sizing calculator leads, and custom engineering requests</p>
           </div>
           <button onclick="exportInquiriesCSV()" class="btn-amazon-secondary" style="font-size: 0.85rem; cursor: pointer;">
-            📥 Export to CSV
+            📥 Export CSV
           </button>
         </div>
 
         <!-- STATS OVERVIEW CARDS -->
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.75rem;">
           <div class="admin-stat-card">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TOTAL INQUIRIES</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">TOTAL INQUIRIES</span>
             <div class="admin-stat-val" id="statTotalInquiries">4</div>
-            <span style="font-size: 0.75rem; color: #059669; font-weight: 800;">+12 this week</span>
+            <span style="font-size: 0.72rem; color: #059669; font-weight: 800;">+12 this week</span>
           </div>
 
           <div class="admin-stat-card">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">PENDING ACTION</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">PENDING ACTION</span>
             <div class="admin-stat-val" style="color: #D97706;" id="statPendingInquiries">2</div>
-            <span style="font-size: 0.75rem; color: #D97706; font-weight: 800;">Requires Follow-up</span>
+            <span style="font-size: 0.72rem; color: #D97706; font-weight: 800;">Requires Follow-up</span>
           </div>
 
           <div class="admin-stat-card">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">QUOTATIONS DELIVERED</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">QUOTATIONS DELIVERED</span>
             <div class="admin-stat-val" style="color: #2563EB;">32</div>
-            <span style="font-size: 0.75rem; color: #2563EB; font-weight: 800;">Sent via WhatsApp &amp; Email</span>
+            <span style="font-size: 0.72rem; color: #2563EB; font-weight: 800;">Sent via WhatsApp &amp; Email</span>
           </div>
 
           <div class="admin-stat-card">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">PIPELINE VALUE</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">PIPELINE VALUE</span>
             <div class="admin-stat-val" style="color: #059669;">₹ 68.4 L</div>
-            <span style="font-size: 0.75rem; color: #059669; font-weight: 800;">Active Thermal Leads</span>
+            <span style="font-size: 0.72rem; color: #059669; font-weight: 800;">Active Thermal Leads</span>
           </div>
         </div>
 
-        <!-- INQUIRIES TABLE -->
-        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+        <!-- INQUIRIES TABLE CONTAINER -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow-x: auto; box-shadow: var(--shadow-sm);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 800px;">
             <thead>
               <tr style="background: #F1F5F9; text-align: left; color: var(--text-primary);">
                 <th style="padding: 0.85rem 1rem;">Ref ID</th>
@@ -127,22 +130,22 @@
 
       </div>
 
-      <!-- TAB 2: PRODUCT CATALOG MANAGEMENT -->
+      <!-- TAB 2: CATALOG -->
       <div id="tabProducts" class="admin-tab-pane" style="display: none;">
         
         <div class="admin-header-bar">
           <div>
-            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Product Catalog &amp; Inventory Control</h1>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Add new heat pump models, adjust prices, edit specifications and stock availability</p>
+            <h1 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Product Catalog Management</h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Add new heat pump models, adjust wholesale prices, COP ratings, and stock status</p>
           </div>
-          <button onclick="openAddProductModal()" class="btn-amazon-primary" style="cursor: pointer;">
-            ➕ Add New Product
+          <button onclick="openAddProductModal()" class="btn-amazon-primary" style="cursor: pointer; font-size: 0.85rem;">
+            ➕ Add Product
           </button>
         </div>
 
-        <!-- PRODUCTS TABLE -->
-        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+        <!-- PRODUCTS TABLE CONTAINER -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow-x: auto; box-shadow: var(--shadow-sm);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 750px;">
             <thead>
               <tr style="background: #F1F5F9; text-align: left;">
                 <th style="padding: 0.85rem 1rem;">Image</th>
@@ -162,43 +165,131 @@
 
       </div>
 
-      <!-- TAB 3: CALCULATOR & CONVERSION ANALYTICS -->
+      <!-- TAB 3: ANALYTICS -->
       <div id="tabAnalytics" class="admin-tab-pane" style="display: none;">
         <div class="admin-header-bar">
           <div>
-            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Sizing Calculator Analytics</h1>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Insights on customer thermal sizing queries and payback conversions</p>
+            <h1 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Sizing Calculator Analytics</h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Insights on customer thermal sizing queries and payback conversions</p>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 1.5rem;">
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 1rem;">Top Sizing Categories Queried</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.9rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.25rem;">
+            <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.85rem;">Top Sizing Categories Queried</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.88rem;">
               <li style="display: flex; justify-content: space-between;"><span>1. Commercial Hot Water (Hotels &amp; Hostels)</span> <strong>44%</strong></li>
               <li style="display: flex; justify-content: space-between;"><span>2. Swimming Pool &amp; Spa Heating</span> <strong>31%</strong></li>
               <li style="display: flex; justify-content: space-between;"><span>3. Domestic Residential Monoblocks</span> <strong>25%</strong></li>
             </ul>
           </div>
 
-          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 1.5rem;">
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 1rem;">Average Energy Payback Calculated</h3>
-            <div style="font-size: 2.5rem; font-weight: 900; color: #10B981;">2.1 Years</div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Based on ₹8.00/kWh average commercial electricity tariff</p>
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.25rem;">
+            <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.85rem;">Average Energy Payback Calculated</h3>
+            <div style="font-size: 2.2rem; font-weight: 900; color: #10B981;">2.1 Years</div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Based on ₹8.00/kWh average commercial electricity tariff</p>
           </div>
         </div>
       </div>
 
-      <!-- TAB 4: FACTORY SETTINGS & RATES -->
-      <div id="tabSettings" class="admin-tab-pane" style="display: none;">
+      <!-- TAB 4: CONTENT MANAGER (Add, Edit, Delete, Update Sitewide Content) -->
+      <div id="tabContent" class="admin-tab-pane" style="display: none;">
         <div class="admin-header-bar">
           <div>
-            <h1 style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">Factory System Settings</h1>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Configure default quotation GST rates, freight fees, and WhatsApp hotline routing</p>
+            <h1 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Sitewide Page Content Manager</h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Add, edit, remove or publish announcements, hero taglines, blog articles, and factory contacts across all pages instantly</p>
           </div>
         </div>
 
-        <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 16px; padding: 2rem; max-width: 600px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+          
+          <!-- Box 1: Sitewide Announcement Banner -->
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-primary);">📢 Sitewide Announcement Banner</h3>
+              <span style="background: #ECFDF5; color: #047857; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.5rem; border-radius: 99px;">LIVE SYNC</span>
+            </div>
+            <form onsubmit="saveSiteBanner(event)">
+              <div class="form-field-group">
+                <label class="form-label-custom">Announcement Message Text</label>
+                <input type="text" id="adminBannerText" class="form-input-custom" placeholder="e.g. ⚡ VINDSOL Factory Direct Sale: Get 18% GST Benefit &amp; Free Installation this month!">
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem;">
+                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); cursor: pointer;">
+                  <input type="checkbox" id="adminBannerActive" checked> Enable Banner on All Pages
+                </label>
+                <button type="submit" class="btn-amazon-primary" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; cursor: pointer;">
+                  💾 Save Banner
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Box 2: Home Hero Title & Tagline -->
+          <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-primary);">🏠 Home Hero Title &amp; Tagline</h3>
+              <span style="background: #ECFDF5; color: #047857; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.5rem; border-radius: 99px;">HOME PAGE</span>
+            </div>
+            <form onsubmit="saveHeroContent(event)">
+              <div class="form-field-group">
+                <label class="form-label-custom">Main Headline</label>
+                <input type="text" id="adminHeroTitle" class="form-input-custom" value="India's Premier Air-Source Heat Pump Manufacturer">
+              </div>
+              <div class="form-field-group">
+                <label class="form-label-custom">Sub-headline Description</label>
+                <input type="text" id="adminHeroSub" class="form-input-custom" value="Engineered for 75% energy savings, COP up to 5.80, and zero carbon heating.">
+              </div>
+              <button type="submit" class="btn-amazon-primary" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; cursor: pointer; float: right;">
+                💾 Update Headline
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Section 2: Blog & Engineering Articles Manager -->
+        <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary);">📰 Blog &amp; Case Study Articles Manager</h3>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Add new articles or remove existing posts displayed on blog.html</p>
+            </div>
+            <button onclick="openAddBlogModal()" class="btn-amazon-primary" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; cursor: pointer;">
+              ➕ Add New Article
+            </button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="background: #F1F5F9; text-align: left;">
+                  <th style="padding: 0.65rem 0.85rem;">Title</th>
+                  <th style="padding: 0.65rem 0.85rem;">Category</th>
+                  <th style="padding: 0.65rem 0.85rem;">Author</th>
+                  <th style="padding: 0.65rem 0.85rem;">Date</th>
+                  <th style="padding: 0.65rem 0.85rem; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminBlogsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 5: SETTINGS -->
+      <div id="tabSettings" class="admin-tab-pane" style="display: none;">
+        <div class="admin-header-bar">
+          <div>
+            <h1 style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary);">Factory System Settings</h1>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Configure default quotation GST rates, freight fees, and WhatsApp hotline routing</p>
+          </div>
+        </div>
+
+        <div style="background: #FFF; border: 1px solid var(--border-soft); border-radius: 14px; padding: 1.5rem; max-width: 550px;">
           <form onsubmit="saveAdminSettings(event)">
             <div class="form-field-group">
               <label class="form-label-custom">WhatsApp Hotline Number</label>
@@ -215,7 +306,7 @@
               <input type="number" id="settingFreight" class="form-input-custom" value="6500">
             </div>
 
-            <button type="submit" class="btn-amazon-primary" style="margin-top: 1rem; cursor: pointer;">
+            <button type="submit" class="btn-amazon-primary" style="margin-top: 0.85rem; cursor: pointer; padding: 0.65rem 1rem;">
               💾 Save Factory Configuration
             </button>
           </form>
@@ -262,6 +353,38 @@
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
           <button type="submit" class="btn-amazon-primary" style="flex: 1; cursor: pointer;">Save Product</button>
           <button type="button" onclick="closeAddProductModal()" class="btn-amazon-secondary" style="flex: 1; cursor: pointer;">Cancel</button>
+        </div>
+      </form>
+  <!-- ADD NEW BLOG ARTICLE MODAL -->
+  <div class="product-detail-modal-overlay" id="adminBlogModal">
+    <div class="product-detail-modal-card" style="max-width: 550px;">
+      <button class="modal-close-btn" onclick="closeAddBlogModal()">&times;</button>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: var(--color-primary); margin-bottom: 1.25rem;">Publish Blog &amp; Case Study Article</h2>
+
+      <form onsubmit="saveBlogForm(event)">
+        <div class="form-field-group">
+          <label class="form-label-custom">Article Title</label>
+          <input type="text" id="blogFormTitle" required class="form-input-custom" placeholder="e.g. 85°C Pasteurization Heat Pumps in Dairy Plants">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Category Tag</label>
+          <input type="text" id="blogFormCategory" required class="form-input-custom" value="ENGINEERING TECH">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Author Name</label>
+          <input type="text" id="blogFormAuthor" required class="form-input-custom" value="VINDSOL Engineering Team">
+        </div>
+
+        <div class="form-field-group">
+          <label class="form-label-custom">Publication Date</label>
+          <input type="text" id="blogFormDate" required class="form-input-custom" value="06 Aug 2026">
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="submit" class="btn-amazon-primary" style="flex: 1; cursor: pointer;">Publish Article</button>
+          <button type="button" onclick="closeAddBlogModal()" class="btn-amazon-secondary" style="flex: 1; cursor: pointer;">Cancel</button>
         </div>
       </form>
     </div>
@@ -524,14 +647,107 @@
         adminProducts.push({ id, title, category, price, cop, img, status: 'In Stock' });
       }
 
+      localStorage.setItem('vindsol_custom_products', JSON.stringify(adminProducts));
       closeAddProductModal();
       renderAdminProducts();
+      alert("✓ Product catalog updated & published live to website!");
+    }
+
+    // --- SITEWIDE PAGE CONTENT MANAGER ---
+    function saveSiteBanner(e) {
+      e.preventDefault();
+      const text = document.getElementById('adminBannerText').value;
+      const active = document.getElementById('adminBannerActive').checked;
+      localStorage.setItem('vindsol_site_banner', JSON.stringify({ text, active }));
+      alert("✓ Sitewide Announcement Banner saved! Active across all pages.");
+    }
+
+    function saveHeroContent(e) {
+      e.preventDefault();
+      const title = document.getElementById('adminHeroTitle').value;
+      const sub = document.getElementById('adminHeroSub').value;
+      localStorage.setItem('vindsol_hero_content', JSON.stringify({ title, sub }));
+      alert("✓ Home Hero headline updated live!");
+    }
+
+    let adminBlogs = [
+      { id: 'b1', title: 'Monoblock vs Split Heat Pumps: 2026 Commercial ROI Comparison', category: 'ENGINEERING', author: 'Er. Deepak M', date: '04 Aug 2026', img: 'assets/images/products/dhw-monoblock.jpg' },
+      { id: 'b2', title: 'Why Titanium Heat Exchangers are Mandatory for Saltwater Pools', category: 'POOL & SPA', author: 'Vindsol R&D', date: '01 Aug 2026', img: 'assets/images/products/swimming-pool-titanium.png' },
+      { id: 'b3', title: 'Achieving 85°C Process Water with R134a High Temp Heat Pumps', category: 'INDUSTRIAL', author: 'Mechzephyr Labs', date: '28 Jul 2026', img: 'assets/images/products/high-temp-industrial.jpg' }
+    ];
+
+    function getAllBlogs() {
+      const stored = JSON.parse(localStorage.getItem('vindsol_custom_blogs') || '[]');
+      return stored.length ? stored : adminBlogs;
+    }
+
+    function renderAdminBlogs() {
+      const tbody = document.getElementById('adminBlogsTableBody');
+      if (!tbody) return;
+      const list = getAllBlogs();
+
+      tbody.innerHTML = list.map(b => `
+        <tr style="border-bottom: 1px solid #E2E8F0;">
+          <td style="padding: 0.65rem 0.85rem; font-weight: 800; color: var(--color-primary);">${b.title}</td>
+          <td style="padding: 0.65rem 0.85rem; font-size: 0.78rem; font-weight: 700; color: #64748B;">${b.category}</td>
+          <td style="padding: 0.65rem 0.85rem;">${b.author}</td>
+          <td style="padding: 0.65rem 0.85rem;">${b.date}</td>
+          <td style="padding: 0.65rem 0.85rem; text-align: right;">
+            <button onclick="deleteAdminBlog('${b.id}')" style="background: none; border: none; cursor: pointer; color: #DC2626; font-weight: 700;">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openAddBlogModal() {
+      document.getElementById('blogFormTitle').value = '';
+      document.getElementById('adminBlogModal').classList.add('active');
+    }
+
+    function closeAddBlogModal() {
+      document.getElementById('adminBlogModal').classList.remove('active');
+    }
+
+    function saveBlogForm(e) {
+      e.preventDefault();
+      const title = document.getElementById('blogFormTitle').value;
+      const category = document.getElementById('blogFormCategory').value;
+      const author = document.getElementById('blogFormAuthor').value;
+      const date = document.getElementById('blogFormDate').value;
+      const id = 'blog_' + Date.now();
+
+      let list = getAllBlogs();
+      list.unshift({ id, title, category, author, date, img: 'assets/images/products/dhw-monoblock.jpg' });
+      localStorage.setItem('vindsol_custom_blogs', JSON.stringify(list));
+      closeAddBlogModal();
+      renderAdminBlogs();
+      alert("✓ Article published live to website blog!");
+    }
+
+    function deleteAdminBlog(id) {
+      if (confirm("Remove this blog article from the site?")) {
+        let list = getAllBlogs().filter(b => b.id !== id);
+        localStorage.setItem('vindsol_custom_blogs', JSON.stringify(list));
+        renderAdminBlogs();
+      }
+    }
+
+    function loadSavedBannerAndHero() {
+      const banner = JSON.parse(localStorage.getItem('vindsol_site_banner') || '{}');
+      if (banner.text) document.getElementById('adminBannerText').value = banner.text;
+      if (banner.active !== undefined) document.getElementById('adminBannerActive').checked = banner.active;
+
+      const hero = JSON.parse(localStorage.getItem('vindsol_hero_content') || '{}');
+      if (hero.title) document.getElementById('adminHeroTitle').value = hero.title;
+      if (hero.sub) document.getElementById('adminHeroSub').value = hero.sub;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       checkAdminAuth();
       renderInquiries();
       renderAdminProducts();
+      renderAdminBlogs();
+      loadSavedBannerAndHero();
     });
   </script>
 
