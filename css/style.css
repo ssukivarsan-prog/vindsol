@@ -2184,11 +2184,11 @@ img {
    FOOTER (2026 MODERN COMPACT CLEAN-TECH DESIGN)
    ========================================================================== */
 .footer {
-  background: linear-gradient(180deg, #022C1E 0%, #011D14 100%);
-  color: #CBD5E1;
+  background: linear-gradient(180deg, #0F5C3E 0%, #08422B 100%);
+  color: #F1F5F9;
   padding: 2.25rem 0 1.25rem 0;
   font-size: 0.85rem;
-  border-top: 3px solid #10B981;
+  border-top: 3px solid #34D399;
   position: relative;
   overflow: hidden;
 }
