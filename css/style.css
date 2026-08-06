@@ -311,6 +311,103 @@ img {
 }
 
 /* ==========================================================================
+   2026 SAVINGS DASHBOARD & COMPARISON MATRIX STYLES
+   ========================================================================== */
+.dashboard-2col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (max-width: 992px) {
+  .dashboard-2col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-card-modern {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card-modern:hover {
+  box-shadow: 0 20px 40px rgba(4, 78, 54, 0.08);
+}
+
+.comp-matrix-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.comp-matrix-table th {
+  background: #F8FAF8;
+  color: var(--text-muted);
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 2px solid var(--border-soft);
+  text-align: center;
+}
+
+.comp-matrix-table td {
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.matrix-vindsol-col {
+  background: #ECFDF5 !important;
+  color: #047857 !important;
+  font-weight: 800 !important;
+  border-left: 2px solid #10B981 !important;
+  border-right: 2px solid #10B981 !important;
+}
+
+.matrix-badge-success {
+  background: #DCFCE7;
+  color: #15803D;
+  font-weight: 800;
+  font-size: 0.76rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+.matrix-badge-danger {
+  background: #FEE2E2;
+  color: #DC2626;
+  font-weight: 800;
+  font-size: 0.76rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+.matrix-badge-warning {
+  background: #FEF3C7;
+  color: #D97706;
+  font-weight: 800;
+  font-size: 0.76rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+/* ==========================================================================
    PRODUCT RANGE MEGA DROPDOWN MENU (Matching Reference Screenshots)
    ========================================================================== */
 .nav-item-has-dropdown {

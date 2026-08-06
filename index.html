@@ -200,118 +200,131 @@
   </div>
 
   <!-- =========================================================================
-       5. SPACIOUS 2-COLUMN DASHBOARD GRID
+       5. SPACIOUS 2-COLUMN DASHBOARD GRID (SAVINGS & MATRIX COMPARISON)
        ========================================================================= -->
-  <section class="grid-dashboard-section" id="calculator">
+  <section class="grid-dashboard-section" id="calculator" style="padding: 4.5rem 0; background: #F8FAF8;">
     <div class="container">
       <div class="dashboard-2col-grid">
         
         <!-- Column 1: Your Potential Savings Output Card -->
-        <div class="dashboard-card" style="background-color: #F8FAF8;">
+        <div class="dashboard-card-modern">
           <div>
-            <h3 class="dashboard-card-title" style="color: var(--color-primary);">Your Potential Savings</h3>
-            <p class="dashboard-card-sub">Estimated annual financial return with Vindsol Heat Pumps</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="blueprint-tag" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">⚡ FINANCIAL &amp; CARBON RETURN</span>
+              <span style="font-size: 0.75rem; font-weight: 800; color: #059669; background: #DCFCE7; padding: 0.2rem 0.6rem; border-radius: 99px;">75% SAVINGS</span>
+            </div>
+            <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--color-primary); margin-bottom: 0.25rem;">Your Potential Savings</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Estimated annual financial &amp; carbon return with Vindsol Heat Pumps</p>
 
-            <div class="savings-metric-box">
-              <div class="metric-row">
-                <div class="metric-icon">💰</div>
-                <div class="metric-info">
-                  <label>Monthly Savings</label>
-                  <strong id="monthlySavingsVal">₹ 2,850</strong>
+            <!-- 2x2 Metric KPI Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              
+              <div style="background: #F8FAF8; border: 1.5px solid #E2E8F0; border-radius: 14px; padding: 1.15rem; transition: all 0.25s ease;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                  <span style="font-size: 1.2rem;">💰</span>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Monthly Savings</span>
                 </div>
+                <strong id="monthlySavingsVal" style="font-size: 1.5rem; font-weight: 900; color: var(--color-primary); display: block;">₹ 2,850</strong>
               </div>
 
-              <div class="metric-row">
-                <div class="metric-icon">📈</div>
-                <div class="metric-info">
-                  <label>Yearly Savings</label>
-                  <strong id="yearlySavingsVal" style="color: #15803D;">₹ 34,200</strong>
+              <div style="background: #ECFDF5; border: 1.5px solid #A7F3D0; border-radius: 14px; padding: 1.15rem; transition: all 0.25s ease;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                  <span style="font-size: 1.2rem;">📈</span>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #047857; text-transform: uppercase;">Yearly Savings</span>
                 </div>
+                <strong id="yearlySavingsVal" style="font-size: 1.5rem; font-weight: 900; color: #047857; display: block;">₹ 34,200</strong>
               </div>
 
-              <div class="metric-row">
-                <div class="metric-icon">🌱</div>
-                <div class="metric-info">
-                  <label>CO₂ Reduction / Year</label>
-                  <strong id="co2ReductionVal">1.2 Tonnes</strong>
+              <div style="background: #F8FAF8; border: 1.5px solid #E2E8F0; border-radius: 14px; padding: 1.15rem; transition: all 0.25s ease;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                  <span style="font-size: 1.2rem;">🌱</span>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">CO₂ Saved / Year</span>
                 </div>
+                <strong id="co2ReductionVal" style="font-size: 1.5rem; font-weight: 900; color: #059669; display: block;">1.2 Tonnes</strong>
               </div>
 
-              <div class="metric-row">
-                <div class="metric-icon">⏳</div>
-                <div class="metric-info">
-                  <label>Payback Period</label>
-                  <strong id="paybackPeriodVal">2.3 Years</strong>
+              <div style="background: #FEF3C7; border: 1.5px solid #FDE68A; border-radius: 14px; padding: 1.15rem; transition: all 0.25s ease;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                  <span style="font-size: 1.2rem;">⌛</span>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #D97706; text-transform: uppercase;">ROI Payback</span>
                 </div>
+                <strong id="paybackPeriodVal" style="font-size: 1.5rem; font-weight: 900; color: #B45309; display: block;">2.3 Years</strong>
               </div>
+
             </div>
           </div>
 
-          <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
-            <button class="btn-primary open-calc-modal" style="width: 100%; justify-content: center; font-size: 0.9rem; padding: 0.75rem 1rem;">
-              🧮 Launch Sizing Calculator
+          <div>
+            <button onclick="document.getElementById('calcModalOverlay').classList.add('active')" class="btn-amazon-primary" style="width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.9rem; background: linear-gradient(135deg, #10B981 0%, #047857 100%); font-weight: 900; border: none; cursor: pointer; box-shadow: 0 4px 14px rgba(4,78,54,0.25);">
+              🧮 Launch Instant Sizing &amp; Savings Calculator
             </button>
           </div>
         </div>
 
         <!-- Column 2: Heat Pump vs Others Comparison Table -->
-        <div class="dashboard-card">
+        <div class="dashboard-card-modern">
           <div>
-            <h3 class="dashboard-card-title">Heat Pump vs Others</h3>
-            <p class="dashboard-card-sub">The smarter choice for a sustainable &amp; cost-effective future</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="blueprint-tag" style="background: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD;">📊 COMPARATIVE MATRIX</span>
+              <span style="font-size: 0.75rem; font-weight: 800; color: #0284C7; background: #E0F2FE; padding: 0.2rem 0.6rem; border-radius: 99px;">TOP CHOICE</span>
+            </div>
+            <h3 style="font-size: 1.75rem; font-weight: 900; color: var(--color-primary); margin-bottom: 0.25rem;">Heat Pump vs Others</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">The smarter choice for a sustainable &amp; cost-effective future</p>
 
-            <table class="comp-table">
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th style="color: var(--color-primary);">Heat Pump (Vindsol)</th>
-                  <th>Electric Geyser</th>
-                  <th>Solar Water Heater</th>
-                  <th>Boiler</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Energy Efficiency</td>
-                  <td class="highlight-vindsol">★★★★★</td>
-                  <td>★</td>
-                  <td>★★★</td>
-                  <td>★★</td>
-                </tr>
-                <tr>
-                  <td>Running Cost</td>
-                  <td class="highlight-vindsol" style="color: #15803D;">Very Low</td>
-                  <td>High</td>
-                  <td>Medium</td>
-                  <td>High</td>
-                </tr>
-                <tr>
-                  <td>Lifespan</td>
-                  <td class="highlight-vindsol">15+ Years</td>
-                  <td>5 Years</td>
-                  <td>10 Years</td>
-                  <td>10 Years</td>
-                </tr>
-                <tr>
-                  <td>Maintenance</td>
-                  <td class="highlight-vindsol">Low</td>
-                  <td>High</td>
-                  <td>Medium</td>
-                  <td>High</td>
-                </tr>
-                <tr>
-                  <td>Eco Friendly</td>
-                  <td class="highlight-vindsol" style="color: #15803D; font-size: 1.1rem;">✓</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td style="color: #DC2626;">✗</td>
-                </tr>
-              </tbody>
-            </table>
+            <div style="overflow-x: auto;">
+              <table class="comp-matrix-table">
+                <thead>
+                  <tr>
+                    <th style="text-align: left; padding-left: 0.75rem;">Feature</th>
+                    <th class="matrix-vindsol-col">Heat Pump (VINDSOL)</th>
+                    <th>Electric Geyser</th>
+                    <th>Solar Water</th>
+                    <th>Boiler</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 800; color: var(--color-primary); text-align: left; padding-left: 0.75rem;">Energy Efficiency</td>
+                    <td class="matrix-vindsol-col"><strong style="color: #047857;">★★★★★ (COP 5.8)</strong></td>
+                    <td style="color: #64748B;">★ (1.0x)</td>
+                    <td style="color: #64748B;">★★★ (3.0x)</td>
+                    <td style="color: #64748B;">★★ (2.0x)</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 800; color: var(--color-primary); text-align: left; padding-left: 0.75rem;">Running Cost</td>
+                    <td class="matrix-vindsol-col"><span class="matrix-badge-success">75% Lower</span></td>
+                    <td><span class="matrix-badge-danger">Very High</span></td>
+                    <td><span class="matrix-badge-warning">Medium</span></td>
+                    <td><span class="matrix-badge-danger">High (Diesel)</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 800; color: var(--color-primary); text-align: left; padding-left: 0.75rem;">System Lifespan</td>
+                    <td class="matrix-vindsol-col"><span class="matrix-badge-success">15+ Years</span></td>
+                    <td style="color: #64748B;">5 Years</td>
+                    <td style="color: #64748B;">10 Years</td>
+                    <td style="color: #64748B;">10 Years</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 800; color: var(--color-primary); text-align: left; padding-left: 0.75rem;">Maintenance</td>
+                    <td class="matrix-vindsol-col"><span class="matrix-badge-success">Low Maintenance</span></td>
+                    <td style="color: #64748B;">High Scale</td>
+                    <td style="color: #64748B;">Medium Scale</td>
+                    <td style="color: #64748B;">High Burner</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 800; color: var(--color-primary); text-align: left; padding-left: 0.75rem;">Eco Friendly</td>
+                    <td class="matrix-vindsol-col"><strong style="color: #047857; font-size: 0.88rem;">✅ Zero ODP</strong></td>
+                    <td style="color: #94A3B8;">—</td>
+                    <td style="color: #94A3B8;">—</td>
+                    <td style="color: #EF4444; font-weight: 800;">❌ CO₂ Smog</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div style="margin-top: 1rem; text-align: right;">
-            <a href="sustainability.html" class="card-bottom-link">
+          <div style="margin-top: 1.25rem; text-align: right;">
+            <a href="sustainability.html" style="color: #047857; font-weight: 800; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s ease;">
               Compare Detailed Engineering Specs →
             </a>
           </div>
